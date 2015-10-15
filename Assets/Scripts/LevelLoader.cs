@@ -40,8 +40,6 @@ public class LevelLoader : Singleton<LevelLoader>
         yield return new WaitForSeconds(.1f);
         while (loading == true)
         {
-            GameObject A = FindObjectOfType<Test>().gameObject;
-            A.transform.position = new Vector3(0, 0, 10);
             loading = false;
         }
 
