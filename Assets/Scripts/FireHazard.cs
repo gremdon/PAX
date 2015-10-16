@@ -8,15 +8,14 @@ public class FireHazard : MonoBehaviour
 	    Messenger.AddListener<GameObject>("HeatSink_Hit", OnHeatSinkHit);
 	}
 
-
     void OnHeatSinkHit(GameObject go)
-    {
-        print("Heatsink Hit received by " + gameObject.name);
+    {   
         if(go == gameObject)
         {
             Debug.Log(gameObject.name + ": I'm Cool now");
             if(_actionOnHeatSink == FireHazrdReaction.DIE)
             {
+                print("Heatsink Hit received by " + gameObject.name);
                 Die();
             }
         }
