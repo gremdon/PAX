@@ -1146,6 +1146,7 @@ GameObject:
   - 136: {fileID: 1194983830}
   - 23: {fileID: 1194983829}
   - 114: {fileID: 1194983828}
+  - 64: {fileID: 1194983833}
   m_Layer: 0
   m_Name: LavaPlatform
   m_TagString: Untagged
@@ -1200,7 +1201,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1194983827}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .5
   m_Height: 2
   m_Direction: 1
@@ -1219,11 +1220,23 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1194983827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.3299999, y: -8.40999985, z: 31.4500008}
+  m_LocalPosition: {x: 14.3299999, y: -1.91999996, z: 31.4500008}
   m_LocalScale: {x: 9, y: 9, z: 9}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!64 &1194983833
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1194983827}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1229573578 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 149790, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
