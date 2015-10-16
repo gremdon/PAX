@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class test : MonoBehaviour {
+public class Test : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Messenger.Broadcast("crouch");
+        }
+        else if (Input.GetKeyDown(KeyCode.Z))
+            Messenger.Broadcast("prone");
+    }
+
 }
+
+
+
