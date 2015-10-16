@@ -9,6 +9,13 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         enableSpawn = false;
+        Callback toggle = ToggleSpawn;
+        Messenger.AddListener(name.ToLower(), toggle);
+    }
+    
+    void ToggleSpawn()
+    {
+        enableSpawn = !enableSpawn;
     }
 
     /// <summary>
@@ -78,14 +85,4 @@ public class EnemySpawner : MonoBehaviour
     /// Time in seconds between spawns.
     /// </summary>
     public float spawnDelay;
-
-    // TESTING // TESTING // TESTING // TESTING // TESTING // TESTING // TESTING // TESTING
-
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            enableSpawn = !enableSpawn;
-        }
-    }
 }
