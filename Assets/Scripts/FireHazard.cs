@@ -12,13 +12,21 @@ public class FireHazard : MonoBehaviour
     {   
         if(go == gameObject)
         {
-            Debug.Log(gameObject.name + ": I'm Cool now");
             if(_actionOnHeatSink == FireHazrdReaction.DIE)
             {
-                print("Heatsink Hit received by " + gameObject.name);
                 Die();
             }
+
+            if(_actionOnHeatSink == FireHazrdReaction.COOL)
+            {
+                Cool();
+            }
         }
+    }
+
+    void Cool()
+    {
+        Messenger.Broadcast("Chilled", gameObject);
     }
 
     void Die()

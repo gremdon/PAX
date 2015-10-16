@@ -7,6 +7,7 @@ public class MovablePlatform : MonoBehaviour
 	void Start ()
     {
         StartCoroutine(MoveToInit());
+        Messenger.AddListener<GameObject>("Chilled", OnCoolToggle);
 	}
     
     public void SetInitPos()
@@ -19,12 +20,32 @@ public class MovablePlatform : MonoBehaviour
         _secondaryPosistion = gameObject.transform.position;
     }
 
+    private void OnCoolToggle(GameObject go)
+    {
+        if(go == gameObject)
+        {
+            if (_chilled)
+            {
+                _chilled = false;
+            }
+
+            else
+            {
+                _chilled = true;
+            }
+        }
+        
+    }
+
     IEnumerator MoveToInit()
     {
-        while (Vector3.Distance(transform.position, _intialPosistion) > 0.5f)
+        while (Vector3.Distance(transform.position, _intialPosistion) > 0.1f)
         {
-            transform.position = Vector3.Lerp(transform.position, _intialPosistion, _speed * Time.deltaTime);
-            yield return null;
+            if(!_chilled)
+            {
+                transform.position = Vector3.Lerp(transform.position, _intialPosistion, _speed * Time.deltaTime);
+                yield return null;
+            }
         }
 
         yield return new WaitForSeconds(_platformDelay);
@@ -36,10 +57,13 @@ public class MovablePlatform : MonoBehaviour
 
     IEnumerator MoveToSecondary()
     {
-        while (Vector3.Distance(transform.position, _secondaryPosistion) > 0.5f)
+        while (Vector3.Distance(transform.position, _secondaryPosistion) > 0.1f)
         {
-            transform.position = Vector3.Lerp(transform.position, _secondaryPosistion, _speed * Time.deltaTime);
-            yield return null;
+            if (!_chilled)
+            {
+                transform.position = Vector3.Lerp(transform.position, _secondaryPosistion, _speed * Time.deltaTime);
+                yield return null;
+            }
         }
 
         yield return new WaitForSeconds(_platformDelay);
@@ -57,6 +81,8 @@ public class MovablePlatform : MonoBehaviour
     private float _platformDelay;
     [SerializeField]
     private float _speed;
+
+    private bool _chilled = false;
 }
 
 
