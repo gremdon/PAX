@@ -18,7 +18,7 @@ public class Aircraft : MonoBehaviour
     {
         // Control Torque applied to the body of the copter based on player input.
         Vector3 torqueValue = Vector3.zero;
-        Vector3 controlTorque = new Vector3(Input.GetAxis("Vertical") * forwardRotorTorqueMult, 1.0f, -Input.GetAxis("Horizontal") * sidewaysRotorTorqueMult);
+        Vector3 controlTorque = new Vector3(Input.GetAxis("Mouse X") * forwardRotorTorqueMult, 1.0f, -Input.GetAxis("Mouse Y") * sidewaysRotorTorqueMult);
 
         if (mainRotorActive == true) // Main Rotor is active, apply net torque to the copter body as well the lift force to create spinning rotors.
         {
