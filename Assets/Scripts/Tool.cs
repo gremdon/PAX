@@ -4,6 +4,6 @@ using System.Collections;
 public class Tool : MonoBehaviour
 {
     public string uniqueName;
-    public string id;
+    public int id;
     public GameObject prefab;
 }
