@@ -4,25 +4,18 @@ using System.Collections;
 
 public class Inventory : MonoBehaviour
 {
-    List<GameObject> items = new List<GameObject>();
-
-    public void addTool(GameObject tool)
+    public List<Tool> items = new List<Tool>();
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="tool">
+    /// tool that player pick up or recieve
+    /// </param>
+    public void addTool(Tool tool)
     {
         items.Add(tool);
     }
-	
-    public void removeTool(GameObject tool)
-    {
-        items.Remove(tool);
-    }
-
-    void accessTool(GameObject tool)
-    {
-        
-    }
-
-    void displayTool()
-    {
-       
-    }
+    
+    
 }
