@@ -209,7 +209,7 @@ Transform:
   m_LocalScale: {x: 25, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
 --- !u!1 &147337569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,9 +1015,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 424928, guid: 86bee733c1c9ea448b59f776d3b2bc2c, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 5951568, guid: 86bee733c1c9ea448b59f776d3b2bc2c, type: 2}
+    - target: {fileID: 0}
       propertyPath: m_ConnectedAnchor.z
       value: 10
       objectReference: {fileID: 0}
@@ -1041,11 +1041,11 @@ Prefab:
       propertyPath: m_ConnectedAnchor.x
       value: 6.00000095
       objectReference: {fileID: 0}
-    - target: {fileID: 5951568, guid: 86bee733c1c9ea448b59f776d3b2bc2c, type: 2}
+    - target: {fileID: 0}
       propertyPath: m_ConnectedAnchor.x
       value: 5.99999905
       objectReference: {fileID: 0}
-    - target: {fileID: 5951568, guid: 86bee733c1c9ea448b59f776d3b2bc2c, type: 2}
+    - target: {fileID: 0}
       propertyPath: m_BreakForce
       value: 30
       objectReference: {fileID: 0}
@@ -1438,9 +1438,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 424928, guid: 86bee733c1c9ea448b59f776d3b2bc2c, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 5951568, guid: 86bee733c1c9ea448b59f776d3b2bc2c, type: 2}
+    - target: {fileID: 0}
       propertyPath: m_ConnectedAnchor.z
       value: 10
       objectReference: {fileID: 0}
@@ -1456,11 +1456,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 5951568, guid: 86bee733c1c9ea448b59f776d3b2bc2c, type: 2}
+    - target: {fileID: 0}
       propertyPath: m_ConnectedAnchor.x
       value: .999999166
       objectReference: {fileID: 0}
-    - target: {fileID: 5951568, guid: 86bee733c1c9ea448b59f776d3b2bc2c, type: 2}
+    - target: {fileID: 0}
       propertyPath: m_BreakForce
       value: 30
       objectReference: {fileID: 0}
