@@ -24,4 +24,14 @@ public class FireHazard : MonoBehaviour
         Messenger.RemoveListener<GameObject>("HeatSink_Hit", OnHeatSinkHit);
     }
 
+    [SerializeField]
+    private FireHazrdReaction _actionOnHeatSink;
+
+}
+
+
+enum FireHazrdReaction
+{
+    DIE,
+    COOL
 }
