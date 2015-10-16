@@ -100,8 +100,5 @@ namespace UnityStandardAssets.Cameras
         {
             get { return m_Target; }
         }
-
-  
-        
     }
 }
