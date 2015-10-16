@@ -23,30 +23,13 @@ public class ComboLock : MonoBehaviour
         SetKeyValues();
     }
 
-    IEnumerator CheckCombo()
-    {
-        checking = true;
-        while(input != null)
-        {
-            if(input == LockCombo)
-            {
-                Debug.Log("You got it");
-                yield return null;
-            }
-            else if(input.Length >= LockCombo.Length)
-            {
-                Debug.Log("Wrong Mother Fucker");
-            }
-        }
-        checking = false;
-        StopCoroutine(CheckCombo());
-    }
+    
 
     void UserInput(string s)
     {
         if(checking == false)
         {
-            StartCoroutine(CheckCombo());
+
         }
         input += s;
     }
