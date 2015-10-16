@@ -14,10 +14,8 @@ public class HeatSink_projectile : MonoBehaviour
 
         while (timePassed < _traveltime)
         {
-            Vector3 pf = transform.position;
-            pf += new Vector3(0, 0, 2);
-
-            transform.position = Vector3.Lerp(transform.position, pf, _speed * Time.deltaTime);
+            transform.position += transform.forward * _speed * Time.deltaTime;
+            
             timePassed += Time.deltaTime;
             yield return null;
         }

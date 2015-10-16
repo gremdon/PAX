@@ -15,12 +15,16 @@ public class FireHazard : MonoBehaviour
         if(go == gameObject)
         {
             Debug.Log(gameObject.name + ": I'm Cool now");
-            Die();
+            if(_actionOnHeatSink == FireHazrdReaction.DIE)
+            {
+                Die();
+            }
         }
     }
 
     void Die()
     {
+        Destroy(gameObject);
         Messenger.RemoveListener<GameObject>("HeatSink_Hit", OnHeatSinkHit);
     }
 
