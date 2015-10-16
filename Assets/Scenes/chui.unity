@@ -1581,7 +1581,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 554883750}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!92 &554883752
 Behaviour:
   m_ObjectHideFlags: 0
@@ -2930,6 +2930,7 @@ GameObject:
   - 64: {fileID: 1201104834}
   - 23: {fileID: 1201104833}
   - 114: {fileID: 1201104837}
+  - 114: {fileID: 1201104838}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -3004,6 +3005,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   copter: {fileID: 100764, guid: e3126e09ad30c5e4a917641ec98524e1, type: 2}
+--- !u!114 &1201104838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1201104832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5ea317bf7821a04981fb785e1b626d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gowCamera: {fileID: 364476947}
+  map: {fileID: 554883754}
 --- !u!1 &1290858071
 GameObject:
   m_ObjectHideFlags: 0
