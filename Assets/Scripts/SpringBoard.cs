@@ -5,9 +5,12 @@ public class SpringBoard : MonoBehaviour
 {
     void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.GetComponent<Rigidbody>())
+        if (other.transform.parent != transform)
         {
-            other.gameObject.GetComponent<Rigidbody>().AddForce(transform.up * power);
+            if (other.gameObject.GetComponent<Rigidbody>() && other.gameObject.GetComponent<Rigidbody>().velocity.y > 1)
+            {
+                other.gameObject.GetComponent<Rigidbody>().AddForce(transform.up * power * 500);
+            }
         }
     }
     
