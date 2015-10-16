@@ -9,6 +9,13 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         enableSpawn = false;
+        Callback toggle = ToggleSpawn;
+        Messenger.AddListener(name.ToLower(), toggle);
+    }
+    
+    void ToggleSpawn()
+    {
+        enableSpawn = !enableSpawn;
     }
 
     /// <summary>
