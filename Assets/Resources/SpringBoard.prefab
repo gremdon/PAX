@@ -31,7 +31,7 @@ GameObject:
   - 65: {fileID: 6554714}
   - 114: {fileID: 11457320}
   m_Layer: 0
-  m_Name: SpringBoard
+  m_Name: Springboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
