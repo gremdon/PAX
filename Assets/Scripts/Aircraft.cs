@@ -31,7 +31,7 @@ public class Aircraft : MonoBehaviour
 
         // When the helicopter is lifting off, the y axis Increase for it to level out so it won't freak out/crash.
         // if it's less than 70s ANGLES!
-        if (Vector3.Angle(Vector3.up, transform.up) < 50) 
+        if (Vector3.Angle(Vector3.up, transform.up) < 20) 
         {
             // applies force to the rb in Y direction.
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0), Time.deltaTime * rotorVel * 2);
@@ -108,7 +108,7 @@ public class Aircraft : MonoBehaviour
 
     float maxRotorForce = 22241.1081f;
     float maxRotorVel = 7200.0f;
-    float rotorVel = 0.0f;
+    public float rotorVel = 0.0f;
     float rotorRot = 0.0f;
 
     float maxTailRotorForce = 15000.0f;
