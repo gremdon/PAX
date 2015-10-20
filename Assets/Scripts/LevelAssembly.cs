@@ -25,13 +25,13 @@ public class LevelAssembly : MonoBehaviour
 
     void FindObject(GameObject temp)
     {
-        //EricPuzzle = FindObjectOfType<Eric>();
-        //DylanPuzzle = FindObjectOfType<Dylan>();
-        //ZacPuzzle = FindObjectOfType<Zac>();
-        //ShelbyPuzzle = FindObjectOfType<Shelby>();
-        //TranPuzzle = FindObjectOfType<Shelby>();
-        //PaulPuzzle = FindObjectOfType<Paul>();
-        //QuintonPuzzle = FindObjectOfType<Quinton>();
+        //EricPuzzle = FindObjectOfType<eric>();
+        //DylanPuzzle = FindObjectOfType<dylan>();
+        //ZacPuzzle = FindObjectOfType<zac>();
+        //ShelbyPuzzle = FindObjectOfType<tran>();
+        //TranPuzzle = FindObjectOfType<shelby>();
+        //PaulPuzzle = FindObjectOfType<paul>();
+        //QuintonPuzzle = FindObjectOfType<quinton>();
     }
 
     /// <summary>
