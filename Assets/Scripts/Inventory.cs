@@ -6,13 +6,14 @@ public class Inventory : MonoBehaviour
 {
     public List<Tool> items = new List<Tool>();
     public Tool current { get; private set; }
-    public Tool previous { get; private set; }
-    public Tool next { get; private set; }
+    private Tool previous { get; set; }
+    private Tool next { get; set; }
+
     int currentIndex;
     int maxItems;
 
     /// <summary>
-    /// 
+    /// Add gameobject to the list
     /// </summary>
     /// <param name="tool">
     /// tool that player pick up or recieve
