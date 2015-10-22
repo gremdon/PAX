@@ -6,16 +6,23 @@ public class CameraController : MonoBehaviour
     Transform followTarget;
     Vector3 offset;
     public float distance = 2.2f;
+    public float minDistance = 2f;
+    public float maxDistance = 10;
     public Vector3 originPosition = new Vector3(0, 1.8f, 0);
     Vector3 originRotation;
+    Vector3 cameraLookDirection;
+    Vector3 playerMoveDirection;
 
     void Start()
     {
         followTarget = FindObjectOfType<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl>().transform;
-        //originPosition = new Vector3(0, 0, 0);
+        originPosition = followTarget.position;
+        originPosition += (followTarget.forward * 3);
+        //transform.LookAt(followTarget);
+        //cameraLookDirection = transform.forward;
         //originPosition = new Vector3(0.17f, 2.48f, -2.53f);
         //originRotation = new Vector3(18, 0, 0);
-        //transform.position = originPosition;
+        transform.position = originPosition;
         //transform.eulerAngles = originRotation;
         //Reset();
         offset = transform.position - followTarget.position;
