@@ -2,9 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-//[RequireComponent(typeof(AudioSource))]
 
-[RequireComponent(typeof(AudioSource))]
 public class Aircraft : MonoBehaviour
 {
     void Start()
