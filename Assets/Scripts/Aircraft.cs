@@ -19,8 +19,8 @@ public class Aircraft : MonoBehaviour
         // Get Axis is a float value that is between -1 to 1.
         // ControlTorque = (-1 to 1, 1, -1 to 1) Don't change Y number, Helicopter will spin
         Vector3 torqueValue = Vector3.zero;
-        Vector3 controlTorque = new Vector3(-Input.GetAxis("Horizontal") * forwardRotorTorqueMult, 1.0f, -Input.GetAxis("Vertical") * sidewaysRotorTorqueMult);
-        //Vector3 controlTorque = new Vector3(-Input.GetAxis("Mouse X") * forwardRotorTorqueMult, 1.0f, Input.GetAxis("Mouse Y") * sidewaysRotorTorqueMult);
+        //Vector3 controlTorque = new Vector3(-Input.GetAxis("Horizontal") * forwardRotorTorqueMult, 1.0f, -Input.GetAxis("Vertical") * sidewaysRotorTorqueMult);
+        Vector3 controlTorque = new Vector3(-Input.GetAxis("Mouse X") * forwardRotorTorqueMult, 1.0f, Input.GetAxis("Mouse Y") * sidewaysRotorTorqueMult);
 
         // Main Rotor is active, apply net torque to the copter body as well the lift force to create spinning rotors.
         if (mainRotorActive == true) 
@@ -76,15 +76,15 @@ public class Aircraft : MonoBehaviour
 
         // if the player increase rotor throttle, increase throttle to main rotor
 
-        if (Input.GetAxis("up") != 0.01f)
-        {
-            rotorVel += Input.GetAxis("up") * 0.001f;
-        }
-
-        //if (Input.GetAxis("Vertical") != 0.01f) 
+        //if (Input.GetAxis("up") != 0.01f)
         //{
-        //    rotorVel += Input.GetAxis("Vertical") * 0.001f;
+        //    rotorVel += Input.GetAxis("up") * 0.001f;
         //}
+
+        if (Input.GetAxis("Vertical") != 0.01f)
+        {
+            rotorVel += Input.GetAxis("Vertical") * 0.001f;
+        }
 
         else // to slow it back to hover vel.
         {
@@ -92,9 +92,9 @@ public class Aircraft : MonoBehaviour
         }
 
         // setting tail rot vel to min vel. Increase or decrease by player in
-        //tailRotorVel = hoverTailRotorVel - Input.GetAxis("Horizontal");
-        tailRotorVel = hoverTailRotorVel - Input.GetAxis("down");
-        Debug.Log(Input.GetAxis("down"));
+        tailRotorVel = hoverTailRotorVel - Input.GetAxis("Horizontal");
+        //tailRotorVel = hoverTailRotorVel - Input.GetAxis("down");
+        //Debug.Log(Input.GetAxis("down"));
 
         // limit rotor vel to 0 and 1 to make sure for a greater force.
         if (rotorVel > 1.0f) 
