@@ -14,7 +14,7 @@ public class Populate : MonoBehaviour
         helicopter = copter;
     }
 
-    [MenuItem("populate/Spawn")]
+    [MenuItem("Chui/Populate/Spawn")]
     public static void Spawn()
     {
         for (int i = 0; i < 10; i++)
@@ -29,7 +29,7 @@ public class Populate : MonoBehaviour
         }
     }
 
-    [MenuItem("populate/deSpawn")]
+    [MenuItem("Chui/Populate/deSpawn")]
     public static void deSpawn()
     {
         foreach (GameObject go in populate)
