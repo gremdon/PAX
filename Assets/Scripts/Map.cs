@@ -5,25 +5,20 @@ public class Map : MonoBehaviour
 {
     public void Update()
     {
-        Camera();
-    }
-    public void Camera()
-    {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            gowCamera.enabled = false;
-            map.enabled = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.M))
-        {
-            gowCamera.enabled = true;
-            map.enabled = false;
+            OnGUI();
         }
     }
 
-    public Camera gowCamera;
-    public Camera map;
+    void OnGUI()
+    {
+        GUI.DrawTexture(new Rect(0, 0, 1600, 900), mapImage, ScaleMode.ScaleToFit);
+    }
+
+    //public Camera mapCamera;
+    public Camera helicopterCamera;
+    public Texture mapImage;
 } 
 
 
