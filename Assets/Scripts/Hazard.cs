@@ -5,6 +5,6 @@ public class Hazard : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        Messenger.Broadcast(other.name, "HAZARD");
+        Messenger.Broadcast("hazard", other.name);
     }
 }
