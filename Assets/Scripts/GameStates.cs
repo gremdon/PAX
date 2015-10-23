@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class GameStates : Singleton<MonoBehaviour>
-{    protected override void Awake()
+public class GameStates:MonoBehaviour// : Singleton<MonoBehaviour>
+{    /*protected override*/ void Awake()
     {
-        base.Awake();
+        //base.Awake();
 
         Messenger.AddListener<STATES>("maketransition", CallTransition);
+        Messenger.AddListener<string>("win", RestartLevel);
+
+        Messenger.MarkAsPermanent("maketransition");
+        Messenger.MarkAsPermanent("win");
     
         callback = DoSomething;
 
@@ -29,6 +33,8 @@ public class GameStates : Singleton<MonoBehaviour>
         _fsm.AddTransition(STATES.GAMEOVER, STATES.START,       callback);
         _fsm.AddTransition(STATES.START,    STATES.END,         callback);
         _fsm.AddTransition(STATES.END,      STATES.TERM,        callback);
+
+        _fsm.AddTransition(STATES.GAMEOVER, STATES.PLAY,        callback);
     }
 
     public enum STATES
@@ -49,6 +55,11 @@ public class GameStates : Singleton<MonoBehaviour>
     void DoSomething(string transition)
     {
         Messenger.Broadcast("transition", transition);
+    }
+
+    void RestartLevel(string s)
+    {
+        Application.LoadLevel(Application.loadedLevel);
     }
 
     void CallTransition(STATES transition)
