@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Paul Chu's Helicopter GUI
+/// </summary>
 public class AircraftGUI : MonoBehaviour
 {
     void OnGUI()
