@@ -10,7 +10,7 @@ using System.Collections.Generic;
 static public class Audio
 {
     /// <summary>
-    /// Audio Manager to play audio
+    /// Audio Source to play audio
     /// </summary>
     static public AudioSource audioManager;
 
