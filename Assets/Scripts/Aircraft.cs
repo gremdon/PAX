@@ -2,63 +2,84 @@
 using System.Collections;
 using System.Collections.Generic;
 
-//[RequireComponent(typeof(AudioSource))]
 
 public class Aircraft : MonoBehaviour
 {
-    //public List<GameObject> aircraft = new List<GameObject>();
-    //public GameObject Helicopter;
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        engineSound = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
     {
         // Control Torque applied to the body of the copter based on player input.
+        // Get Axis is a float value that is between -1 to 1.
+        // ControlTorque = (-1 to 1, 1, -1 to 1) Don't change Y number, Helicopter will spin
         Vector3 torqueValue = Vector3.zero;
-        Vector3 controlTorque = new Vector3(Input.GetAxis("Mouse X") * forwardRotorTorqueMult, 1.0f, -Input.GetAxis("Mouse Y") * sidewaysRotorTorqueMult);
+        //Vector3 controlTorque = new Vector3(-Input.GetAxis("Horizontal") * forwardRotorTorqueMult, 1.0f, -Input.GetAxis("Vertical") * sidewaysRotorTorqueMult);
+        Vector3 controlTorque = new Vector3(-Input.GetAxis("Mouse X") * forwardRotorTorqueMult, 1.0f, Input.GetAxis("Mouse Y") * sidewaysRotorTorqueMult);
 
-        if (mainRotorActive == true) // Main Rotor is active, apply net torque to the copter body as well the lift force to create spinning rotors.
+        // Main Rotor is active, apply net torque to the copter body as well the lift force to create spinning rotors.
+        if (mainRotorActive == true) 
         {
-            torqueValue += (controlTorque * maxRotorForce * rotorVel); // notes control torque to net torque. Also applies force to rb = y.
+            // notes control torque to net torque. Also applies force to rb = y. for lift force
+            torqueValue += (controlTorque * maxRotorForce * rotorVel); 
             rb.AddRelativeForce(Vector3.up * maxRotorForce * rotorVel);
         }
 
-        if (Vector3.Angle(Vector3.up, transform.up) < 80) // When the helicopter is lifting off, the y axis Increase for it to level out so it won't freak out/crash.
+        // When the helicopter is lifting off, the y axis Increase for it to level out so it won't freak out/crash.
+        // if it's less than 70s ANGLES!
+        if (Vector3.Angle(Vector3.up, transform.up) < 20) 
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, // Using Quaternion.Slerp  for X and Z rotations without changing.
-            Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0),
-            Time.deltaTime * rotorVel * 2);
+            // applies force to the rb in Y direction.
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0), Time.deltaTime * rotorVel * 2);
         }
 
-        if (tailRotorActive == true) // tail rotor active. apply tail rotor force to net torque, torque to copter body.
+        // tail rotor active. apply tail rotor force to net torque, torque to copter body.
+        if (tailRotorActive == true) 
         {
-            torqueValue -= (Vector3.up * maxTailRotorForce * tailRotorVel); // subtract rotor max force mult by throttle from net forque and apply copter's body.
+            // subtract rotor max force mult by throttle from net forque and apply copter's body.
+            torqueValue -= (Vector3.up * maxTailRotorForce * tailRotorVel); 
         }
         rb.AddRelativeTorque(torqueValue);
     }
     
     void Update()
     {
-        if (mainRotorActive == true) // animate main rotor
+        // Engine SOUND! WOOT!
+        engineSound.pitch = rotorVel;
+
+        // animate main rotor
+        if (mainRotorActive == true) 
         {
-            mainRotor.transform.rotation = mainRotor.transform.rotation * Quaternion.Euler(0, rotorRot, 0); // Rotors JUST RIGHT! 
+            mainRotor.transform.rotation = transform.rotation * Quaternion.Euler(0, rotorRot, 0); // Rotors JUST RIGHT! 
         }
 
-        if (tailRotorActive == true) // Animite tail rotor
+        // Animite tail rotor
+        if (tailRotorActive == true) 
         {
-            tailRotor.transform.rotation = tailRotor.transform.rotation * Quaternion.Euler(0, 0, tailRotorRot); // Tail rotate goes in the correct direction
+            tailRotor.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, tailRotorRot); // Tail rotate goes in the correct direction
         }
 
-        rotorRot += maxRotorVel * rotorVel * Time.deltaTime; // having the max rotor vel * rotor vel * delta time to equal and increment rotorRot
-        tailRotorRot += maxTailRotorVel * rotorVel * Time.deltaTime; // having maxTailRotorVel * rotor Vel * delta time to equal and increment tailRotorRot
+        // having the max rotor vel * rotor vel * delta time to equal and increment rotorRot
+        // having maxTailRotorVel * rotor Vel * delta time to equal and increment tailRotorRot
+        rotorRot += maxRotorVel * rotorVel * Time.deltaTime; 
+        tailRotorRot += maxTailRotorVel * rotorVel * Time.deltaTime;
 
-        float hoverRotorVel = (rb.mass * Mathf.Abs(Physics.gravity.y) / maxRotorForce); // counteract force of gravity / max force rotors (0.0f to 1.0f) = minimum throttle to keep copter stationary.
-        float hoverTailRotorVel = (maxRotorForce * rotorVel) / maxTailRotorForce; // counteract torque of main rotor, find torque by main rotor to use for tail rotor throttle.
+        // counteract force of gravity / max force rotors (0.0f to 1.0f) = minimum throttle to keep copter stationary.
+        float hoverRotorVel = (rb.mass * Mathf.Abs(Physics.gravity.y) / maxRotorForce);
+        // counteract torque of main rotor, find torque by main rotor to use for tail rotor throttle.
+        float hoverTailRotorVel = (maxRotorForce * rotorVel) / maxTailRotorForce;
 
-        if (Input.GetAxis("Vertical") != 0.0f) // if the player increase rotor throttle, increase throttle to main rotor
+        // if the player increase rotor throttle, increase throttle to main rotor
+
+        //if (Input.GetAxis("up") != 0.01f)
+        //{
+        //    rotorVel += Input.GetAxis("up") * 0.001f;
+        //}
+
+        if (Input.GetAxis("Vertical") != 0.01f)
         {
             rotorVel += Input.GetAxis("Vertical") * 0.001f;
         }
@@ -68,9 +89,13 @@ public class Aircraft : MonoBehaviour
             rotorVel = Mathf.Lerp(rotorVel, hoverRotorVel, Time.deltaTime * Time.deltaTime * 5);
         }
 
-        tailRotorVel = hoverTailRotorVel - Input.GetAxis("Horizontal"); // setting tail rot vel to min vel. Increase or decrease by player in
+        // setting tail rot vel to min vel. Increase or decrease by player in
+        tailRotorVel = hoverTailRotorVel - Input.GetAxis("Horizontal");
+        //tailRotorVel = hoverTailRotorVel - Input.GetAxis("down");
+        //Debug.Log(Input.GetAxis("down"));
 
-        if (rotorVel > 1.0f) // limit rotor vel to 0 and 1 to make sure for a greater force.
+        // limit rotor vel to 0 and 1 to make sure for a greater force.
+        if (rotorVel > 1.0f) 
         {
             rotorVel = 1.0f;
         }
@@ -81,6 +106,8 @@ public class Aircraft : MonoBehaviour
         }
     }
 
+    AudioSource engineSound;
+
     public GameObject mainRotor;
     public GameObject tailRotor;
 
@@ -88,7 +115,7 @@ public class Aircraft : MonoBehaviour
 
     float maxRotorForce = 22241.1081f;
     float maxRotorVel = 7200.0f;
-    float rotorVel = 0.0f;
+    public float rotorVel = 0.0f;
     float rotorRot = 0.0f;
 
     float maxTailRotorForce = 15000.0f;
@@ -96,8 +123,9 @@ public class Aircraft : MonoBehaviour
     float tailRotorVel = 0.0f;
     float tailRotorRot = 0.0f;
 
-    float forwardRotorTorqueMult = 0.5f;
-    float sidewaysRotorTorqueMult = 0.5f;
+    // control mouse sensitvity
+    float forwardRotorTorqueMult = 0.2f;
+    float sidewaysRotorTorqueMult = 0.2f;
 
     bool mainRotorActive = true;
     bool tailRotorActive = true;
