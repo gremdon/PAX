@@ -36,10 +36,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             // get the third person character ( this should never be null due to require component )
             m_Character = GetComponent<ThirdPersonCharacter>();
-
-            //Debug.Log(Crouch + gameObject.name);
-            //Debug.Log(Run + gameObject.name);
-            //Debug.Log(Jump + gameObject.name);
+            
         }
 
 
