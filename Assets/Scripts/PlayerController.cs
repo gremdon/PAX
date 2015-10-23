@@ -12,11 +12,18 @@ public class PlayerController : MonoBehaviour
     private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
     float h;
     float v;
-    public string Crouch;
-    public string Jump;
-    public string Horizontal;
-    public string Vertical;
-    public string Run;
+    bool crouch;
+    float speed;
+    bool running = false;
+    void Awake()
+    {
+        Messenger.AddListener<string>(gameObject.name + ":j", PlayerJump);
+        Messenger.AddListener<string>(gameObject.name + ":s", PlayerSpecial);
+        Messenger.AddListener<string>(gameObject.name + ":a", PlayerAttack);
+        Messenger.AddListener<string>(gameObject.name + ":h", MoveHorizontal);
+        Messenger.AddListener<string>(gameObject.name + ":v", MoveVertical);
+        Messenger.AddListener<string>(gameObject.name + ":r", PlayerRun);
+    }
 
     private void Start()
     {
@@ -37,48 +44,42 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+    #region Events
     void MoveHorizontal(string a)
     {
-        h = CrossPlatformInputManager.GetAxis(a);
+        h = CrossPlatformInputManager.GetAxis(gameObject.name + ":" + a);
     }
 
     void MoveVertical(string a)
     {
-        v = CrossPlatformInputManager.GetAxis(a);
+        v = CrossPlatformInputManager.GetAxis(gameObject.name + ":" + a);
     }
 
     void PlayerJump(string a)
     {
-        m_Jump = CrossPlatformInputManager.GetButton(a);
+        if(!m_Jump)
+            m_Jump = CrossPlatformInputManager.GetButton(gameObject.name + ":" + a);
     }
 
-    void PlayerCrouch(string a)
+    void PlayerRun(string a)
     {
-        bool crouch = CrossPlatformInputManager.GetButton(Crouch);
+        running = true;
     }
 
-    private void Update()
+    void PlayerAttack(string a)
     {
-
-        if (!m_Jump)
-        {
-            m_Jump = CrossPlatformInputManager.GetButton(Jump);
-        }
+        Debug.Log(a + " Attack");
     }
 
+    void PlayerSpecial(string a)
+    {
+        Debug.Log(a + " Special");
+    }
+    #endregion
 
     // Fixed update is called in sync with physics
     private void FixedUpdate()
     {
-
-        // read inputs
-        float h = CrossPlatformInputManager.GetAxis(Horizontal);
-        float v = CrossPlatformInputManager.GetAxis(Vertical);
-        bool crouch = CrossPlatformInputManager.GetButton(Crouch);
-
-
-
         // calculate move direction to pass to character
         if (m_Cam != null)
         {
@@ -92,17 +93,15 @@ public class PlayerController : MonoBehaviour
             m_Move = v * Vector3.forward + h * Vector3.right;
         }
 
-#if !MOBILE_INPUT
-        // walk speed multiplier
-        if (!CrossPlatformInputManager.GetButton(Run))
+        if (!running)
         {
             m_Move *= 0.75f;
         }
 
-#endif
 
         // pass all parameters to the character control script
         m_Character.Move(m_Move, crouch, m_Jump);
         m_Jump = false;
+        running = false;
     }
 }
