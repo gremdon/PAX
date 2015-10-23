@@ -71,7 +71,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		col = GetComponent<CapsuleCollider>();
 		rb = GetComponent<Rigidbody>();
 		//メインカメラを取得する
-		cameraObject = GameObject.FindWithTag("MainCamera");
+		//cameraObject = GameObject.FindWithTag("MainCamera");
 		// CapsuleColliderコンポーネントのHeight、Centerの初期値を保存する
 		orgColHight = col.height;
 		orgVectColCenter = col.center;
@@ -159,7 +159,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		// 現在のベースレイヤーがjumpStateの時
 		else if(currentBaseState.fullPathHash == jumpState)
 		{
-			cameraObject.SendMessage("setCameraPositionJumpView");	// ジャンプ中のカメラに変更
+			//cameraObject.SendMessage("setCameraPositionJumpView");	// ジャンプ中のカメラに変更
 			// ステートがトランジション中でない場合
 			if(!anim.IsInTransition(0))
 			{
