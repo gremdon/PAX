@@ -46,6 +46,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     float h;
     float v;
     bool running = false;
+    public bool m_jump = false;
 // アニメーター各ステートへの参照
 	static int idleState = Animator.StringToHash("Base Layer.Idle");
 	static int locoState = Animator.StringToHash("Base Layer.Locomotion");
@@ -90,8 +91,10 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 
     void PlayerJump(string a)
     {
-        rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
-        anim.SetBool("Jump", true);     // Animatorにジャンプに切り替えるフラグを送る
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
+            anim.SetBool("Jump", true);     // Animatorにジャンプに切り替えるフラグを送る
+        
+
     }
 
     void PlayerRun(string a)
@@ -221,6 +224,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 			}
 		}
         running = false;
+        m_jump = false;
 	}
 
 

@@ -16,7 +16,7 @@ public class InputHandler : MonoBehaviour
     void Update()
     {
         //IdleTime = Time.deltaTime * 2f;
-        if (CrossPlatformInputManager.GetButton(gameObject.name + ":" + Jump))
+        if (CrossPlatformInputManager.GetButtonDown(gameObject.name + ":" + Jump))
         {
             Messenger.Broadcast<string>(gameObject.name + ":j", Jump.ToString());
             //IdleTime = 0;
