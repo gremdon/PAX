@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class GameStates:MonoBehaviour// : Singleton<MonoBehaviour>
-{    /*protected override*/ void Awake()
+public class GameStates : Singleton<MonoBehaviour>
+{
+    protected override void Awake()
     {
-        //base.Awake();
+        base.Awake();
 
         Messenger.AddListener<STATES>("maketransition", CallTransition);
         Messenger.AddListener<string>("win", RestartLevel);
 
         Messenger.MarkAsPermanent("maketransition");
         Messenger.MarkAsPermanent("win");
-    
+
         callback = DoSomething;
 
         _fsm.AddState(STATES.INIT);
@@ -24,17 +25,17 @@ public class GameStates:MonoBehaviour// : Singleton<MonoBehaviour>
 
         _fsm.m_currentState = STATES.INIT;
 
-        _fsm.AddTransition(STATES.INIT,     STATES.START,       callback);
-        _fsm.AddTransition(STATES.START,    STATES.PLAY,        callback);
-        _fsm.AddTransition(STATES.PLAY,     STATES.PAUSE,       callback);
-        _fsm.AddTransition(STATES.PAUSE,    STATES.PLAY,        callback);
-        _fsm.AddTransition(STATES.PLAY,     STATES.GAMEOVER,    callback);
-        _fsm.AddTransition(STATES.PAUSE,    STATES.GAMEOVER,    callback);
-        _fsm.AddTransition(STATES.GAMEOVER, STATES.START,       callback);
-        _fsm.AddTransition(STATES.START,    STATES.END,         callback);
-        _fsm.AddTransition(STATES.END,      STATES.TERM,        callback);
+        _fsm.AddTransition(STATES.INIT, STATES.START, callback);
+        _fsm.AddTransition(STATES.START, STATES.PLAY, callback);
+        _fsm.AddTransition(STATES.PLAY, STATES.PAUSE, callback);
+        _fsm.AddTransition(STATES.PAUSE, STATES.PLAY, callback);
+        _fsm.AddTransition(STATES.PLAY, STATES.GAMEOVER, callback);
+        _fsm.AddTransition(STATES.PAUSE, STATES.GAMEOVER, callback);
+        _fsm.AddTransition(STATES.GAMEOVER, STATES.START, callback);
+        _fsm.AddTransition(STATES.START, STATES.END, callback);
+        _fsm.AddTransition(STATES.END, STATES.TERM, callback);
 
-        _fsm.AddTransition(STATES.GAMEOVER, STATES.PLAY,        callback);
+        _fsm.AddTransition(STATES.GAMEOVER, STATES.PLAY, callback);
     }
 
     public enum STATES
