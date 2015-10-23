@@ -1740,7 +1740,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 464420}
   - 137: {fileID: 13713574}
-  - 114: {fileID: 11479358}
   m_Layer: 0
   m_Name: tail
   m_TagString: Untagged
@@ -3525,7 +3524,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179854}
-  m_LocalRotation: {x: -.0937465355, y: .697855115, z: .707468987, w: .0608067475}
+  m_LocalRotation: {x: -.0937465429, y: .697855175, z: .707469046, w: .0608067475}
   m_LocalPosition: {x: -.0554340295, y: .00173068431, z: .0986537337}
   m_LocalScale: {x: 1.00000036, y: 1.0000006, z: 1.00000048}
   m_Children:
@@ -4985,7 +4984,8 @@ MonoBehaviour:
   forwardSpeed: 7
   backwardSpeed: 2
   rotateSpeed: 2
-  jumpPower: 3
+  jumpPower: 1
+  m_jump: 0
 --- !u!114 &11463148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5009,24 +5009,6 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 4f32f4345ffde43aca2270c41dcf6e81, type: 2}
   - {fileID: 7400000, guid: 73cb3ae8fc1de47a0a307cb5f95ec701, type: 2}
   delayWeight: .300000012
---- !u!114 &11479358
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c30f7ce9c19ea439c1aacded1b96f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Horizontal: 
-  Vertical: 
-  Jump: 
-  Attack: 
-  Special: 
-  Run: 
-  IdleTime: 0
 --- !u!136 &13604774
 CapsuleCollider:
   m_ObjectHideFlags: 1
