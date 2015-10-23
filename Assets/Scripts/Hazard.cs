@@ -25,3 +25,5 @@ public class Hazard : MonoBehaviour
     [SerializeField]
     float timer = 1;
 }
+
+/// Eric Mouledoux
