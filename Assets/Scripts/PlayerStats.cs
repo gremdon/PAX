@@ -33,6 +33,6 @@ public class PlayerStats : MonoBehaviour
 
     public void OnEnable()
     {
-        Messenger.AddListener<string>("hazard", TakeDamage);
+        Messenger.AddListener<string>("takedamage", TakeDamage);
     }
 }
