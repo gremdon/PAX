@@ -59,6 +59,8 @@ public class GameStates:MonoBehaviour// : Singleton<MonoBehaviour>
 
     void RestartLevel(string s)
     {
+        Messenger.RemoveListener<string>("win", RestartLevel);
+        Messenger.RemoveListener<STATES>("maketransition", CallTransition);
         Application.LoadLevel(Application.loadedLevel);
     }
 
