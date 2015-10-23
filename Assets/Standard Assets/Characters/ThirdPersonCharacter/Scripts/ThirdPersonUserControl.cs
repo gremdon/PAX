@@ -20,6 +20,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public string Vertical;
         public string Run;
 
+        public void Awake()
+        {
+            
+        }
+
         private void Start()
         {
             // get the transform of the main camera
@@ -98,7 +103,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             // walk speed multiplier
             if (!CrossPlatformInputManager.GetButton(Run))
             {
-                m_Move *= 0.5f;
+                m_Move *= 0.75f;
             }
 
 #endif
