@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 3aa3f20190c2a1545bd3ace1b93281bd
+timeCreated: 1445275428
+=======
 guid: 9bbfaa009c1ed064695683d41ac2a05a
 timeCreated: 1445009765
+>>>>>>> slanden/master
 licenseType: Pro
 NativeFormatImporter:
   userData: 
