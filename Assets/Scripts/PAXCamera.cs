@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraController : MonoBehaviour
+public class PAXCamera : MonoBehaviour
 {
     Transform followTarget;
     Vector3 offset;
