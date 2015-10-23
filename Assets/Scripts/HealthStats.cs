@@ -21,35 +21,39 @@ using System.Collections;
 public class HealthStats : MonoBehaviour
 {
     [SerializeField]
-    private int _health;
+    protected int _health = 3;
+    /// <summary>
+    /// public
+    /// Getter/Setter for _health
+    /// </summary>
     public int health
     {
-        get { return _health; }
-        private set
+        get { return _health; } //returns _health
+        protected set           // Protected Set
         {          
-           _health = value;
+           _health = value;      //Sets _health to Value
 
-            if (health < 0)
-                OnDead();
+            if (health <= 0)     //If health is less then or equal to 0
+                OnDead();        //Triggers OnDead()
         }
 
      }
 
 
 
-    public void TakeDamage(string message)
+    public virtual void TakeDamage(string message)
     {
-        if (message == name)
-        { health--; }
+        if (message == name) // Checks to see if message is equal to gameObject.name
+        { health--; }       // reduces health by 1
     }
 
-    private void OnDead()
+    protected virtual void OnDead()
     {
-        Messenger.Broadcast("playerdied", name);
+        Messenger.Broadcast("playerdied", name); //Broacasts "playerdied" with gameObject.name
     }
 
-    public void OnEnable()
+    public virtual void OnEnable()
     {
-        Messenger.AddListener<string>("takedamage", TakeDamage);
+        Messenger.AddListener<string>("takedamage", TakeDamage); //AddListener of "takedamage" with TakeDamage function
     }
 }
