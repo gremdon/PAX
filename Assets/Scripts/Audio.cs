@@ -1,35 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class Audio : MonoBehaviour
-{
-    AudioSource player, enemy, gui;
-    Dictionary<string, AudioClip> audioEvent = new Dictionary<string, AudioClip>();
-    /* 
-        An event is played and when that event is played, it shoots out a string, that a subscriber will subscribe to that message and play that audio
-        clip.
 
-        Dictionary of key : message
-                      value : AudioClip
-    */
+/// <summary>
+/// Tran and Paul audio file!
+/// Tran did all of the audio script.
+/// While Paul is looking into 3D settings.
+/// </summary>
+public class Audio
+{
+    /// <summary>
+    /// A base audio for everyone to play the audio.
+    /// A dictionary to add the audio
+    /// </summary>
+    public AudioSource audioManager;
+    Dictionary<string, AudioClip> audioTable = new Dictionary<string, AudioClip>();
 
     /// <summary>
-    /// Tran and Paul
+    /// Adds audio, checks to see if the same message is in the dictionary, if not, adds it in.
     /// </summary>
-    /// <param name="message"></param>
-    void PlayerAudio(string message)
+    /// <param string ="argument"></param>
+    /// <param AudioClip ="audioclip"></param>
+    public void AddAudio(string argument, AudioClip audioclip)
     {
-        player.clip = audioEvent[message];
-        player.Play();
+        if (audioTable.ContainsKey(argument))
+        {
+            Debug.Log(argument.ToString() + "This message already exist");
+        }
+        else
+            audioTable.Add(argument, audioclip);
     }
 
-    void EnemyAudio()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="messageBroadcast">
+    /// The message that the audio wants to listen to
+    ///</param>
+    public void AudioListener(string messageBroadcast)
     {
-
+        Messenger.AddListener<string>(messageBroadcast, playAudio);
     }
 
-    void GuiAudio()
+    /// <summary>
+    /// The audio plays by string arguments.
+    /// </summary>
+    /// <param string="argument"></param>
+    void playAudio(string argument)
     {
-
+        audioManager.clip = audioTable[argument];
+        audioManager.Play();
     }
 }
