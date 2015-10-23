@@ -18,11 +18,14 @@ public class CameraController : MonoBehaviour
         followTarget = FindObjectOfType<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl>().transform;
         originPosition = followTarget.position;
         originPosition += (followTarget.forward * 3);
-        //transform.LookAt(followTarget);
-        //cameraLookDirection = transform.forward;
+        originPosition += new Vector3(0, 3, 0);
+
+        transform.position = originPosition;
+        transform.LookAt(followTarget);
+        cameraLookDirection = transform.forward;
         //originPosition = new Vector3(0.17f, 2.48f, -2.53f);
         //originRotation = new Vector3(18, 0, 0);
-        transform.position = originPosition;
+
         //transform.eulerAngles = originRotation;
         //Reset();
         offset = transform.position - followTarget.position;
