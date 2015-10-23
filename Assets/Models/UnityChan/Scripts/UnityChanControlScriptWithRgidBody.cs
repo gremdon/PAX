@@ -46,6 +46,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     float h;
     float v;
     bool running = false;
+    public bool m_jump = false;
 // アニメーター各ステートへの参照
 	static int idleState = Animator.StringToHash("Base Layer.Idle");
 	static int locoState = Animator.StringToHash("Base Layer.Locomotion");
@@ -71,7 +72,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		col = GetComponent<CapsuleCollider>();
 		rb = GetComponent<Rigidbody>();
 		//メインカメラを取得する
-		cameraObject = GameObject.FindWithTag("MainCamera");
+		//cameraObject = GameObject.FindWithTag("MainCamera");
 		// CapsuleColliderコンポーネントのHeight、Centerの初期値を保存する
 		orgColHight = col.height;
 		orgVectColCenter = col.center;
@@ -90,8 +91,8 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 
     void PlayerJump(string a)
     {
-        rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
-        anim.SetBool("Jump", true);     // Animatorにジャンプに切り替えるフラグを送る
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
+            anim.SetBool("Jump", true);     // Animatorにジャンプに切り替えるフラグを送る
     }
 
     void PlayerRun(string a)
@@ -159,7 +160,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		// 現在のベースレイヤーがjumpStateの時
 		else if(currentBaseState.fullPathHash == jumpState)
 		{
-			cameraObject.SendMessage("setCameraPositionJumpView");	// ジャンプ中のカメラに変更
+			//cameraObject.SendMessage("setCameraPositionJumpView");	// ジャンプ中のカメラに変更
 			// ステートがトランジション中でない場合
 			if(!anim.IsInTransition(0))
 			{
@@ -221,6 +222,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 			}
 		}
         running = false;
+        m_jump = false;
 	}
 
 
