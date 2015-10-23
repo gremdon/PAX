@@ -23,7 +23,7 @@ public class PAXCamera : MonoBehaviour
         followTarget = GameObject.FindGameObjectWithTag("Player").transform;
 
         //set initial camera position and orientation
-        transform.position = followTarget.position + (followTarget.forward * distance) + new Vector3(0, 3, 0);
+        transform.position = followTarget.position + (-followTarget.forward * distance) + new Vector3(0, 3, 0);
         transform.LookAt(followTarget);
         cameraLookDirection = transform.forward;
 
