@@ -93,8 +93,6 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     {
             rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
             anim.SetBool("Jump", true);     // Animatorにジャンプに切り替えるフラグを送る
-        
-
     }
 
     void PlayerRun(string a)
