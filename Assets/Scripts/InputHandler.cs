@@ -10,36 +10,45 @@ public class InputHandler : MonoBehaviour
     public string Crouch;
     public string Run;
 
+    public float IdleTime;
+
     void Update()
     {
-        if(CrossPlatformInputManager.GetButton(Jump))
+        IdleTime = Time.deltaTime * 2f;
+        if (CrossPlatformInputManager.GetButton(Jump))
         {
             string[] temp = Jump.Split(':');
-            Messenger.Broadcast<string>(temp[0].ToLower(), temp[1].ToLower());
+            //Messenger.Broadcast<string>(temp[0].ToLower(), temp[1].ToLower());
+            IdleTime = 0;
         }
 
         if (CrossPlatformInputManager.GetButton(Crouch))
         {
             string[] temp = Crouch.Split(':');
-            Messenger.Broadcast<string>(temp[0].ToLower(), temp[1].ToLower());
+            //Messenger.Broadcast<string>(temp[0].ToLower(), temp[1].ToLower());
+            IdleTime = 0;
+
         }
 
         if (CrossPlatformInputManager.GetButton(Run))
         {
             string[] temp = Run.Split(':');
-            Messenger.Broadcast<string>(temp[0].ToLower(), temp[1].ToLower());
+            //Messenger.Broadcast<string>(temp[0].ToLower(), temp[1].ToLower());
+            IdleTime = 0;
         }
 
-        if (CrossPlatformInputManager.GetButton(Vertical))
+        if (CrossPlatformInputManager.GetAxis(Vertical) != 0)
         {
             string[] temp = Vertical.Split(':');
-            Messenger.Broadcast<string>(temp[0].ToLower(), temp[1].ToLower());
+            //Messenger.Broadcast<string>(temp[0].ToLower(), temp[1].ToLower());
+            IdleTime = 0;
         }
 
-        if (CrossPlatformInputManager.GetButton(Horizontal))
+        if (CrossPlatformInputManager.GetAxis(Horizontal) != 0)
         {
             string[] temp = Horizontal.Split(':');
-            Messenger.Broadcast<string>(temp[0].ToLower(), temp[1].ToLower());
+            //Messenger.Broadcast<string>(temp[0].ToLower(), temp[1].ToLower());
+            IdleTime = 0;
         }
     }
 }

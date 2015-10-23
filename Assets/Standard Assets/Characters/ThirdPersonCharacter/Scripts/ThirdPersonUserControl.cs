@@ -20,10 +20,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public string Vertical;
         public string Run;
 
-        public void Awake()
-        {
-            
-        }
 
         private void Start()
         {
