@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class GameStates:MonoBehaviour// : Singleton<MonoBehaviour>
-{    /*protected override*/ void Awake()
+public class GameStates : Singleton<MonoBehaviour>
+{
+    protected override void Awake()
     {
-        //base.Awake();
+        base.Awake();
 
         Messenger.AddListener<STATES>("maketransition", CallTransition);
         Messenger.AddListener<string>("win", RestartLevel);
