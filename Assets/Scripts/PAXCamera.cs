@@ -23,7 +23,7 @@ public class PAXCamera : MonoBehaviour
         followTarget = GameObject.FindGameObjectWithTag("Player").transform;
 
         //set initial camera position and orientation
-        transform.position = followTarget.position + (followTarget.forward * distance) + new Vector3(0, 3, 0);
+        transform.position = followTarget.position + (-followTarget.forward * distance) + new Vector3(0, 3, 0);
         transform.LookAt(followTarget);
         cameraLookDirection = transform.forward;
 
@@ -45,20 +45,21 @@ public class PAXCamera : MonoBehaviour
         //    transform.position = followTarget.position + offset;
         //    //transform.forward = Vector3.Lerp(transform.forward, transform.LookAt(followTarget), Time.deltaTime * smoothing);
         //}
-        PredictPosition();
+        PredictPlayerPosition();
         transform.LookAt(followTarget);
     }
 
-    void PredictPosition()
+    void PredictPlayerPosition()
     {
-        Vector3 predictedCameraPosition = transform.position + (followTarget.forward * distance);
-        testCube.transform.position = predictedCameraPosition;
+        Vector3 predictedPlayerPosition = followTarget.position + (followTarget.forward * distance);
+        testCube.transform.position = predictedPlayerPosition;
         float playerDistanceToCamera = Vector3.Distance(followTarget.position, transform.position);
 
+        cameraLookDirection = followTarget.position - transform.position;
         RaycastHit hit;
-        Ray r = new Ray(predictedCameraPosition, transform.forward);        
+        Ray r = new Ray(predictedPlayerPosition, -cameraLookDirection);        
         Physics.Raycast(r, out hit);
-        Debug.DrawLine(predictedCameraPosition, hit.point);
+        Debug.DrawLine(predictedPlayerPosition, hit.point);
         //if (Vector3.Distance(hit.point, predictedCameraPosition) <= playerDistanceToCamera)
         //{
         //    //transform.position = followTarget.position + (followTarget.forward * distance) + new Vector3(0, 3, 0);

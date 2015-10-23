@@ -6006,10 +6006,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165410ab67c947845ae8cac303fa742f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 2.20000005
+  distance: 5
   minDistance: 3
-  maxDistance: 10
-  smoothing: .100000001
+  maxDistance: 6
+  smoothing: 1
 --- !u!81 &1982966568
 AudioListener:
   m_ObjectHideFlags: 0
