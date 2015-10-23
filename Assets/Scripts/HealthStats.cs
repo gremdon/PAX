@@ -41,7 +41,7 @@ public class HealthStats : MonoBehaviour
 
 
 
-    public virtual void TakeDamage(string message)
+    protected virtual void TakeDamage(string message)
     {
         if (message == name) // Checks to see if message is equal to gameObject.name
         { health--; }       // reduces health by 1
