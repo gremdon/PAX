@@ -17,7 +17,7 @@ public class PAXCamera : MonoBehaviour
     {
         followTarget = FindObjectOfType<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl>().transform;
         originPosition = followTarget.position;
-        originPosition += (followTarget.forward * 3);
+        originPosition += (followTarget.forward * maxDistance);
         originPosition += new Vector3(0, 3, 0);
 
         transform.position = originPosition;
