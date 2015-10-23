@@ -68,16 +68,18 @@ public class PAXCamera : MonoBehaviour
         if(hit.collider != null && hit.collider != followTarget.gameObject && hit.collider != transform.gameObject)
         {
             //transform.position += followTarget.forward * distance;
-            //transform.position = Vector3.Lerp(transform.position, -followTarget.forward * distance, Time.deltaTime * smoothing);
-            ////Vector3 hitDirection = Vector3.Normalize(hit.point - followTarget.position);
-            ////if (Vector3.Dot(followTarget.forward, hitDirection) > 0 && Vector3.Dot(followTarget.forward, hitDirection) < 1)
-            ////{
-            ////    transform.position -= new Vector3(.2f,0,.2f);
-            ////}
-            ////else if (Vector3.Dot(followTarget.forward, hitDirection) > 1 && Vector3.Dot(followTarget.forward, hitDirection) < 0)
-            ////{
-            ////    transform.position += new Vector3(.2f, 0, .2f);
-            ////}
+            transform.position = Vector3.Lerp(transform.position, followTarget.position + (-followTarget.forward * playerDistanceToCamera), Time.deltaTime * smoothing);
+
+            //Vector3 hitDirection = Vector3.Normalize(hit.point - followTarget.position);
+            //if (Vector3.Dot(followTarget.forward, hitDirection) > 0 && Vector3.Dot(followTarget.forward, hitDirection) < 1)
+            //{
+            //    transform.position -= new Vector3(.2f, 0, .2f);
+            //}
+            //else if (Vector3.Dot(followTarget.forward, hitDirection) > 1 && Vector3.Dot(followTarget.forward, hitDirection) < 0)
+            //{
+            //    transform.position += new Vector3(.2f, 0, .2f);
+            //}
+
             //if (hit.point.x > followTarget.position.x)
             //{
             //    transform.position -= new Vector3(smoothing, 0, 0);
