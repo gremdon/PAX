@@ -35,7 +35,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 0
+    axis: 3
     joyNum: 1
   - serializedVersion: 3
     m_Name: Player1:Vertical
@@ -131,7 +131,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 0
+    axis: 3
     joyNum: 2
   - serializedVersion: 3
     m_Name: Player2:Vertical
