@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
 
 public class MovablePlatform : MonoBehaviour
 {
@@ -86,21 +85,4 @@ public class MovablePlatform : MonoBehaviour
 }
 
 
-[CustomEditor(typeof(MovablePlatform))]
-public class MovablePlatformEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
 
-        MovablePlatform myScript = (MovablePlatform)target;
-        if (GUILayout.Button("Set Initial Posistion"))
-        {
-            myScript.SetInitPos();
-        }
-        if (GUILayout.Button("Set Secondary Posistion"))
-        {
-            myScript.SetSecondaryPos();
-        }
-    }
-} 
