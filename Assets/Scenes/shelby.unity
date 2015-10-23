@@ -1671,9 +1671,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 5
   minDistance: 3
-  maxDistance: 10
+  maxDistance: 6
   smoothing: 1
-  originPosition: {x: 0, y: 1.79999995, z: 0}
 --- !u!1 &766235168
 GameObject:
   m_ObjectHideFlags: 0
