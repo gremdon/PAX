@@ -9,11 +9,11 @@ public class PlayerStats : MonoBehaviour
     {
         get { return _health; }
         private set
-        {
-            if (value > 0)
-            {
-                _health = value;
-            }
+        {          
+           _health = value;
+
+            if (health < 0)
+                OnDead();
         }
 
      }
