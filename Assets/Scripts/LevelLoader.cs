@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+
 
 public class LevelLoader : Singleton<LevelLoader>
 {
@@ -18,15 +19,15 @@ public class LevelLoader : Singleton<LevelLoader>
         //Subscritions will be placed here once the event system has been implemented
     }
 
-    void Start()
-    {
-        foreach(UnityEditor.EditorBuildSettingsScene S in UnityEditor.EditorBuildSettings.scenes)
-        {
-            string name = S.path.Substring(S.path.LastIndexOf('/') + 1);
-            name = name.Substring(0, name.Length - 6);
-            Scenes.Add(name);
-        }
-    }
+    //void Start()
+    //{
+    //    foreach(UnityEditor.EditorBuildSettingsScene S in UnityEditor.EditorBuildSettings.scenes)
+    //    {
+    //        string name = S.path.Substring(S.path.LastIndexOf('/') + 1);
+    //        name = name.Substring(0, name.Length - 6);
+    //        Scenes.Add(name);
+    //    }
+    //}
 
     public void LoadLevelSection(string name)
     {
