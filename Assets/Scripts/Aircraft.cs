@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Paul Chu Helicopter Script
+/// </summary>
 
 public class Aircraft : MonoBehaviour
 {
