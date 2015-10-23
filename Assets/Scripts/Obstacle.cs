@@ -8,5 +8,6 @@ public class Obstacle : HealthStats
         gameObject.SetActive(false);
         Destroy(gameObject);
     }
+
 }
 /// Eric Mouledoux

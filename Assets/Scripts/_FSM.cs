@@ -91,7 +91,7 @@ public class _FSM<T>
         if (m_transitions.ContainsKey(trans))           // checks to see if the key exist as a valid transition
         {                                               // if so...s
             m_currentState = b_state;                       // set the current state to the new state
-            m_transitions[trans].DynamicInvoke();           // and call the functions associated with the transition
+            m_transitions[trans].DynamicInvoke(trans);      // and call the functions associated with the transition
         }
     }
 
