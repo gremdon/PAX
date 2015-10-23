@@ -56,4 +56,9 @@ public class HealthStats : MonoBehaviour
     {
         Messenger.AddListener<string>("takedamage", TakeDamage); //AddListener of "takedamage" with TakeDamage function
     }
+    public virtual void OnDisable()
+    {
+        Messenger.RemoveListener<string>("takedamage", TakeDamage); //Removes listener of "takedamage" with TakeDamage function
+    }
+
 }
