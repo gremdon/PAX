@@ -5,6 +5,7 @@
 //
 using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.CrossPlatformInput;
 
 // 必要なコンポーネントの列記
 [RequireComponent(typeof (Animator))]
@@ -41,13 +42,26 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 	private Animator anim;							// キャラにアタッチされるアニメーターへの参照
 	private AnimatorStateInfo currentBaseState;			// base layerで使われる、アニメーターの現在の状態の参照
 
-	private GameObject cameraObject;	// メインカメラへの参照
-		
+	private GameObject cameraObject;    // メインカメラへの参照
+    float h;
+    float v;
+    bool running = false;
+    public bool m_jump = false;
 // アニメーター各ステートへの参照
 	static int idleState = Animator.StringToHash("Base Layer.Idle");
 	static int locoState = Animator.StringToHash("Base Layer.Locomotion");
 	static int jumpState = Animator.StringToHash("Base Layer.Jump");
 	static int restState = Animator.StringToHash("Base Layer.Rest");
+
+    void Awake()
+    {
+        Messenger.AddListener<string>(gameObject.name + ":j", PlayerJump);
+        Messenger.AddListener<string>(gameObject.name + ":s", PlayerSpecial);
+        Messenger.AddListener<string>(gameObject.name + ":a", PlayerAttack);
+        Messenger.AddListener<string>(gameObject.name + ":r", PlayerRun);
+        Messenger.AddListener<string>(gameObject.name + ":h", MoveHorizontal);
+        Messenger.AddListener<string>(gameObject.name + ":v", MoveVertical);
+    }
 
 // 初期化
 	void Start ()
@@ -58,18 +72,50 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		col = GetComponent<CapsuleCollider>();
 		rb = GetComponent<Rigidbody>();
 		//メインカメラを取得する
-		cameraObject = GameObject.FindWithTag("MainCamera");
+		//cameraObject = GameObject.FindWithTag("MainCamera");
 		// CapsuleColliderコンポーネントのHeight、Centerの初期値を保存する
 		orgColHight = col.height;
 		orgVectColCenter = col.center;
 }
-	
-	
-// 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
-	void FixedUpdate ()
+
+    #region Events
+    void MoveHorizontal(string a)
+    {
+        h = CrossPlatformInputManager.GetAxis(gameObject.name + ":" + a);
+    }
+
+    void MoveVertical(string a)
+    {
+        v = CrossPlatformInputManager.GetAxis(gameObject.name + ":" + a);
+    }
+
+    void PlayerJump(string a)
+    {
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
+            anim.SetBool("Jump", true);     // Animatorにジャンプに切り替えるフラグを送る
+    }
+
+    void PlayerRun(string a)
+    {
+        running = true;
+    }
+
+    void PlayerAttack(string a)
+    {
+        Debug.Log(a + " Attack");
+    }
+
+    void PlayerSpecial(string a)
+    {
+        Debug.Log(a + " Special");
+    }
+    #endregion
+
+    // 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
+    void FixedUpdate ()
 	{
-		float h = Input.GetAxis("Horizontal");				// 入力デバイスの水平軸をhで定義
-		float v = Input.GetAxis("Vertical");				// 入力デバイスの垂直軸をvで定義
+		//float h = Input.GetAxis("Horizontal");				// 入力デバイスの水平軸をhで定義
+		//float v = Input.GetAxis("Vertical");				// 入力デバイスの垂直軸をvで定義
 		anim.SetFloat("Speed", v);							// Animator側で設定している"Speed"パラメタにvを渡す
 		anim.SetFloat("Direction", h); 						// Animator側で設定している"Direction"パラメタにhを渡す
 		anim.speed = animSpeed;								// Animatorのモーション再生速度に animSpeedを設定する
@@ -89,19 +135,10 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 			velocity *= backwardSpeed;	// 移動速度を掛ける
 		}
 		
-		if (Input.GetButtonDown("Jump")) {	// スペースキーを入力したら
-
-			//アニメーションのステートがLocomotionの最中のみジャンプできる
-			if (currentBaseState.nameHash == locoState){
-				//ステート遷移中でなかったらジャンプできる
-				if(!anim.IsInTransition(0))
-				{
-						rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
-						anim.SetBool("Jump", true);		// Animatorにジャンプに切り替えるフラグを送る
-				}
-			}
-		}
-		
+        if(!running)
+        {
+            velocity *= 0.5f;
+        }
 
 		// 上下のキー入力でキャラクターを移動させる
 		transform.localPosition += velocity * Time.fixedDeltaTime;
@@ -113,7 +150,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		// 以下、Animatorの各ステート中での処理
 		// Locomotion中
 		// 現在のベースレイヤーがlocoStateの時
-		if (currentBaseState.nameHash == locoState){
+		if (currentBaseState.fullPathHash == locoState){
 			//カーブでコライダ調整をしている時は、念のためにリセットする
 			if(useCurves){
 				resetCollider();
@@ -121,9 +158,9 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		}
 		// JUMP中の処理
 		// 現在のベースレイヤーがjumpStateの時
-		else if(currentBaseState.nameHash == jumpState)
+		else if(currentBaseState.fullPathHash == jumpState)
 		{
-			cameraObject.SendMessage("setCameraPositionJumpView");	// ジャンプ中のカメラに変更
+			//cameraObject.SendMessage("setCameraPositionJumpView");	// ジャンプ中のカメラに変更
 			// ステートがトランジション中でない場合
 			if(!anim.IsInTransition(0))
 			{
@@ -162,7 +199,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		}
 		// IDLE中の処理
 		// 現在のベースレイヤーがidleStateの時
-		else if (currentBaseState.nameHash == idleState)
+		else if (currentBaseState.fullPathHash == idleState)
 		{
 			//カーブでコライダ調整をしている時は、念のためにリセットする
 			if(useCurves){
@@ -175,7 +212,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		}
 		// REST中の処理
 		// 現在のベースレイヤーがrestStateの時
-		else if (currentBaseState.nameHash == restState)
+		else if (currentBaseState.fullPathHash == restState)
 		{
 			//cameraObject.SendMessage("setCameraPositionFrontView");		// カメラを正面に切り替える
 			// ステートが遷移中でない場合、Rest bool値をリセットする（ループしないようにする）
@@ -184,17 +221,8 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 				anim.SetBool("Rest", false);
 			}
 		}
-	}
-
-	void OnGUI()
-	{
-		GUI.Box(new Rect(Screen.width -260, 10 ,250 ,150), "Interaction");
-		GUI.Label(new Rect(Screen.width -245,30,250,30),"Up/Down Arrow : Go Forwald/Go Back");
-		GUI.Label(new Rect(Screen.width -245,50,250,30),"Left/Right Arrow : Turn Left/Turn Right");
-		GUI.Label(new Rect(Screen.width -245,70,250,30),"Hit Space key while Running : Jump");
-		GUI.Label(new Rect(Screen.width -245,90,250,30),"Hit Spase key while Stopping : Rest");
-		GUI.Label(new Rect(Screen.width -245,110,250,30),"Left Control : Front Camera");
-		GUI.Label(new Rect(Screen.width -245,130,250,30),"Alt : LookAt Camera");
+        running = false;
+        m_jump = false;
 	}
 
 

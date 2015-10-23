@@ -12,11 +12,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
+        float h;
+        float v;
         public string Crouch;
         public string Jump;
         public string Horizontal;
         public string Vertical;
         public string Run;
+
 
         private void Start()
         {
@@ -34,12 +37,29 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             // get the third person character ( this should never be null due to require component )
             m_Character = GetComponent<ThirdPersonCharacter>();
-
-            //Debug.Log(Crouch + gameObject.name);
-            //Debug.Log(Run + gameObject.name);
-            //Debug.Log(Jump + gameObject.name);
+            
         }
 
+
+        void MoveHorizontal(string a)
+        {
+            h = CrossPlatformInputManager.GetAxis(a);
+        }
+
+        void MoveVertical(string a)
+        {
+            v = CrossPlatformInputManager.GetAxis(a);
+        }
+
+        void PlayerJump(string a)
+        {
+            m_Jump = CrossPlatformInputManager.GetButton(a);
+        }
+
+        void PlayerCrouch(string a)
+        {
+            bool crouch = CrossPlatformInputManager.GetButton(Crouch);
+        }
 
         private void Update()
         {
@@ -79,7 +99,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             // walk speed multiplier
             if (!CrossPlatformInputManager.GetButton(Run))
             {
-                m_Move *= 0.5f;
+                m_Move *= 0.75f;
             }
 
 #endif
