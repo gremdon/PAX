@@ -18,7 +18,7 @@ using System.Collections;
 
 
 
-public class PlayerStats : MonoBehaviour
+public class HealthStats : MonoBehaviour
 {
     [SerializeField]
     private int _health;
