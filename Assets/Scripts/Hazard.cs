@@ -15,7 +15,7 @@ public class Hazard : MonoBehaviour
 
     IEnumerator TakeDamage(Collider other)
     {
-        while (true)
+        while (other)
         {
             Messenger.Broadcast("takedamage", other.name);
             yield return new WaitForSeconds(timer);
