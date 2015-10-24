@@ -1,46 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
+using System.Collections.Generic;
 
 public class InputHandler : MonoBehaviour
 {
-    public string Horizontal;
-    public string Vertical;
-    public string Jump;
     public string Attack;
+    public string Jump;
     public string Special;
-    public string Run;
+    public string Sprint;
+
+    [SerializeField]
+    List<string> Controls = new List<string>();
+
+    public string joysticks;
 
     public float IdleTime; //Will be used to turn return to main menu if no input for a certain time.
 
+    void Start()
+    {
+        Controls.Add(Attack);
+        Controls.Add(Jump);
+        Controls.Add(Special);
+        Controls.Add(Sprint);
+        Input.GetJoystickNames()[0] = "Player 1";
+        Debug.Log(Input.GetJoystickNames()[0]);
+        joysticks = Input.GetJoystickNames()[0];
+    }
+
     void Update()
     {
-        //IdleTime = Time.deltaTime * 2f;
-        if (CrossPlatformInputManager.GetButtonDown(gameObject.name + ":" + Jump))
+        if(Input.anyKey)
         {
-            Messenger.Broadcast<string>(gameObject.name + ":j", Jump.ToString());
-            //IdleTime = 0;
+            Debug.Log("Input Detected");
         }
 
-        if (CrossPlatformInputManager.GetButton(gameObject.name + ":" + Attack))
-        {
-            Messenger.Broadcast<string>(gameObject.name + ":a", Attack);
-            //IdleTime = 0;
-        }
 
-        if (CrossPlatformInputManager.GetButton(gameObject.name + ":" + Special))
-        {
-            Messenger.Broadcast<string>(gameObject.name + ":s", Special);
-            //IdleTime = 0;
-        }
-
-        if (CrossPlatformInputManager.GetButton(gameObject.name + ":" + Run))
-        {
-            Messenger.Broadcast<string>(gameObject.name + ":r", Run);
-            //IdleTime = 0;
-        }
-
-        Messenger.Broadcast<string>(gameObject.name + ":v", Vertical);
-        Messenger.Broadcast<string>(gameObject.name + ":h", Horizontal);
+        
     }
 }
