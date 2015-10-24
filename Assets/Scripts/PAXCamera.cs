@@ -55,6 +55,7 @@ public class PAXCamera : MonoBehaviour
     {
         //position in front of player facing in the direction the player is facing
         Vector3 predictedPlayerPosition = followTarget.position + (followTarget.forward * distance);
+        predictedPlayerPosition = followTarget.position;
         //testCube.transform.position = predictedPlayerPosition;
         //testCube.transform.forward = followTarget.forward;
 
