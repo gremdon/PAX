@@ -254,6 +254,8 @@ PlayerSettings:
   ps4pnGameCustomData: 1
   playerPrefsSupport: 0
   ps4ReprojectionSupport: 0
+  ps4UseAudio3dBackend: 0
+  ps4Audio3dVirtualSpeakerCount: 14
   ps4attribUserManagement: 0
   ps4attribMoveSupport: 0
   ps4attrib3DSupport: 0
@@ -477,14 +479,18 @@ PlayerSettings:
   WebGL::useEmbeddedResources: 0
   XboxOne::enus: 1
   stringPropertyNames:
+  - Build_ServiceEnabled::Build_ServiceEnabled
+  - UNet_ServiceEnabled::UNet_ServiceEnabled
   - WebGL::emscriptenArgs
   - WebGL::template
   - additionalIl2CppArgs::additionalIl2CppArgs
+  Build_ServiceEnabled::Build_ServiceEnabled: True
+  UNet_ServiceEnabled::UNet_ServiceEnabled: True
   WebGL::emscriptenArgs: 
   WebGL::template: APPLICATION:Default
   additionalIl2CppArgs::additionalIl2CppArgs: 
   firstStreamedSceneWithResources: 0
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudProjectId: 2b938f5c-9d92-4206-944b-07d21625a669
+  projectName: Pax
+  organizationId: lfsmwilliamson
   cloudEnabled: 0
