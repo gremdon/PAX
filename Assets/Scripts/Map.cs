@@ -19,7 +19,7 @@ public class Map : MonoBehaviour
     //public Camera mapCamera;
     public Camera helicopterCamera;
     public Texture mapImage;
-} 
+}
 
 
 //if (Input.GetKeyDown(KeyCode.M))
