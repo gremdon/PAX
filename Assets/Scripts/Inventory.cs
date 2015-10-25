@@ -68,16 +68,5 @@ public class Inventory : MonoBehaviour
 
     
 
-    void Update()
-    {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
-        {
-            NextTool();
-        }
-
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
-        {
-            PreviousTool();
-        }
-    }
+    
 }
