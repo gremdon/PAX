@@ -54,12 +54,12 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     static int restState = Animator.StringToHash("Base Layer.Rest");
     void AddListeners()
     {
-        Messenger.AddListener<string>(gameObject.name + ":j", PlayerJump);
-        Messenger.AddListener<string>(gameObject.name + ":s", PlayerSpecial);
-        Messenger.AddListener<string>(gameObject.name + ":a", PlayerAttack);
-        Messenger.AddListener<string>(gameObject.name + ":r", PlayerRun);
-        Messenger.AddListener<string>(gameObject.name + ":h", MoveHorizontal);
-        Messenger.AddListener<string>(gameObject.name + ":v", MoveVertical);
+        Messenger.AddListener<string>(gameObject.name + ":Jump", PlayerJump);
+        Messenger.AddListener<string>(gameObject.name + ":Special", PlayerSpecial);
+        Messenger.AddListener<string>(gameObject.name + ":Attack", PlayerAttack);
+        Messenger.AddListener<string>(gameObject.name + ":Sprint", PlayerRun);
+        Messenger.AddListener<string>(gameObject.name + ":", MoveHorizontal);
+        Messenger.AddListener<string>(gameObject.name + ":", MoveVertical);
     }
     void Awake()
     {
@@ -69,12 +69,12 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     void OnDisable()
     {
         Debug.Log("removing listeners");
-        Messenger.RemoveListener<string>(gameObject.name + ":j", PlayerJump);
-        Messenger.RemoveListener<string>(gameObject.name + ":s", PlayerSpecial);
-        Messenger.RemoveListener<string>(gameObject.name + ":a", PlayerAttack);
-        Messenger.RemoveListener<string>(gameObject.name + ":r", PlayerRun);
-        Messenger.RemoveListener<string>(gameObject.name + ":h", MoveHorizontal);
-        Messenger.RemoveListener<string>(gameObject.name + ":v", MoveVertical);
+        Messenger.RemoveListener<string>(gameObject.name + ":Jump", PlayerJump);
+        Messenger.RemoveListener<string>(gameObject.name + ":Special", PlayerSpecial);
+        Messenger.RemoveListener<string>(gameObject.name + ":Attack", PlayerAttack);
+        Messenger.RemoveListener<string>(gameObject.name + ":Sprint", PlayerRun);
+        Messenger.RemoveListener<string>(gameObject.name, MoveHorizontal);
+        Messenger.RemoveListener<string>(gameObject.name, MoveVertical);
     }
 
     // 初期化
@@ -96,12 +96,14 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     #region Events
     void MoveHorizontal(string a)
     {
-        h = CrossPlatformInputManager.GetAxis(gameObject.name + ":" + a);
+        Debug.Log(CrossPlatformInputManager.GetAxis(a) + " h");
+        h = CrossPlatformInputManager.GetAxis(a);
     }
 
     void MoveVertical(string a)
     {
-        v = CrossPlatformInputManager.GetAxis(gameObject.name + ":" + a);
+        Debug.Log(CrossPlatformInputManager.GetAxis(a) + " v");
+        v = CrossPlatformInputManager.GetAxis(a);
     }
 
     void PlayerJump(string a)
