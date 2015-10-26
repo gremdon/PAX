@@ -3,6 +3,9 @@ using System.Collections;
 
 public class test_audio : MonoBehaviour
 {
+    /// <summary>
+    /// Tran & Chui's test Audio script.
+    /// </summary>
 
     public AudioSource manager;
     public AudioClip death;
@@ -21,10 +24,7 @@ public class test_audio : MonoBehaviour
 
         Audio.AudioListener("takeDamage");
         Audio.AudioListener("takeHealth");
-
-
     }
-
 
     void Update()
     {

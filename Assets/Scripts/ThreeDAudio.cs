@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 static public class ThreeDAudio
 {
+    /// <summary>
+    /// Chui's 3D audio.
+    /// </summary>
     static public AudioSource manager;
 
     /// <summary>
