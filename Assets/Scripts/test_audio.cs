@@ -1,21 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class test_audio : MonoBehaviour {
+public class test_audio : MonoBehaviour
+{
 
     public AudioSource manager;
     public AudioClip death;
     public AudioClip music;
+    public AudioClip threeSound;
 
     void Start()
     {
         Audio.audioManager = manager;
+        ThreeDAudio.manager = manager;
+
+        ThreeDAudio.threeDAudio(threeSound);
 
         Audio.AddAudio("Player1", death);
         Audio.AddAudio("Player2", music);
 
         Audio.AudioListener("takeDamage");
         Audio.AudioListener("takeHealth");
+
+
     }
 
 
