@@ -9,13 +9,20 @@ public class InputHandler : MonoBehaviour
     public string Jump;
     public string Special;
     public string Sprint;
-    public bool Keyboard;
+    public bool keyboard;
+    int numPlayers;
+
     [SerializeField]
     List<string> P1Controls = new List<string>();
     [SerializeField]
     List<string> P2Controls = new List<string>();
 
     public float IdleTime; //Will be used to turn return to main menu if no input for a certain time.
+
+    void Awake()
+    {
+
+    }
 
     void Start()
     {
@@ -27,8 +34,12 @@ public class InputHandler : MonoBehaviour
         P2Controls.Add(Jump + ":Jump");
         P2Controls.Add(Special + ":Special");
         P2Controls.Add(Sprint + ":Sprint");
-        SetP1Controls();
-        SetP2Controls();
+        if(!keyboard)
+        {
+            SetP1Controls();
+            SetP2Controls();
+        }
+
     }
 
     void Update()
@@ -39,23 +50,34 @@ public class InputHandler : MonoBehaviour
             Debug.Log("Thanks for playing");
         }
 
-        if(Input.anyKey)
+        if (Input.anyKey || Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
             IdleTime = 0;
         }
 
 
-        Messenger.Broadcast<string>("Player1:", "Vertical");
-        Messenger.Broadcast<string>("Player1:", "Horizontal");
-        //Messenger.Broadcast<string>("Player2:", "Horizontal");
-        //Messenger.Broadcast<string>("Player2:", "Vertical");
+        Messenger.Broadcast<string>("Player1:v", "Vertical");
+        Messenger.Broadcast<string>("Player1:h", "Horizontal");
+        //Messenger.Broadcast<string>("Player2:h", "Horizontal");
+        //Messenger.Broadcast<string>("Player2:v", "Vertical");
         foreach(string s in P1Controls)
         {
             string[] temp = s.Split(':');
-            if(Input.GetKeyDown(temp[1]))
+            if (!keyboard)
             {
-                Debug.Log(temp[0] + " " + temp[1]);
-                Messenger.Broadcast<string>("Player1:" + temp[0], temp[0]);
+                if (Input.GetKeyDown(temp[1]))
+                {
+                    Debug.Log(temp[0] + " " + temp[1]);
+                    Messenger.Broadcast<string>("Player1:" + temp[0], temp[0]);
+                }
+            }
+            else
+            {
+                if(Input.GetKeyDown(temp[0]))
+                {
+                    Debug.Log(temp[0] + " " + temp[1]);
+                    Messenger.Broadcast<string>("Player1:" + temp[1], temp[1]);
+                }
             }
         }
 

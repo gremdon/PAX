@@ -58,8 +58,8 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
         Messenger.AddListener<string>(gameObject.name + ":Special", PlayerSpecial);
         Messenger.AddListener<string>(gameObject.name + ":Attack", PlayerAttack);
         Messenger.AddListener<string>(gameObject.name + ":Sprint", PlayerRun);
-        Messenger.AddListener<string>(gameObject.name + ":", MoveHorizontal);
-        Messenger.AddListener<string>(gameObject.name + ":", MoveVertical);
+        Messenger.AddListener<string>(gameObject.name + ":h", MoveHorizontal);
+        Messenger.AddListener<string>(gameObject.name + ":v", MoveVertical);
     }
     void Awake()
     {
@@ -96,24 +96,24 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     #region Events
     void MoveHorizontal(string a)
     {
-        Debug.Log(CrossPlatformInputManager.GetAxis(a) + " h");
         h = CrossPlatformInputManager.GetAxis(a);
     }
 
     void MoveVertical(string a)
     {
-        Debug.Log(CrossPlatformInputManager.GetAxis(a) + " v");
         v = CrossPlatformInputManager.GetAxis(a);
     }
 
     void PlayerJump(string a)
     {
+        Debug.Log("Jumping");
         rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
         anim.SetBool("Jump", true);     // Animatorにジャンプに切り替えるフラグを送る
     }
 
     void PlayerRun(string a)
     {
+        Debug.Log("Running");
         running = true;
     }
 
