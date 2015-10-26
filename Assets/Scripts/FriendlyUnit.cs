@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class FriendlyUnit : MonoBehaviour
 {
+    /// <summary>
+    /// Chui's follower!
+    /// 
+    /// The Idea is like dungeon defender followers.
+    /// </summary>
     public GameObject follower;
 
     void Follower()
