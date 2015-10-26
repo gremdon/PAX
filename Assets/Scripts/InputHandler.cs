@@ -3,14 +3,15 @@ using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 using System.Collections.Generic;
 
-public class InputHandler : MonoBehaviour
+public class InputHandler : Singleton<InputHandler>
 {
     public string Attack;
     public string Jump;
     public string Special;
     public string Sprint;
     public bool keyboard;
-    int numPlayers;
+
+    public int numPlayers;
 
     [SerializeField]
     List<string> P1Controls = new List<string>();
@@ -50,7 +51,8 @@ public class InputHandler : MonoBehaviour
             Debug.Log("Thanks for playing");
         }
 
-        if (Input.anyKey || Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        if (Input.anyKey || Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0 ||
+            Input.GetAxis("p2Vertical") != 0 || Input.GetAxis("p2Horizontal") != 0)
         {
             IdleTime = 0;
         }
@@ -58,16 +60,16 @@ public class InputHandler : MonoBehaviour
 
         Messenger.Broadcast<string>("Player1:v", "Vertical");
         Messenger.Broadcast<string>("Player1:h", "Horizontal");
-        //Messenger.Broadcast<string>("Player2:h", "Horizontal");
-        //Messenger.Broadcast<string>("Player2:v", "Vertical");
-        foreach(string s in P1Controls)
+        Messenger.Broadcast<string>("Player2:h", "p2Horizontal");
+        Messenger.Broadcast<string>("Player2:v", "p2Vertical");
+        foreach (string s in P1Controls)
         {
             string[] temp = s.Split(':');
             if (!keyboard)
             {
                 if (Input.GetKeyDown(temp[1]))
                 {
-                    Debug.Log(temp[0] + " " + temp[1]);
+                    //Debug.Log(temp[0] + " " + temp[1]);
                     Messenger.Broadcast<string>("Player1:" + temp[0], temp[0]);
                 }
             }
@@ -75,7 +77,7 @@ public class InputHandler : MonoBehaviour
             {
                 if(Input.GetKeyDown(temp[0]))
                 {
-                    Debug.Log(temp[0] + " " + temp[1]);
+                    //Debug.Log(temp[0] + " " + temp[1]);
                     Messenger.Broadcast<string>("Player1:" + temp[1], temp[1]);
                 }
             }
@@ -86,9 +88,15 @@ public class InputHandler : MonoBehaviour
             string[] temp = s.Split(':');
             if (Input.GetKeyDown(temp[1]))
             {
-                Messenger.Broadcast<string>("Player2" + temp[0], temp[0]);
+                Debug.Log(temp[0] + " " + temp[1]);
+                Messenger.Broadcast<string>("Player2:" + temp[0], temp[0]);
             }
         }
+    }
+
+    void NumberOfPlayers()
+    {
+        numPlayers++;
     }
 
     void SetP1Controls()

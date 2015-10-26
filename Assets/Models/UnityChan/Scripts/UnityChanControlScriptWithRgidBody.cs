@@ -96,11 +96,13 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     #region Events
     void MoveHorizontal(string a)
     {
+        Debug.Log(a);
         h = CrossPlatformInputManager.GetAxis(a);
     }
 
     void MoveVertical(string a)
     {
+        Debug.Log(a);
         v = CrossPlatformInputManager.GetAxis(a);
     }
 
