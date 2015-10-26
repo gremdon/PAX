@@ -44,9 +44,6 @@ MonoBehaviour:
   Special: X
   Sprint: RightBumper
   keyboard: 0
-  P1Controls: []
-  P2Controls: []
-  IdleTime: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
