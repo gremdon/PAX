@@ -51,6 +51,14 @@ static public class Audio
         Messenger.AddListener<string>(messageBroadcast, playAudio);
     }
 
+    static public void threeDAudio(AudioClip audioClip)
+    {
+        // Setting spatialBlend 0 is 2D & 1 is 3D;
+        audioManager.spatialBlend = 1.0f;
+        audioManager.minDistance = 1.0f;
+        audioManager.maxDistance = 10.0f;
+    }
+
     /// <summary>
     /// Play the audio
     /// </summary>
