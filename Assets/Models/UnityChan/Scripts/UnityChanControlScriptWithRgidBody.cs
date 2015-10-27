@@ -47,6 +47,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     float v;
     bool running = false;
     public bool m_jump = false;
+
+    Vector3 m_GroundNormal;
+    public bool m_IsGrounded;
+    float m_GroundCheckDistance = 0.1f;
+
     // アニメーター各ステートへの参照
     static int idleState = Animator.StringToHash("Base Layer.Idle");
     static int locoState = Animator.StringToHash("Base Layer.Locomotion");
@@ -108,9 +113,12 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 
     void PlayerJump(string a)
     {
-        Debug.Log("Jumping");
-        rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
-        anim.SetBool("Jump", true);     // Animatorにジャンプに切り替えるフラグを送る
+        if(m_IsGrounded)
+        {
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
+            anim.SetBool("Jump", true);     // Animatorにジャンプに切り替えるフラグを送る
+        }
+
     }
 
     void PlayerRun(string a)
@@ -161,6 +169,8 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
         {
             velocity *= 0.5f;
         }
+
+        CheckGroundStatus();
 
         // 上下のキー入力でキャラクターを移動させる
         transform.localPosition += velocity * Time.fixedDeltaTime;
@@ -250,7 +260,6 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
             }
         }
         running = false;
-        m_jump = false;
     }
 
 
@@ -260,5 +269,26 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
         // コンポーネントのHeight、Centerの初期値を戻す
         col.height = orgColHight;
         col.center = orgVectColCenter;
+    }
+
+    void CheckGroundStatus()
+    {
+        RaycastHit hitInfo;
+        // 0.1f is a small offset to start the ray from inside the character
+        // it is also good to note that the transform position in the sample assets 
+        // is at the base of the character
+        if (Physics.Raycast(transform.position + (Vector3.up * 0.1f)
+            , Vector3.down, out hitInfo, m_GroundCheckDistance))
+        {
+            Debug.Log("On Ground");
+            m_GroundNormal = hitInfo.normal;
+            m_IsGrounded = true;
+        }
+        else
+        {
+            Debug.Log("!On Ground");
+            m_IsGrounded = false;
+            m_GroundNormal = Vector3.up;
+        }
     }
 }
