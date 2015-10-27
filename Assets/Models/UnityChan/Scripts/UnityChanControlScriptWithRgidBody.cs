@@ -49,7 +49,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     public bool m_jump = false;
 
     Vector3 m_GroundNormal;
-    public bool m_IsGrounded;
+    bool m_IsGrounded;
     float m_GroundCheckDistance = 0.1f;
 
     // アニメーター各ステートへの参照
@@ -243,10 +243,10 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
                 resetCollider();
             }
             // スペースキーを入力したらRest状態になる
-            if (Input.GetButtonDown("Jump"))
-            {
-                anim.SetBool("Rest", true);
-            }
+            //if (Input.GetButtonDown("Jump"))
+            //{
+            //    anim.SetBool("Rest", true);
+            //}
         }
         // REST中の処理
         // 現在のベースレイヤーがrestStateの時
@@ -280,13 +280,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
         if (Physics.Raycast(transform.position + (Vector3.up * 0.1f)
             , Vector3.down, out hitInfo, m_GroundCheckDistance))
         {
-            Debug.Log("On Ground");
             m_GroundNormal = hitInfo.normal;
             m_IsGrounded = true;
         }
         else
         {
-            Debug.Log("!On Ground");
             m_IsGrounded = false;
             m_GroundNormal = Vector3.up;
         }

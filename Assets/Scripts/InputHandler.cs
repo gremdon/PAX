@@ -52,19 +52,41 @@ public class InputHandler : Singleton<InputHandler>
         //KeyBoad Controls are active or not
         if(!keyboard)
         {
+            //Messenger.Broadcast<float,float>("Player1:", Input.GetAxis("Vertical"),
+            //    Input.GetAxis("Horizontal"));
             Messenger.Broadcast<string>("Player1:v", "Vertical");
             Messenger.Broadcast<string>("Player1:h", "Horizontal");
         }
         else
         {
-            Messenger.Broadcast<string>("Player1:v", "KeyBoardVertical");
+            //Messenger.Broadcast<float,float>("Player1:", Input.GetAxis("KeyBoardVertical"),
+            //    Input.GetAxis("KeyBoardHorizontal"));
+            Messenger.Broadcast<string>("Player1v", "KeyBoardVertical");
             Messenger.Broadcast<string>("Player1:h", "KeyBoardHorizontal");
         }
 
-        //Sets the Axis Player2 moves on regardless of control scheme. It will allways
-        //move with the controller and not the keybard
-        Messenger.Broadcast<string>("Player2:h", "p2Horizontal");
-        Messenger.Broadcast<string>("Player2:v", "p2Vertical");
+
+        if (numPlayers == 2)
+        {
+            //Sets the Axis Player2 moves on regardless of control scheme. It will allways
+            //move with the controller and not the keybard
+            //Messenger.Broadcast<float, float>("Player2:", Input.GetAxis("p2Horizontal"),
+            //    Input.GetAxis("p2Vertical"));
+            Messenger.Broadcast<string>("Player2:v", "Vertical");
+            Messenger.Broadcast<string>("Player2:h", "Horizontal");
+
+            //Checks for inputs that are in the List of controls for player2
+            foreach (string s in P2Controls)
+            {
+                string[] temp = s.Split(':');
+                Debug.Log(temp[0] + " " + temp[1]);
+                if (Input.GetKeyDown(temp[1]))
+                {
+                    Messenger.Broadcast<string>("Player2:" + temp[0], temp[0]);
+                }
+            }
+        }
+
 
         //Checks for inputs that are in the List of controls for player1
         foreach (string s in P1Controls)
@@ -86,16 +108,7 @@ public class InputHandler : Singleton<InputHandler>
             }
         }
 
-        //Checks for inputs that are in the List of controls for player2
-        foreach (string s in P2Controls)
-        {
-            string[] temp = s.Split(':');
-            Debug.Log(temp[0] + " " + temp[1]);
-            if (Input.GetKeyDown(temp[1]))
-            {
-                Messenger.Broadcast<string>("Player2:" + temp[0], temp[0]);
-            }
-        }
+
     }
 
     /// <summary>
@@ -263,10 +276,11 @@ public class InputHandler : Singleton<InputHandler>
     public string Sprint; //Control assigned to the Sprint Action
     public bool keyboard; //A boolean to determine if the controls are configured for keyboard or Controler
 
-    private int numPlayers; //Keeps track of number of players active in the game
+    public  int numPlayers; //Keeps track of number of players active in the game
 
-
+    [SerializeField]
     protected List<string> P1Controls = new List<string>(); //List that stores all controls for player 1
+    [SerializeField]
     protected List<string> P2Controls = new List<string>(); //List that stores all controls for player 2
 
     private float IdleTime; //Will be used to turn return to main menu if no input for a certain time.
