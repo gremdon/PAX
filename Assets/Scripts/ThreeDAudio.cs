@@ -27,3 +27,8 @@ static public class ThreeDAudio
         manager.Play();
     }
 }
+
+//void OnTriggerEnter()
+//{
+//    ThreeDAudio.threeDAudio(threeSound);
+//}
