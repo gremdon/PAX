@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Hazard : MonoBehaviour
+public class Attack : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        StartCoroutine("TakeDamage", other);
+        if (canAttack)
+        {
+            StartCoroutine("TakeDamage", other);
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -24,6 +27,8 @@ public class Hazard : MonoBehaviour
 
     [SerializeField]
     float timer = 1;
+
+    public bool canAttack = true;
 }
 
 /// Eric Mouledoux
