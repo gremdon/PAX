@@ -27,17 +27,19 @@ public class PAXCamera : MonoBehaviour
         pivot = cam.parent;
 
         offset = new Vector3(0, yOffset, 0);
-        lookAtTarget = GameObject.FindGameObjectWithTag("Player").transform;
+        //lookAtTarget = GameObject.FindGameObjectWithTag("Player").transform;
+        lookAtTarget = GameObject.Find("Player1").transform;
 
         //set follow target
-        if (GameObject.FindGameObjectWithTag("cameraFollow") != null)
+        if (GameObject.Find("followTarget") != null)
         {
-            followTarget = GameObject.FindGameObjectWithTag("cameraFollow").transform;
+            //followTarget = GameObject.FindGameObjectWithTag("cameraFollow").transform;
+            GameObject.Find("followTarget");
         }
         else
         {
             GameObject g = new GameObject();
-            g.name = "followTarget1";
+            g.name = "followTarget";
             g.transform.parent = lookAtTarget.transform;
             g.transform.position = lookAtTarget.position + new Vector3(0, 0, 3);
             followTarget = g.transform;
@@ -81,7 +83,7 @@ public class PAXCamera : MonoBehaviour
         //if the ray hit an obstacle blocking the view of the lookAtTarget, the camera should pan behind the followTarget
         if (hit.collider != null && hit.collider != lookAtTarget.gameObject && hit.collider != transform.gameObject)
         {
-            if(hit.normal == aboveClipPlane)
+            //if(hit.normal == aboveClipPlane)
             transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * followSpeed);
         }
     }
