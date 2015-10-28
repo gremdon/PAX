@@ -11,13 +11,13 @@ public class MovablePlatformEditor : Editor
         DrawDefaultInspector();
 
         MovablePlatform myScript = (MovablePlatform)target;
-        if (GUILayout.Button("Set Initial Posistion"))
+        if (GUILayout.Button("Add Path Node"))
         {
-            myScript.SetInitPos();
+            myScript.AddPathNode();
         }
-        if (GUILayout.Button("Set Secondary Posistion"))
-        {
-            myScript.SetSecondaryPos();
-        }
+        //if (GUILayout.Button("Set Secondary Posistion"))
+        //{
+        //    myScript.SetSecondaryPos();
+        //}
     }
 }
