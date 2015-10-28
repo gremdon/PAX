@@ -8,32 +8,15 @@ public class test_audio : MonoBehaviour
     /// </summary>
 
     public AudioSource manager;
-    public AudioClip death;
     public AudioClip music;
-    public AudioClip threeSound;
+    public string broadcastMessge;
+    public string argument;
+    public bool ThreeDSound;
 
     void Start()
     {
-        Audio.audioManager = manager;
         ThreeDAudio.manager = manager;
-
-        Audio.AddAudio("Player1", death);
-        Audio.AddAudio("Player2", music);
-
-        Audio.AudioListener("takeDamage", false);
-        Audio.AudioListener("takeHealth", true);
+        Audio.AddAudio(argument, music);
+        Audio.AudioListener(broadcastMessge, ThreeDSound);
     }
-
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.E))
-    //    {
-    //        Messenger.Broadcast<string>("takeDamage", "Player1");
-    //    }
-
-    //    if (Input.GetKeyDown(KeyCode.T))
-    //    {
-    //        Messenger.Broadcast<string>("takeHealth", "Player2");
-    //    }
-    //}
 }
