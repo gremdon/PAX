@@ -59,12 +59,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     static int restState = Animator.StringToHash("Base Layer.Rest");
     void AddListeners()
     {
-        Messenger.AddListener<string>(gameObject.name + ":Jump", PlayerJump);
-        Messenger.AddListener<string>(gameObject.name + ":Special", PlayerSpecial);
-        Messenger.AddListener<string>(gameObject.name + ":Attack", PlayerAttack);
-        Messenger.AddListener<string>(gameObject.name + ":Sprint", PlayerRun);
-        Messenger.AddListener<string>(gameObject.name + ":h", MoveHorizontal);
-        Messenger.AddListener<string>(gameObject.name + ":v", MoveVertical);
+        Messenger.AddListener(gameObject.name + ":Jump", PlayerJump);
+        Messenger.AddListener(gameObject.name + ":Special", PlayerSpecial);
+        Messenger.AddListener(gameObject.name + ":Attack", PlayerAttack);
+        Messenger.AddListener(gameObject.name + ":Sprint", PlayerRun);
+        Messenger.AddListener<float, float>(gameObject.name + ":", Movement);
     }
     void Awake()
     {
@@ -74,12 +73,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     void OnDisable()
     {
         Debug.Log("removing listeners");
-        Messenger.RemoveListener<string>(gameObject.name + ":Jump", PlayerJump);
-        Messenger.RemoveListener<string>(gameObject.name + ":Special", PlayerSpecial);
-        Messenger.RemoveListener<string>(gameObject.name + ":Attack", PlayerAttack);
-        Messenger.RemoveListener<string>(gameObject.name + ":Sprint", PlayerRun);
-        Messenger.RemoveListener<string>(gameObject.name, MoveHorizontal);
-        Messenger.RemoveListener<string>(gameObject.name, MoveVertical);
+        Messenger.RemoveListener(gameObject.name + ":Jump", PlayerJump);
+        Messenger.RemoveListener(gameObject.name + ":Special", PlayerSpecial);
+        Messenger.RemoveListener(gameObject.name + ":Attack", PlayerAttack);
+        Messenger.RemoveListener(gameObject.name + ":Sprint", PlayerRun);
+        Messenger.RemoveListener<float, float>(gameObject.name + ":", Movement);
     }
 
     // 初期化
@@ -99,19 +97,13 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     }
 
     #region Events
-    void MoveHorizontal(string a)
+    void Movement(float a, float b)
     {
-        Debug.Log(a);
-        h = CrossPlatformInputManager.GetAxis(a);
+        h = b;
+        v = a;
     }
 
-    void MoveVertical(string a)
-    {
-        Debug.Log(a);
-        v = CrossPlatformInputManager.GetAxis(a);
-    }
-
-    void PlayerJump(string a)
+    void PlayerJump()
     {
         if(m_IsGrounded)
         {
@@ -121,20 +113,19 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 
     }
 
-    void PlayerRun(string a)
+    void PlayerRun()
     {
-        Debug.Log("Running");
         running = true;
     }
 
-    void PlayerAttack(string a)
+    void PlayerAttack()
     {
-        Debug.Log(a + " Attack");
+        Debug.Log("Attack");
     }
 
-    void PlayerSpecial(string a)
+    void PlayerSpecial()
     {
-        Debug.Log(a + " Special");
+        Debug.Log("Special");
     }
     #endregion
 
@@ -243,10 +234,6 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
                 resetCollider();
             }
             // スペースキーを入力したらRest状態になる
-            //if (Input.GetButtonDown("Jump"))
-            //{
-            //    anim.SetBool("Rest", true);
-            //}
         }
         // REST中の処理
         // 現在のベースレイヤーがrestStateの時

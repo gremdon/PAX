@@ -39,11 +39,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c30f7ce9c19ea439c1aacded1b96f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack: B
-  Jump: A
-  Special: X
-  Sprint: RightBumper
+  jAttack: 2
+  jJump: 1
+  jSpecial: 3
+  jSprint: 6
+  kAttack: 0
+  kJump: 0
+  kSpecial: 0
+  kSprint: 0
   keyboard: 0
+  numPlayers: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

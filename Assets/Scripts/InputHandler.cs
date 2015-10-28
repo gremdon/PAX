@@ -14,18 +14,96 @@ using System.Collections.Generic;
 
 public class InputHandler : Singleton<InputHandler>
 {
+    private enum E_JOYSTICK
+    {
+        e_NULL,
+        e_A,
+        e_B,
+        e_X,
+        e_Y,
+        e_RightBumper,
+        e_LeftBumper,
+        e_RightStick,
+        e_LeftStick,
+        e_StartButton,
+        e_BackButton
+    }
+
+    private enum E_KEYBOARD
+    {
+        e_Null,
+        e_A,
+        e_B,
+        e_C,
+        e_D,
+        e_E,
+        e_F,
+        e_G,
+        e_H,
+        e_I,
+        e_J,
+        e_K,
+        e_L,
+        e_M,
+        e_N,
+        e_O,
+        e_P,
+        e_Q,
+        e_R,
+        e_S,
+        e_T,
+        e_U,
+        e_V,
+        e_W,
+        e_X,
+        e_Y,
+        e_Z,
+        e_ARROW_UP,
+        e_ARROW_LEFT,
+        e_ARROW_DOWN,
+        e_ARROW_RIGHT,
+        e_SPACE,
+        e_ESCAPE,
+        e_SHIFT,
+        e_NUM_LOCK,
+        e_SCROLL_LOCK,
+        e_CAP_LOCK,
+        e_Num_0,
+        e_Num_1,
+        e_Num_2,
+        e_Num_3,
+        e_Num_4,
+        e_Num_5,
+        e_Num_6,
+        e_Num_7,
+        e_Num_8,
+        e_Num_9,
+        e_F1,
+        e_F2,
+        e_F3,
+        e_F4,
+        e_F5,
+        e_F6,
+        e_F7,
+        e_F8,
+        e_F9,
+        e_F10,
+        e_F11,
+        e_F12
+    }
+
     void Start()
     {
         //Adds all the controls to the list
         //They are modified in the SetControls Functions for each player
-        P1Controls.Add(Attack + ":Attack");
-        P1Controls.Add(Jump + ":Jump");
-        P1Controls.Add(Special + ":Special");
-        P1Controls.Add(Sprint + ":Sprint");
-        P2Controls.Add(Attack + ":Attack");
-        P2Controls.Add(Jump + ":Jump");
-        P2Controls.Add(Special + ":Special");
-        P2Controls.Add(Sprint + ":Sprint");
+        P1Controls.Add(jAttack + ":Attack");
+        P1Controls.Add(jJump + ":Jump");
+        P1Controls.Add(jSpecial + ":Special");
+        P1Controls.Add(jSprint + ":Sprint");
+        P2Controls.Add(kAttack + ":Attack");
+        P2Controls.Add(kJump + ":Jump");
+        P2Controls.Add(kSpecial + ":Special");
+        P2Controls.Add(kSprint + ":Sprint");
         if(!keyboard)
         {
             SetP1Controls();
@@ -52,17 +130,17 @@ public class InputHandler : Singleton<InputHandler>
         //KeyBoad Controls are active or not
         if(!keyboard)
         {
-            //Messenger.Broadcast<float,float>("Player1:", Input.GetAxis("Vertical"),
-            //    Input.GetAxis("Horizontal"));
-            Messenger.Broadcast<string>("Player1:v", "Vertical");
-            Messenger.Broadcast<string>("Player1:h", "Horizontal");
+            Messenger.Broadcast<float, float>("Player1:", Input.GetAxis("Vertical"),
+                Input.GetAxis("Horizontal"));
+            //Messenger.Broadcast<string>("Player1:v", "Vertical");
+            //Messenger.Broadcast<string>("Player1:h", "Horizontal");
         }
         else
         {
-            //Messenger.Broadcast<float,float>("Player1:", Input.GetAxis("KeyBoardVertical"),
-            //    Input.GetAxis("KeyBoardHorizontal"));
-            Messenger.Broadcast<string>("Player1v", "KeyBoardVertical");
-            Messenger.Broadcast<string>("Player1:h", "KeyBoardHorizontal");
+            Messenger.Broadcast<float, float>("Player1:", Input.GetAxis("KeyBoardVertical"),
+                Input.GetAxis("KeyBoardHorizontal"));
+            //Messenger.Broadcast<string>("Player1v", "KeyBoardVertical");
+            //Messenger.Broadcast<string>("Player1:h", "KeyBoardHorizontal");
         }
 
 
@@ -70,19 +148,22 @@ public class InputHandler : Singleton<InputHandler>
         {
             //Sets the Axis Player2 moves on regardless of control scheme. It will allways
             //move with the controller and not the keybard
-            //Messenger.Broadcast<float, float>("Player2:", Input.GetAxis("p2Horizontal"),
-            //    Input.GetAxis("p2Vertical"));
-            Messenger.Broadcast<string>("Player2:v", "Vertical");
-            Messenger.Broadcast<string>("Player2:h", "Horizontal");
+            Messenger.Broadcast<float, float>("Player2:", Input.GetAxis("p2Horizontal"),
+                Input.GetAxis("p2Vertical"));
+            //Messenger.Broadcast<string>("Player2:v", "Vertical");
+            //Messenger.Broadcast<string>("Player2:h", "Horizontal");
 
             //Checks for inputs that are in the List of controls for player2
             foreach (string s in P2Controls)
             {
                 string[] temp = s.Split(':');
-                Debug.Log(temp[0] + " " + temp[1]);
+                if(temp[1] == "Sprint" && Input.GetKey(temp[1]))
+                {
+                    Messenger.Broadcast("Player2:" + temp[0]);
+                }
                 if (Input.GetKeyDown(temp[1]))
                 {
-                    Messenger.Broadcast<string>("Player2:" + temp[0], temp[0]);
+                    Messenger.Broadcast("Player2:" + temp[0]);
                 }
             }
         }
@@ -94,16 +175,24 @@ public class InputHandler : Singleton<InputHandler>
             string[] temp = s.Split(':');
             if (!keyboard)
             {
+                if (temp[0] == "Sprint" && Input.GetKey(temp[1]))
+                {
+                    Messenger.Broadcast("Player1:" + temp[0]);
+                }
                 if (Input.GetKeyDown(temp[1]))
                 {
-                    Messenger.Broadcast<string>("Player1:" + temp[0], temp[0]);
+                    Messenger.Broadcast("Player1:" + temp[0]);
                 }
             }
             else
             {
-                if(Input.GetKeyDown(temp[0]))
+                if (temp[1] == "Sprint" && Input.GetKey(temp[0]))
                 {
-                    Messenger.Broadcast<string>("Player1:" + temp[1], temp[1]);
+                    Messenger.Broadcast("Player1:" + temp[1]);
+                }
+                if (Input.GetKeyDown(temp[0]))
+                {
+                    Messenger.Broadcast("Player1:" + temp[1]);
                 }
             }
         }
@@ -129,7 +218,8 @@ public class InputHandler : Singleton<InputHandler>
         for (int i = 0; i < P1Controls.Capacity; i++ )
         {
             string[] temp = P1Controls[i].Split(':');
-            switch (temp[0])
+            string[] split = temp[0].Split('_');
+            switch (split[1])
             {
                 case "A":
                     {
@@ -196,8 +286,8 @@ public class InputHandler : Singleton<InputHandler>
         for (int i = 0; i < P2Controls.Capacity; i++ )
         {
             string[] temp = P2Controls[i].Split(':');
-            Debug.Log(temp[1]);
-            switch (temp[0])
+            string[] split = temp[0].Split('_');
+            switch (split[1])
             {
                 case "A":
                     {
@@ -270,18 +360,32 @@ public class InputHandler : Singleton<InputHandler>
     /// All variables of the InputHandler class
     /// </summary>
     #region Varaibles
-    public string Attack; //Control assigned to the attack action
-    public string Jump; //Control assigned to the Jump Action
-    public string Special; //Control assigned to the Specail Action
-    public string Sprint; //Control assigned to the Sprint Action
+    [Header("Joystick Controls")]
+    [SerializeField]
+    private E_JOYSTICK jAttack; //Control assigned to the attack action if using a joystick
+    [SerializeField]
+    private E_JOYSTICK jJump; //Control assigned to the Jump Action if using a joystick
+    [SerializeField]
+    private E_JOYSTICK jSpecial; //Control assigned to the Specail Action if using a joystick
+    [SerializeField]
+    private E_JOYSTICK jSprint; //Control assigned to the Sprint Action if using a joystick
+
+    [Header("Keyboard Controls")]
+    [SerializeField]
+    private E_KEYBOARD kAttack; //Control assigned to the attack action if using the Keyboard
+    [SerializeField]
+    private E_KEYBOARD kJump; //Control assigned to the Jump Action if using the Keyboard
+    [SerializeField]
+    private E_KEYBOARD kSpecial; //Control assigned to the Specail Action if using the Keyboard
+    [SerializeField]
+    private E_KEYBOARD kSprint; //Control assigned to the Sprint Action if using the Keyboard
+
     public bool keyboard; //A boolean to determine if the controls are configured for keyboard or Controler
 
-    public  int numPlayers; //Keeps track of number of players active in the game
+    public int numPlayers; //Keeps track of number of players active in the game
 
-    [SerializeField]
-    protected List<string> P1Controls = new List<string>(); //List that stores all controls for player 1
-    [SerializeField]
-    protected List<string> P2Controls = new List<string>(); //List that stores all controls for player 2
+    private List<string> P1Controls = new List<string>(); //List that stores all controls for player 1
+    private List<string> P2Controls = new List<string>(); //List that stores all controls for player 2
 
     private float IdleTime; //Will be used to turn return to main menu if no input for a certain time.
     #endregion

@@ -20,30 +20,28 @@ public class PlayerCharacterController : MonoBehaviour
     }
 
     [SerializeField]
-    private float m_MovementSeed = 0;
+    private float m_BaseMovementSpeed = 0;
     [SerializeField]
     private float m_RotateSpeed = 0;
     [SerializeField]
     private float m_JumpPower = 0;
-    [SerializeField]
-    private int m_MaxHealth = 0;
-    [SerializeField]
-    private int m_CurrentHealth = 0;
-    [SerializeField]
-    private int m_MaxActionResource = 0;
-    private int m_CurrentActionResource = 0;
+
+    private float m_MovementSpeed;
 
     float h; //horizontal movement
     float v; //vertical movement
 
+    bool sprint;
+
+    Rigidbody rb;
+
     void Awake()
     {
         _fsm = new DJG.FSM<E_CHARACTERSTATES>();
-        m_CurrentHealth = m_MaxHealth;
-        m_CurrentActionResource = m_MaxActionResource;
         AddStates();
         AddTransitions();
         Instance = this;
+        rb = GetComponent<Rigidbody>();
         AddListeners();
     }
 
@@ -56,7 +54,10 @@ public class PlayerCharacterController : MonoBehaviour
     void AddListeners()
     {
         Messenger.AddListener<float,float>(gameObject.name + ":", Movement);
-        Debug.Log(gameObject.name + ":");
+        Messenger.AddListener(gameObject.name + ":Jump", Jump);
+        Messenger.AddListener(gameObject.name + ":Attack", Attack);
+        Messenger.AddListener(gameObject.name + ":Sprint", Sprint);
+        Messenger.AddListener(gameObject.name + ":Special", SpecialAttack);
     }
 
     void AddStates()
@@ -113,31 +114,54 @@ public class PlayerCharacterController : MonoBehaviour
         v = a;
     }
 
+    void Jump()
+    {
+        rb.AddForce(Vector3.up * m_JumpPower, ForceMode.VelocityChange);
+    }
+
+    void Attack()
+    {
+        Debug.Log("Attack");
+    }
+
+    void SpecialAttack()
+    {
+        Debug.Log("Special Attack");
+    }
+
+    void Sprint()
+    {
+        sprint = true;
+    }
+
     #endregion
 
     // Update is called once per frame
     void FixedUpdate ()
     {
-        transform.Rotate(0, h * 10.0f, 0);
-        if (h < 0)
+        if (sprint == true)
         {
-            transform.Rotate(0, h * 10.0f, 0);
-            transform.forward = new Vector3(transform.forward.x, h, transform.forward.z);
+            m_MovementSpeed = 0.2f;
         }
-        else if(h > 0)
+        else if(sprint == false)
         {
-            transform.forward = new Vector3(transform.forward.x, h, transform.forward.z);
+            m_MovementSpeed = m_BaseMovementSpeed;
         }
+
         if (v > 0.1)
         {
             transform.forward = new Vector3(transform.forward.x, transform.forward.y, v);
-            transform.Translate(0, 0, v * m_MovementSeed);      
+            transform.Translate(0, 0, v * m_MovementSpeed);
+            transform.Rotate(0, h * 10.0f, 0);
+
         }
         else if (v < -0.1)
         {
             transform.forward = new Vector3(transform.forward.x, transform.forward.y, v);
-            transform.Translate(0, 0, -v * m_MovementSeed);
+            transform.Translate(0, 0, -v * m_MovementSpeed);
+            transform.Rotate(0, -h * 10.0f, 0);
         }
+        sprint = false;
     }
 
     private PlayerCharacterController Instance;
