@@ -12,7 +12,7 @@ public class GameStates : Singleton<MonoBehaviour>
 
         Messenger.MarkAsPermanent("maketransition");
         Messenger.MarkAsPermanent("win");
-    
+
         callback = DoSomething;
 
         _fsm.AddState(STATES.INIT);
@@ -25,17 +25,17 @@ public class GameStates : Singleton<MonoBehaviour>
 
         _fsm.m_currentState = STATES.INIT;
 
-        _fsm.AddTransition(STATES.INIT,     STATES.START,       callback);
-        _fsm.AddTransition(STATES.START,    STATES.PLAY,        callback);
-        _fsm.AddTransition(STATES.PLAY,     STATES.PAUSE,       callback);
-        _fsm.AddTransition(STATES.PAUSE,    STATES.PLAY,        callback);
-        _fsm.AddTransition(STATES.PLAY,     STATES.GAMEOVER,    callback);
-        _fsm.AddTransition(STATES.PAUSE,    STATES.GAMEOVER,    callback);
-        _fsm.AddTransition(STATES.GAMEOVER, STATES.START,       callback);
-        _fsm.AddTransition(STATES.START,    STATES.END,         callback);
-        _fsm.AddTransition(STATES.END,      STATES.TERM,        callback);
+        _fsm.AddTransition(STATES.INIT, STATES.START, callback);
+        _fsm.AddTransition(STATES.START, STATES.PLAY, callback);
+        _fsm.AddTransition(STATES.PLAY, STATES.PAUSE, callback);
+        _fsm.AddTransition(STATES.PAUSE, STATES.PLAY, callback);
+        _fsm.AddTransition(STATES.PLAY, STATES.GAMEOVER, callback);
+        _fsm.AddTransition(STATES.PAUSE, STATES.GAMEOVER, callback);
+        _fsm.AddTransition(STATES.GAMEOVER, STATES.START, callback);
+        _fsm.AddTransition(STATES.START, STATES.END, callback);
+        _fsm.AddTransition(STATES.END, STATES.TERM, callback);
 
-        _fsm.AddTransition(STATES.GAMEOVER, STATES.PLAY,        callback);
+        _fsm.AddTransition(STATES.GAMEOVER, STATES.PLAY, callback);
     }
 
     public enum STATES
