@@ -25,8 +25,9 @@ public class PlayerCharacterController : MonoBehaviour
     private float m_RotateSpeed = 0;
     [SerializeField]
     private float m_JumpPower = 0;
-
     private float m_MovementSpeed;
+
+    float GroundDistance = 0.1f;
 
     float h; //horizontal movement
     float v; //vertical movement
@@ -34,6 +35,10 @@ public class PlayerCharacterController : MonoBehaviour
     bool sprint;
 
     Rigidbody rb;
+
+    bool grounded;
+
+    Vector3 groundNormal;
 
     void Awake()
     {
@@ -148,19 +153,14 @@ public class PlayerCharacterController : MonoBehaviour
             m_MovementSpeed = m_BaseMovementSpeed;
         }
 
-        if (v > 0.1)
-        {
-            transform.forward = new Vector3(transform.forward.x, transform.forward.y, v);
-            transform.Translate(0, 0, v * m_MovementSpeed);
-            transform.Rotate(0, h * 10.0f, 0);
 
-        }
-        else if (v < -0.1)
-        {
-            transform.forward = new Vector3(transform.forward.x, transform.forward.y, v);
-            transform.Translate(0, 0, -v * m_MovementSpeed);
-            transform.Rotate(0, -h * 10.0f, 0);
-        }
+        transform.Rotate(0, h * 10.0f, 0);
+
+        if (v > 0.1 || v < -0.1)
+            transform.Translate(0, 0, v * m_BaseMovementSpeed);
+
+        
+
         sprint = false;
     }
 
