@@ -19,9 +19,11 @@ static public class ThreeDAudio
     static public void threeDAudio(AudioClip audioClip)
     {
         // Setting spatialBlend 0 is 2D & 1 is 3D;
+        manager.clip = audioClip;
         manager.spatialBlend = 1.0f;
         manager.minDistance = 1.0f;
         manager.maxDistance = 10.0f;
         manager.loop = true;
+        manager.Play();
     }
 }
