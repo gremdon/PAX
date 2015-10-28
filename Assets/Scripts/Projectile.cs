@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Projectile : HealthStats
+public class Projectile : MonoBehaviour
 {
     
 
@@ -11,14 +11,6 @@ public class Projectile : HealthStats
     private float Timer = 100;
 
     bool alive = true;
-    protected override void OnDead()
-    {
-        base.OnDead();
-        Destroy(gameObject);
-    }
-    // Use this for initialization
-
-    // Update is called once per frame
     void Start()
     {
         if (gameObject.GetComponent<Rigidbody>())
@@ -28,10 +20,12 @@ public class Projectile : HealthStats
     }
 
     IEnumerator Forward()
-    {        
-        transform.position += transform.forward * speed;
+    {   while (true)
+        {
+            transform.position += transform.forward * speed;
 
-        yield return null;
+            yield return null;
+        }
     }
 
     void Update()
@@ -39,7 +33,14 @@ public class Projectile : HealthStats
        
         Timer -= Time.deltaTime;
         if (Timer < 0)
-        OnCollisionEnter();
+            Destroy(gameObject);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Messenger.Broadcast("takedamage", other.name);
+        StopAllCoroutines();
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter()
