@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Projectile : MonoBehaviour
+public class Projectile : HealthStats
 {
     
 
@@ -11,7 +11,11 @@ public class Projectile : MonoBehaviour
     private float Timer = 100;
 
     bool alive = true;
-
+    protected override void OnDead()
+    {
+        base.OnDead();
+        Destroy(gameObject);
+    }
     // Use this for initialization
 
     // Update is called once per frame
