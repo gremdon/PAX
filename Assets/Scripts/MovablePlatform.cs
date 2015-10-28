@@ -1,25 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MovablePlatform : MonoBehaviour
 {
 	void Start ()
     {
-        StartCoroutine(MoveToInit());
+        if(_pathFlow.Count == 0)
+        {
+            AddPathNode();
+        }
+        gameObject.transform.position = _pathFlow[0];
+        StartCoroutine(FollowPath());
         Messenger.AddListener<GameObject>("Chilled", OnCoolToggle);
 	}
     
-    public void SetInitPos()
+    public void AddPathNode()
     {
-        _intialPosistion = gameObject.transform.position;
-    }
-    
-    public void SetSecondaryPos()
-    {
-        _secondaryPosistion = gameObject.transform.position;
+        _pathFlow.Add(gameObject.transform.position);
     }
 
-    private void OnCoolToggle(GameObject go)
+    private void OnCoolToggle(GameObject go) //*
     {
         if(go == gameObject)
         {
@@ -36,53 +37,39 @@ public class MovablePlatform : MonoBehaviour
         
     }
 
-    IEnumerator MoveToInit()
+    IEnumerator FollowPath()
     {
-        while (Vector3.Distance(transform.position, _intialPosistion) > 0.1f)
+        if (_pathFlow.Count == _count)
         {
-            if(!_chilled)
-            {
-                transform.position = Vector3.Lerp(transform.position, _intialPosistion, _speed * Time.deltaTime);
-                yield return null;
-            }
+            _count = 0;
+        }
+
+        while(Vector3.Distance(transform.position, _pathFlow[_count]) > 0.3f)
+        {
+            transform.position = Vector3.Lerp(transform.position, _pathFlow[_count], _speed * Time.deltaTime);
+            yield return null;
         }
 
         yield return new WaitForSeconds(_platformDelay);
 
-        //Debug.Log("Done moving to Init");
-        StartCoroutine(MoveToSecondary());
-
-    }
-
-    IEnumerator MoveToSecondary()
-    {
-        while (Vector3.Distance(transform.position, _secondaryPosistion) > 0.1f)
-        {
-            if (!_chilled)
-            {
-                transform.position = Vector3.Lerp(transform.position, _secondaryPosistion, _speed * Time.deltaTime);
-                yield return null;
-            }
-        }
-
-        yield return new WaitForSeconds(_platformDelay);
-
-        //Debug.Log("Done moving to Secondary");
-        StartCoroutine(MoveToInit());
+        StopCoroutine(FollowPath());
+        _count++;
+        StartCoroutine(FollowPath());
     }
 
     [SerializeField]
-    private Vector3 _intialPosistion;
-    [SerializeField]
-    private Vector3 _secondaryPosistion;
+    private List<Vector3> _pathFlow;
+
+    private int _count = 0;
 
     [SerializeField]
     private float _platformDelay;
     [SerializeField]
     private float _speed;
 
-    private bool _chilled = false;
+    private bool _chilled = false; //*
 }
 
-
-
+///
+/// Zac King
+///

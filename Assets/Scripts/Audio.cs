@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 /// <summary>
 /// Tran and Paul audio file!
-/// Tran did all of the audio script.
-/// While Paul is looking into 3D settings.
 /// </summary>
 static public class Audio
 {
@@ -46,9 +44,31 @@ static public class Audio
     /// <param name="messageBroadcast">
     /// The message that is interested in.
     ///</param>
-    static public void AudioListener(string messageBroadcast)
+    static public void AudioListener(string messageBroadcast, bool threeD)
     {
-        Messenger.AddListener<string>(messageBroadcast, playAudio);
+        if(threeD)
+        {
+            Messenger.AddListener<string>(messageBroadcast, play3DAudio);
+        }
+        else
+            Messenger.AddListener<string>(messageBroadcast, play2DAudio);
+    }
+
+    /// <summary>
+    /// So all audioClips start off 2D
+    /// This function turns 2D Audio Clips into 3D
+    /// </summary>
+    /// <param name="audioClip">
+    /// The audio that is passed in, will turn into 3D audio
+    /// </param>
+    static public void play3DAudio(string argument)
+    {
+        // Setting spatialBlend 0 is 2D & 1 is 3D;
+        audioManager.clip = audioTable[argument];
+        audioManager.spatialBlend = 1;
+        audioManager.minDistance = 0.0f;
+        audioManager.maxDistance = 1.0f;
+        audioManager.Play();
     }
 
     /// <summary>
@@ -57,7 +77,7 @@ static public class Audio
     /// <param name="argument">
     /// Argument that audio needs to play to. :3
     /// </param>
-    static private void playAudio(string argument)
+    static private void play2DAudio(string argument)
     {
         audioManager.clip = audioTable[argument];
         audioManager.Play();
