@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PAXCamera : MonoBehaviour
 {
-    //GameObject testCube;
+    GameObject testCube;
     Transform followTarget;
     public float distance = 2.2f;
     public float minDistance = 3f;
@@ -19,14 +19,15 @@ public class PAXCamera : MonoBehaviour
     {
         //testCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //testCube.transform.position = Vector3.zero;
+        //testCube.GetComponent<BoxCollider>().enabled = false;
         
         //set follow targtet
-        followTarget = GameObject.FindGameObjectWithTag("Player").transform;
+        followTarget = GameObject.FindGameObjectWithTag("partybro").transform;
 
-        //set initial camera position and orientation
-        transform.position = followTarget.position + (-followTarget.forward * distance) + new Vector3(0, 3, 0);
-        transform.LookAt(followTarget);
-        cameraLookDirection = transform.forward;
+        ////set initial camera position and orientation
+        //transform.position = followTarget.position + (-followTarget.forward * distance) + new Vector3(0, 3, 0);
+        //transform.LookAt(followTarget);
+        //cameraLookDirection = transform.forward;
 
         //Reset();
         offset = transform.position - followTarget.position;
@@ -53,7 +54,8 @@ public class PAXCamera : MonoBehaviour
     void PredictPlayerPosition()
     {
         //position in front of player facing in the direction the player is facing
-        Vector3 predictedPlayerPosition = followTarget.position + (followTarget.forward * distance) + new Vector3(0,0.2f, 0);
+        Vector3 predictedPlayerPosition = followTarget.position + (followTarget.forward * distance);
+        predictedPlayerPosition = followTarget.position;
         //testCube.transform.position = predictedPlayerPosition;
         //testCube.transform.forward = followTarget.forward;
 
@@ -69,49 +71,8 @@ public class PAXCamera : MonoBehaviour
         {
             //transform.position += followTarget.forward * distance;
             transform.position = Vector3.Lerp(transform.position, followTarget.position + (-followTarget.forward * playerDistanceToCamera), Time.deltaTime * smoothing);
-
-            //Vector3 hitDirection = Vector3.Normalize(hit.point - followTarget.position);
-            //if (Vector3.Dot(followTarget.forward, hitDirection) > 0 && Vector3.Dot(followTarget.forward, hitDirection) < 1)
-            //{
-            //    transform.position -= new Vector3(.2f, 0, .2f);
-            //}
-            //else if (Vector3.Dot(followTarget.forward, hitDirection) > 1 && Vector3.Dot(followTarget.forward, hitDirection) < 0)
-            //{
-            //    transform.position += new Vector3(.2f, 0, .2f);
-            //}
-
-            //if (hit.point.x > followTarget.position.x)
-            //{
-            //    transform.position -= new Vector3(smoothing, 0, 0);
-            //}
-            //else if (hit.point.x < followTarget.position.x)
-            //{
-            //    transform.position += new Vector3(smoothing, 0, 0);
-            //}
-
-            ////if (hit.point.y > followTarget.position.y)
-            ////{
-
-            ////}
-            ////else if (hit.point.y < followTarget.position.y)
-            ////{
-
-            ////}
-
-            //if (hit.point.z > followTarget.position.z)
-            //{
-            //    transform.position -= new Vector3(0, 0, smoothing);
-            //}
-            //else if (hit.point.z < followTarget.position.z)
-            //{
-            //    transform.position += new Vector3(0, 0, smoothing);
-            //}
         }
-        //if (Vector3.Distance(hit.point, predictedCameraPosition) <= playerDistanceToCamera)
-        //{
-        //    //transform.position = followTarget.position + (followTarget.forward * distance) + new Vector3(0, 3, 0);
-        //    transform.position = Vector3.Lerp(transform.position, (followTarget.forward * playerDistanceToCamera), Time.deltaTime * smoothing);
-        //}
+        
     }
 
     void Reset()
