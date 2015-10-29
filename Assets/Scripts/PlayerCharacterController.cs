@@ -36,9 +36,12 @@ public class PlayerCharacterController : MonoBehaviour
 
     Rigidbody rb;
 
-    bool grounded;
+    Vector3 HorizontalVelocity;
+    Vector3 VerticalVelocity;
 
-    Vector3 groundNormal;
+    public Vector3 Position;
+    public Vector3 Rotation;
+    public Vector3 Forward;
 
     void Awake()
     {
@@ -146,22 +149,32 @@ public class PlayerCharacterController : MonoBehaviour
     {
         if (sprint == true)
         {
-            m_MovementSpeed = 0.2f;
+            m_MovementSpeed = 5.0f;
         }
         else if(sprint == false)
         {
             m_MovementSpeed = m_BaseMovementSpeed;
         }
-
-
-        transform.Rotate(0, h * 10.0f, 0);
-
-        if (v > 0.1 || v < -0.1)
-            transform.Translate(0, 0, v * m_BaseMovementSpeed);
-
         
+        if(HorizontalVelocity + VerticalVelocity != Vector3.zero)
+        {
+            Forward = HorizontalVelocity + VerticalVelocity;
+            transform.forward = Forward;
+        }
+
+        HorizontalVelocity.x = (h / m_MovementSpeed);
+        VerticalVelocity.z = (v / m_MovementSpeed);
+
+        Position = (HorizontalVelocity + VerticalVelocity);
+
+        transform.position += Position;
 
         sprint = false;
+    }
+
+    void CheckGroundDistance()
+    {
+        RaycastHit HitInfo;
     }
 
     private PlayerCharacterController Instance;
