@@ -15,7 +15,7 @@ public class test_audio : MonoBehaviour
 
     void Start()
     {
-        ThreeDAudio.manager = manager;
+        Audio.audioManager = manager;
         Audio.AddAudio(argument, music);
         Audio.AudioListener(broadcastMessge, ThreeDSound);
     }
