@@ -14,7 +14,7 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         if (gameObject.GetComponent<Rigidbody>())
-          GetComponent<Rigidbody>().AddForce(transform.forward * speed);
+            GetComponent<Rigidbody>().AddForce(transform.forward * speed);
         
         else StartCoroutine("Forward");
     }
@@ -33,17 +33,16 @@ public class Projectile : MonoBehaviour
        
         Timer -= Time.deltaTime;
         if (Timer < 0)
-            Destroy(gameObject);
+            KillProjectile();
     }
 
     void OnTriggerEnter(Collider other)
     {
         Messenger.Broadcast("takedamage", other.name);
-        StopAllCoroutines();
-        Destroy(gameObject);
+        KillProjectile();
     }
 
-    void OnCollisionEnter()
+    void KillProjectile()
     {
         if (!gameObject.GetComponent<Rigidbody>())
             StopCoroutine("Forward");
