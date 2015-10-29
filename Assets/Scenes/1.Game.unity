@@ -2011,14 +2011,14 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7abbde055825429459bd13d9e6b7a478, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 93222f30ab2efef4fb18e614f839b639, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
-  Priority: 128
+  Priority: 256
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -2132,7 +2132,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 3f8911886b1a98a4ca3bab809b11c1c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -3743,11 +3743,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 487438, guid: fb1b3c6027e29c041b8b73e6c943e3ea, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11470252, guid: fb1b3c6027e29c041b8b73e6c943e3ea, type: 2}
       propertyPath: keyboard
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11470252, guid: fb1b3c6027e29c041b8b73e6c943e3ea, type: 2}
+      propertyPath: kAttack
+      value: 27
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb1b3c6027e29c041b8b73e6c943e3ea, type: 2}
@@ -4181,7 +4185,7 @@ Prefab:
     - target: {fileID: 11471178, guid: df9248b9a01a8f745bae6c15c0cdeb0d, type: 2}
       propertyPath: music
       value: 
-      objectReference: {fileID: 8300000, guid: dba684d6fb50d4548845591514258d07, type: 3}
+      objectReference: {fileID: 8300000, guid: f9b64609cd9cfa44ba59af67597669b2, type: 3}
     - target: {fileID: 11471178, guid: df9248b9a01a8f745bae6c15c0cdeb0d, type: 2}
       propertyPath: ThreeDSound
       value: 1
@@ -4192,7 +4196,7 @@ Prefab:
       objectReference: {fileID: 1861509334}
     - target: {fileID: 11471178, guid: df9248b9a01a8f745bae6c15c0cdeb0d, type: 2}
       propertyPath: argument
-      value: AudioEvent
+      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 11471178, guid: df9248b9a01a8f745bae6c15c0cdeb0d, type: 2}
       propertyPath: broadcastMessge
@@ -5094,11 +5098,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.06799996
+      value: 3.72199988
       objectReference: {fileID: 0}
     - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -15.8900003
+      value: -11.0799999
       objectReference: {fileID: 0}
     - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_LocalRotation.x
@@ -5118,11 +5122,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 191558, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_Name
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570896, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
