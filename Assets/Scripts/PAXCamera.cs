@@ -6,17 +6,21 @@ public class PAXCamera : MonoBehaviour
     Transform pivot;
     Transform cam;
     Transform followTarget;
-    Transform lookAtTarget;
+    public Transform lookAtTarget;
     public float yOffset = 0f;
+    public float pivotOffsetY;
     public float playerDistanceToCamera = 2.2f;
     public float minDistance = 3f;
     public float maxDistance = 10f;
     public float followSpeed = 1f;
     public float smoothing = 0.1f;
     float lookAtDistance;
+    //bool isOccluded = false;
     Vector3 offset;
     Vector3 cameraLookDirection;
     Vector3 playerMoveDirection;
+    Vector3 clipPos;
+    //Vector3 preOccludedPos;
 
     Vector3 aboveClipPlane = new Vector3(0, -1, 0);
     Vector3 bottomClipPlane = new Vector3(0, 1, 0);
@@ -27,6 +31,7 @@ public class PAXCamera : MonoBehaviour
         pivot = cam.parent;
 
         offset = new Vector3(0, yOffset, 0);
+        pivotOffsetY = pivot.position.y;
         //lookAtTarget = GameObject.FindGameObjectWithTag("Player").transform;
         lookAtTarget = GameObject.Find("Player1").transform;
 
@@ -41,7 +46,7 @@ public class PAXCamera : MonoBehaviour
             GameObject g = new GameObject();
             g.name = "followTarget";
             g.transform.parent = lookAtTarget.transform;
-            g.transform.position = lookAtTarget.position + new Vector3(0, 0, 3);
+            g.transform.position = lookAtTarget.position + new Vector3(0, 1.4f, 3);
             followTarget = g.transform;
         }        
 
@@ -51,7 +56,7 @@ public class PAXCamera : MonoBehaviour
         //cameraLookDirection = transform.forward;
 
         //Reset();
-        lookAtDistance = Vector3.Distance(lookAtTarget.position, pivot.transform.position);// transform.position - lookAtTarget.position;
+        lookAtDistance = Vector3.Distance(lookAtTarget.position, pivot.transform.position);
 
     }
 
@@ -61,15 +66,21 @@ public class PAXCamera : MonoBehaviour
         if ((v.x * v.x + v.z * v.z) <= minDistance * minDistance ||
             (v.x * v.x + v.z * v.z) >= maxDistance * maxDistance)
         {
-            transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * followSpeed);
+            transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + 
+                                (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * followSpeed);
         }
         else if ((v.x * v.x + v.z * v.z) <= lookAtDistance * lookAtDistance ||
                  (v.x * v.x + v.z * v.z) >= lookAtDistance * lookAtDistance)
         {
-            transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * smoothing);
+            transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + 
+                                (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * smoothing);
         }
         HandleRotation();
         transform.LookAt(lookAtTarget.position + offset);
+        //if(isOccluded == false)
+        //{
+        //    preOccludedPos = pivot.position;
+        //}
     }
 
     void HandleRotation()
@@ -83,8 +94,19 @@ public class PAXCamera : MonoBehaviour
         //if the ray hit an obstacle blocking the view of the lookAtTarget, the camera should pan behind the followTarget
         if (hit.collider != null && hit.collider != lookAtTarget.gameObject && hit.collider != transform.gameObject)
         {
-            //if(hit.normal == aboveClipPlane)
+            if (hit.normal == aboveClipPlane)
+            {
+                clipPos = pivot.position - new Vector3(0, Time.deltaTime * followSpeed, 0);
+                pivot.position = clipPos;
+            }
+                
+
             transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * followSpeed);
+        }
+        else
+        {
+            pivot.position = pivot.position - clipPos + new Vector3(0, pivotOffsetY, 0);
+            clipPos = Vector3.zero;
         }
     }
 
