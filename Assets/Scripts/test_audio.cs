@@ -7,16 +7,31 @@ public class test_audio : MonoBehaviour
     /// Tran & Chui's test Audio script.
     /// </summary>
 
-    public AudioSource manager;
-    public AudioClip music;
-    public string broadcastMessge;
+    
+    public AudioSource audioSource;
+    
+    public AudioClip sound;
+    public string audioEvent;
+    
     public string argument;
-    public bool ThreeDSound;
+    public bool sound3D;
 
+    void Awake()
+    {
+        
+        audioSource = GetComponent<AudioSource>();
+        sound = audioSource.clip;
+        argument = sound.ToString();
+        string newstring = argument.Replace(" (UnityEngine.AudioClip)", "");
+        argument = newstring;
+        
+        Audio.audioManager = audioSource;
+        Audio.AddAudio(argument, sound);
+        Audio.AudioListener(audioEvent, sound3D);
+
+
+    }
     void Start()
     {
-        Audio.audioManager = manager;
-        Audio.AddAudio(argument, music);
-        Audio.AudioListener(broadcastMessge, ThreeDSound);
     }
 }
