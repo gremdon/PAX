@@ -47,6 +47,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     float v;
     bool running = false;
     public bool m_jump = false;
+
+    Vector3 m_GroundNormal;
+    bool m_IsGrounded;
+    float m_GroundCheckDistance = 0.1f;
+
     // アニメーター各ステートへの参照
     static int idleState = Animator.StringToHash("Base Layer.Idle");
     static int locoState = Animator.StringToHash("Base Layer.Locomotion");
@@ -54,12 +59,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     static int restState = Animator.StringToHash("Base Layer.Rest");
     void AddListeners()
     {
-        Messenger.AddListener<string>(gameObject.name + ":j", PlayerJump);
-        Messenger.AddListener<string>(gameObject.name + ":s", PlayerSpecial);
-        Messenger.AddListener<string>(gameObject.name + ":a", PlayerAttack);
-        Messenger.AddListener<string>(gameObject.name + ":r", PlayerRun);
-        Messenger.AddListener<string>(gameObject.name + ":h", MoveHorizontal);
-        Messenger.AddListener<string>(gameObject.name + ":v", MoveVertical);
+        Messenger.AddListener(gameObject.name + ":Jump", PlayerJump);
+        Messenger.AddListener(gameObject.name + ":Special", PlayerSpecial);
+        Messenger.AddListener(gameObject.name + ":Attack", PlayerAttack);
+        Messenger.AddListener(gameObject.name + ":Sprint", PlayerRun);
+        Messenger.AddListener<float, float>(gameObject.name + ":", Movement);
     }
     void Awake()
     {
@@ -69,12 +73,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     void OnDisable()
     {
         Debug.Log("removing listeners");
-        Messenger.RemoveListener<string>(gameObject.name + ":j", PlayerJump);
-        Messenger.RemoveListener<string>(gameObject.name + ":s", PlayerSpecial);
-        Messenger.RemoveListener<string>(gameObject.name + ":a", PlayerAttack);
-        Messenger.RemoveListener<string>(gameObject.name + ":r", PlayerRun);
-        Messenger.RemoveListener<string>(gameObject.name + ":h", MoveHorizontal);
-        Messenger.RemoveListener<string>(gameObject.name + ":v", MoveVertical);
+        Messenger.RemoveListener(gameObject.name + ":Jump", PlayerJump);
+        Messenger.RemoveListener(gameObject.name + ":Special", PlayerSpecial);
+        Messenger.RemoveListener(gameObject.name + ":Attack", PlayerAttack);
+        Messenger.RemoveListener(gameObject.name + ":Sprint", PlayerRun);
+        Messenger.RemoveListener<float, float>(gameObject.name + ":", Movement);
     }
 
     // 初期化
@@ -94,35 +97,35 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     }
 
     #region Events
-    void MoveHorizontal(string a)
+    void Movement(float a, float b)
     {
-        h = CrossPlatformInputManager.GetAxis(gameObject.name + ":" + a);
+        h = b;
+        v = a;
     }
 
-    void MoveVertical(string a)
+    void PlayerJump()
     {
-        v = CrossPlatformInputManager.GetAxis(gameObject.name + ":" + a);
+        if(m_IsGrounded)
+        {
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
+            anim.SetBool("Jump", true);     // Animatorにジャンプに切り替えるフラグを送る
+        }
+
     }
 
-    void PlayerJump(string a)
-    {
-        rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
-        anim.SetBool("Jump", true);     // Animatorにジャンプに切り替えるフラグを送る
-    }
-
-    void PlayerRun(string a)
+    void PlayerRun()
     {
         running = true;
     }
 
-    void PlayerAttack(string a)
+    void PlayerAttack()
     {
-        Debug.Log(a + " Attack");
+        Debug.Log("Attack");
     }
 
-    void PlayerSpecial(string a)
+    void PlayerSpecial()
     {
-        Debug.Log(a + " Special");
+        Debug.Log("Special");
     }
     #endregion
 
@@ -157,6 +160,8 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
         {
             velocity *= 0.5f;
         }
+
+        CheckGroundStatus();
 
         // 上下のキー入力でキャラクターを移動させる
         transform.localPosition += velocity * Time.fixedDeltaTime;
@@ -229,10 +234,6 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
                 resetCollider();
             }
             // スペースキーを入力したらRest状態になる
-            if (Input.GetButtonDown("Jump"))
-            {
-                anim.SetBool("Rest", true);
-            }
         }
         // REST中の処理
         // 現在のベースレイヤーがrestStateの時
@@ -246,7 +247,6 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
             }
         }
         running = false;
-        m_jump = false;
     }
 
 
@@ -256,5 +256,24 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
         // コンポーネントのHeight、Centerの初期値を戻す
         col.height = orgColHight;
         col.center = orgVectColCenter;
+    }
+
+    void CheckGroundStatus()
+    {
+        RaycastHit hitInfo;
+        // 0.1f is a small offset to start the ray from inside the character
+        // it is also good to note that the transform position in the sample assets 
+        // is at the base of the character
+        if (Physics.Raycast(transform.position + (Vector3.up * 0.1f)
+            , Vector3.down, out hitInfo, m_GroundCheckDistance))
+        {
+            m_GroundNormal = hitInfo.normal;
+            m_IsGrounded = true;
+        }
+        else
+        {
+            m_IsGrounded = false;
+            m_GroundNormal = Vector3.up;
+        }
     }
 }
