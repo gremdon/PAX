@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
     IEnumerator Spawn()
     {
         ///Will continue untill stopAtLimit is true AND unit count is not less then limit
-        while (!(stopAtLimit && limit <= units.Count) || limit < 0)
+        while (!(spawningType == Spawning.StopAtLimit && limit <= units.Count) || limit < 0)
         {   ///Loops and removes all objects that have been destroyed outside this function
             for (int i = 0; i < units.Count; i++)
             {
@@ -30,10 +30,10 @@ public class Spawner : MonoBehaviour
                 }
             }
             /// Will skip if waitAtLimit is true AND unit count is not less then limit
-            if (!(waitAtLimit && limit <= units.Count) || limit < 0)
+            if (!(spawningType == Spawning.WaitAtLimit && limit <= units.Count) || limit < 0)
             {
 
-                if (despawnAtLimit && limit <= units.Count && limit > 0)
+                if (spawningType == Spawning.DespawnAtLimit && limit <= units.Count && limit > 0)
                 {
                     Destroy(units[0]);
                     units.RemoveAt(0);
@@ -46,26 +46,22 @@ public class Spawner : MonoBehaviour
             yield return new WaitForSeconds(timer);
         }
     }
+
     /// <summary>
-    /// If true when limit is reached stops spawning.(stops running coroutine)
+    /// StopAtLimit: When limit is reached no more objects will spawn from this script
+    /// WaitAtLimit: When limit is reached will wait untill objects have been destroyed outside this sript
+    /// DespawnAtLimit: When limit is reached will despawn oldes object from this script
+    /// NoLimit: Will ignor limit set
     /// </summary>
+    public enum Spawning {StopAtLimit,WaitAtLimit,DespawnAtLimit,NoLimit};
     [SerializeField]
-    private bool stopAtLimit;
-    /// <summary>
-    /// If true when limit is reached will wait till a spot is clear.
-    /// </summary>
-    [SerializeField]
-    private bool waitAtLimit;
-    /// <summary>
-    /// If true when limit is reached oldest gameobject will be destroyed.
-    /// </summary>
-    [SerializeField]
-    private bool despawnAtLimit;
+    public Spawning spawningType = Spawning.NoLimit;
+
     /// <summary>
     /// Seconds per spawn.
     /// </summary>
     [SerializeField]
-    private float timer;
+    private float timer = 1;
     /// <summary>
     /// Prefab to be spawned
     /// </summary>
@@ -75,7 +71,7 @@ public class Spawner : MonoBehaviour
     /// Max number of spawned(If despawnAtLimit is true)
     /// </summary>
     [SerializeField]
-    private int limit;
+    private int limit = 1;
     /// <summary>
     /// storage and queue for each unit spawned(if despawnedAtLimit is true)
     /// </summary>
