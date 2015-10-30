@@ -10,13 +10,11 @@ public class BroadcastOnTriggerStay : MonoBehaviour
 {
     protected virtual void OnTriggerEnter(Collider other)
     {
-        print("enter");
         StartCoroutine("Broadcast", other);
     }
 
     protected virtual void OnTriggerExit(Collider other)
     {
-        print("exit");
         StopCoroutine("Broadcast");
     }
 
@@ -24,7 +22,6 @@ public class BroadcastOnTriggerStay : MonoBehaviour
     {
         while (other)
         {
-            print("shit");
             Messenger.Broadcast(m_message.ToLower(), other.name);
             yield return new WaitForSeconds(m_timer);
         }

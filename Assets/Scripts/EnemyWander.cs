@@ -22,7 +22,7 @@ public class EnemyWander : MonoBehaviour
             Vector3 heading = Vector3.Normalize(targetPos - currentPos);
             rb.AddForce(heading * speedConst * speed * 2f);
             
-            Debug.DrawLine(transform.position, target.transform.position, Color.red);
+            //Debug.DrawLine(transform.position, target.transform.position, Color.red);
         }
         else
         {
@@ -31,7 +31,7 @@ public class EnemyWander : MonoBehaviour
             Vector3 heading = Vector3.Normalize(targetPos - currentPos);
             rb.AddForce(heading * speedConst * speed);
 
-            Debug.DrawLine(transform.position, nxtPos, Color.red);
+            //Debug.DrawLine(transform.position, nxtPos, Color.red);
         }
 
         if (Vector3.Distance(transform.position, nxtPos) < 1f)
