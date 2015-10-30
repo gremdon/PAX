@@ -6,6 +6,6 @@ public class BroadcastOnTrigger : MonoBehaviour {
     void OnTriggerEnter(Collider col)
     {
         //col is the name of the object that enters the trigger
-        Messenger.Broadcast<string>(message, col.name);
+        Messenger.Broadcast<string, string>(message, col.name,this.name);
     }
 }

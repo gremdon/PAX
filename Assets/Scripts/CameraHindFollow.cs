@@ -64,7 +64,7 @@ public class CameraHindFollow : MonoBehaviour
         }
     }
 
-    void Awake()
+    void Start()
     {
         cam = GetComponentInChildren<Camera>().transform;
         pivot = cam.parent;
