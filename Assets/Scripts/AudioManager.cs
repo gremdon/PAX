@@ -5,7 +5,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Tran and Paul audio file!
 /// </summary>
-static public class Audio
+static public class AudioManager
 {
     /// <summary>
     /// Audio Source to play audio
@@ -17,7 +17,7 @@ static public class Audio
     /// Value : AudioClip
     /// play audio depend on the string arg
     /// </summary>
-    static Dictionary<string, AudioClip> audioTable = new Dictionary<string, AudioClip>();
+    static Dictionary<string, GameObject> audioTable = new Dictionary<string, GameObject>();
 
     /// <summary>
     /// Add AudioClip with string argument to Dictionary
@@ -28,7 +28,7 @@ static public class Audio
     /// <param name ="audioclip">
     /// Audioclip that plays with the assign argument
     /// </param>
-    static public void AddAudioToDictionary(string argument, AudioClip audioclip)
+    static public void AddAudioToDictionary(string argument, GameObject audioclip)
     {
         if (audioTable.ContainsKey(argument))
         {
@@ -63,12 +63,14 @@ static public class Audio
     /// </param>
     static private void play3DAudio(string argument)
     {
+        GameObject aud = audioTable[argument];
+        AudioSource asrc = aud.GetComponent<AudioSource>();
         // Setting spatialBlend 0 is 2D & 1 is 3D;
-        audioSource.clip = audioTable[argument];
-        audioSource.spatialBlend = 1;
-        audioSource.minDistance = 1.0f;
-        audioSource.maxDistance = 5.0f;
-        audioSource.Play();
+        asrc.clip = audioTable[argument].GetComponent<AudioSource>().clip ;
+        asrc.spatialBlend = 1;
+        asrc.minDistance = 1.0f;
+        asrc.maxDistance = 5.0f;
+        asrc.Play();
     }
 
     /// <summary>
@@ -79,8 +81,10 @@ static public class Audio
     /// </param>
     static private void play2DAudio(string argument)
     {
-        audioSource.clip = audioTable[argument];
-        audioSource.Play();
+        GameObject aud = audioTable[argument];
+        AudioSource asrc = aud.GetComponent<AudioSource>();
+       
+        asrc.Play();
     }
 
     static public void AmbientSound(AudioClip sound)

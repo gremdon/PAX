@@ -5,6 +5,6 @@ public class AudioTrigger : BroadcastOnTrigger {
     public string argument;
     protected override void OnTriggerEnter(Collider col)
     {
-        Messenger.Broadcast(message, argument);
+        Messenger.Broadcast("playaudio", argument);
     }
 }
