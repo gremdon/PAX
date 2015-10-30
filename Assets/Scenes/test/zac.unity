@@ -2549,8 +2549,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1320595733}
-  m_LocalRotation: {x: .0871557519, y: 0, z: 0, w: .99619472}
-  m_LocalPosition: {x: 0, y: 6.4000001, z: -16.2000008}
+  m_LocalRotation: {x: .130526215, y: 0, z: 0, w: .991444886}
+  m_LocalPosition: {x: 0, y: 5, z: -24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2566,8 +2566,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165410ab67c947845ae8cac303fa742f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  followTarget: {fileID: 0}
+  lookAtTarget: {fileID: 0}
   yOffset: 0
-  playerDistanceToCamera: 2.20000005
+  followTargetDist: 3
+  pivotOffsetY: 0
   minDistance: 3
   maxDistance: 10
   followSpeed: 1
