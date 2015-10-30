@@ -64,7 +64,8 @@ public class InputHandler : Singleton<InputHandler>
         e_ARROW_RIGHT,
         e_SPACE,
         e_ESCAPE,
-        e_SHIFT,
+        e_LEFTSHIFT,
+        e_RIGHTSHIFT,
         e_NUM_LOCK,
         e_SCROLL_LOCK,
         e_CAP_LOCK,
@@ -96,19 +97,27 @@ public class InputHandler : Singleton<InputHandler>
     {
         //Adds all the controls to the list
         //They are modified in the SetControls Functions for each player
-        P1Controls.Add(jAttack + ":Attack");
-        P1Controls.Add(jJump + ":Jump");
-        P1Controls.Add(jSpecial + ":Special");
-        P1Controls.Add(jSprint + ":Sprint");
-        P2Controls.Add(kAttack + ":Attack");
-        P2Controls.Add(kJump + ":Jump");
-        P2Controls.Add(kSpecial + ":Special");
-        P2Controls.Add(kSprint + ":Sprint");
-        if(!keyboard)
-        {
-            SetP1Controls();
 
+        if(keyboard)
+        {
+            P1Controls.Add(kAttack + ":Attack");
+            P1Controls.Add(kJump + ":Jump");
+            P1Controls.Add(kSpecial + ":Special");
+            P1Controls.Add(kSprint + ":Sprint");
         }
+        else
+        {
+            P1Controls.Add(jAttack + ":Attack");
+            P1Controls.Add(jJump + ":Jump");
+            P1Controls.Add(jSpecial + ":Special");
+            P1Controls.Add(jSprint + ":Sprint");
+
+            P2Controls.Add(jAttack + ":Attack");
+            P2Controls.Add(jJump + ":Jump");
+            P2Controls.Add(jSpecial + ":Special");
+            P2Controls.Add(jSprint + ":Sprint");
+        }
+        SetP1Controls();
         SetP2Controls();
     }
 
@@ -132,15 +141,11 @@ public class InputHandler : Singleton<InputHandler>
         {
             Messenger.Broadcast<float, float>("Player1:", Input.GetAxis("Vertical"),
                 Input.GetAxis("Horizontal"));
-            //Messenger.Broadcast<string>("Player1:v", "Vertical");
-            //Messenger.Broadcast<string>("Player1:h", "Horizontal");
         }
         else
         {
             Messenger.Broadcast<float, float>("Player1:", Input.GetAxis("KeyBoardVertical"),
                 Input.GetAxis("KeyBoardHorizontal"));
-            //Messenger.Broadcast<string>("Player1v", "KeyBoardVertical");
-            //Messenger.Broadcast<string>("Player1:h", "KeyBoardHorizontal");
         }
 
 
@@ -150,8 +155,6 @@ public class InputHandler : Singleton<InputHandler>
             //move with the controller and not the keybard
             Messenger.Broadcast<float, float>("Player2:", Input.GetAxis("p2Horizontal"),
                 Input.GetAxis("p2Vertical"));
-            //Messenger.Broadcast<string>("Player2:v", "Vertical");
-            //Messenger.Broadcast<string>("Player2:h", "Horizontal");
 
             //Checks for inputs that are in the List of controls for player2
             foreach (string s in P2Controls)
@@ -196,8 +199,6 @@ public class InputHandler : Singleton<InputHandler>
                 }
             }
         }
-
-
     }
 
     /// <summary>
@@ -219,58 +220,76 @@ public class InputHandler : Singleton<InputHandler>
         {
             string[] temp = P1Controls[i].Split(':');
             string[] split = temp[0].Split('_');
-            switch (split[1])
+            if (!keyboard)
             {
-                case "A":
-                    {
-                        P1Controls[i] = temp[1] + ":joystick 1 button 0";
-                        break;
-                    }
-                case "B":
-                    {
-                        P1Controls[i] = temp[1] + ":joystick 1 button 1";
-                        break;
-                    }
-                case "X":
-                    {
-                        P1Controls[i] = temp[1] + ":joystick 1 button 2";
-                        break;
-                    }
-                case "Y":
-                    {
-                        P1Controls[i] = temp[1] + ":joystick 1 button 3";
-                        break;
-                    }
-                case "RightBumper":
-                    {
-                        P1Controls[i] = temp[1] + ":joystick 1 button 4";
-                        break;
-                    }
-                case "LeftBumper":
-                    {
-                        P1Controls[i] = temp[1] + ":joystick 1 button 5";
-                        break;
-                    }
-                case "BackButton":
-                    {
-                        P1Controls[i] = temp[1] + ":joystick 1 button 6";
-                        break;
-                    }
-                case "StartButton":
-                    {
-                        P1Controls[i] = temp[1] + ":joystick 1 button 7";
-                        break;
-                    }
-                case "LeftStick":
-                    {
-                        P1Controls[i] = temp[1] + ":joystick 1 button 8";
-                        break;
-                    }
-                case "RightStick":
-                    {
-                        P1Controls[i] = temp[1] + ":joystick 1 button 9";
-                        break;
-                    }
+                switch (split[1].ToLower())
+                {
+                    case "a":
+                        {
+                            P1Controls[i] = temp[1] + ":joystick 1 button 0";
+                            break;
+                        }
+                    case "b":
+                        {
+                            P1Controls[i] = temp[1] + ":joystick 1 button 1";
+                            break;
+                        }
+                    case "x":
+                        {
+                            P1Controls[i] = temp[1] + ":joystick 1 button 2";
+                            break;
+                        }
+                    case "y":
+                        {
+                            P1Controls[i] = temp[1] + ":joystick 1 button 3";
+                            break;
+                        }
+                    case "rightbumper":
+                        {
+                            P1Controls[i] = temp[1] + ":joystick 1 button 5";
+                            break;
+                        }
+                    case "leftbumper":
+                        {
+                            P1Controls[i] = temp[1] + ":joystick 1 button 4";
+                            break;
+                        }
+                    case "backbutton":
+                        {
+                            P1Controls[i] = temp[1] + ":joystick 1 button 6";
+                            break;
+                        }
+                    case "startbutton":
+                        {
+                            P1Controls[i] = temp[1] + ":joystick 1 button 7";
+                            break;
+                        }
+                    case "leftstick":
+                        {
+                            P1Controls[i] = temp[1] + ":joystick 1 button 8";
+                            break;
+                        }
+                    case "rightstick":
+                        {
+                            P1Controls[i] = temp[1] + ":joystick 1 button 9";
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                if(split[1].ToLower() == "leftshift")
+                {
+                    P1Controls[i] = "left shift:" + temp[1];
+                }
+                else if (split[1].ToLower() == "rightshift")
+                {
+                    P1Controls[i] = "right shift:" + temp[1];
+                }
+                else
+                {
+                    P1Controls[i] = split[1].ToLower() + ":" + temp[1];
+                }
             }
         }
     }
@@ -283,76 +302,79 @@ public class InputHandler : Singleton<InputHandler>
     {
         //Checks the button the user assigns to the selected action and assigns it to the appropriate
         //string value for unity to recognize inputs of that type
-        for (int i = 0; i < P2Controls.Capacity; i++ )
+        if(!keyboard)
         {
-            string[] temp = P2Controls[i].Split(':');
-            string[] split = temp[0].Split('_');
-            switch (split[1])
+            for (int i = 0; i < P2Controls.Capacity; i++)
             {
-                case "A":
-                    {
-                        P2Controls[i] = temp[1] + ":joystick 2 button 0";
-                        break;
-                    }
-                case "B":
-                    {
-                        P2Controls[i] = temp[1] + ":joystick 2 button 1";
-                        break;
-                    }
-                case "X":
-                    {
-                        P2Controls[i] = temp[1] + ":joystick 2 button 2";
-                        break;
-                    }
-                case "Y":
-                    {
-                        P2Controls[i] = temp[1] + ":joystick 2 button 3";
-                        break;
-                    }
-                case "RightBumper":
-                    {
-                        P2Controls[i] = temp[1] + ":joystick 2 button 4";
-                        break;
-                    }
-                case "LeftBumper":
-                    {
-                        P2Controls[i] = temp[1] + ":joystick 2 button 5";
-                        break;
-                    }
-                case "BackButton":
-                    {
-                        P2Controls[i] = temp[1] + ":joystick 2 button 6";
-                        break;
-                    }
-                case "StartButton":
-                    {
-                        P2Controls[i] = temp[1] + ":joystick 2 button 7";
-                        break;
-                    }
-                case "LeftStick":
-                    {
-                        P2Controls[i] = temp[1] + ":joystick 2 button 8";
-                        break;
-                    }
-                case "RightStick":
-                    {
-                        P2Controls[i] = temp[1] + ":joystick 2 button 9";
-                        break;
-                    }
-                default:
-                    {
-                        break;
-                    }
+                string[] temp = P2Controls[i].Split(':');
+                string[] split = temp[0].Split('_');
+                switch (split[1])
+                {
+                    case "A":
+                        {
+                            P2Controls[i] = temp[1] + ":joystick 2 button 0";
+                            break;
+                        }
+                    case "B":
+                        {
+                            P2Controls[i] = temp[1] + ":joystick 2 button 1";
+                            break;
+                        }
+                    case "X":
+                        {
+                            P2Controls[i] = temp[1] + ":joystick 2 button 2";
+                            break;
+                        }
+                    case "Y":
+                        {
+                            P2Controls[i] = temp[1] + ":joystick 2 button 3";
+                            break;
+                        }
+                    case "RightBumper":
+                        {
+                            P2Controls[i] = temp[1] + ":joystick 2 button 4";
+                            break;
+                        }
+                    case "LeftBumper":
+                        {
+                            P2Controls[i] = temp[1] + ":joystick 2 button 5";
+                            break;
+                        }
+                    case "BackButton":
+                        {
+                            P2Controls[i] = temp[1] + ":joystick 2 button 6";
+                            break;
+                        }
+                    case "StartButton":
+                        {
+                            P2Controls[i] = temp[1] + ":joystick 2 button 7";
+                            break;
+                        }
+                    case "LeftStick":
+                        {
+                            P2Controls[i] = temp[1] + ":joystick 2 button 8";
+                            break;
+                        }
+                    case "RightStick":
+                        {
+                            P2Controls[i] = temp[1] + ":joystick 2 button 9";
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
             }
         }
 
         //Default controls for when keyboard is active
-        if(keyboard)
+        else if(keyboard)
         {
-            P2Controls[0] = "Attack" + ":joystick 2 button 1";
-            P2Controls[1] = "Jump" + ":joystick 2 button 0";
-            P2Controls[2] = "Special" + ":joystick 2 button 2";
-            P2Controls[3] = "Sprint" + ":joystick 2 button 4";
+            P2Controls.Add("Attack" + ":joystick 2 button 1");
+            P2Controls.Add("Jump" + ":joystick 2 button 0");
+            P2Controls.Add("Special" + ":joystick 2 button 2");
+            P2Controls.Add("Sprint" + ":joystick 2 button 5");
         }
     }
 
@@ -384,7 +406,9 @@ public class InputHandler : Singleton<InputHandler>
 
     public int numPlayers; //Keeps track of number of players active in the game
 
+    [SerializeField]
     private List<string> P1Controls = new List<string>(); //List that stores all controls for player 1
+    [SerializeField]
     private List<string> P2Controls = new List<string>(); //List that stores all controls for player 2
 
     private float IdleTime; //Will be used to turn return to main menu if no input for a certain time.
