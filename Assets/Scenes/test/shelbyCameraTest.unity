@@ -5103,7 +5103,8 @@ Prefab:
       propertyPath: m_Name
       value: FreeFollowCam2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11458864, guid: 38d115dcc8ae1624aa37492934493b22, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 38d115dcc8ae1624aa37492934493b22, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &915412934
@@ -10812,7 +10813,8 @@ Prefab:
       propertyPath: m_TagString
       value: MainCamera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11419550, guid: 121e43300ac2b01499a02a7a5d856d82, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 121e43300ac2b01499a02a7a5d856d82, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1898967552 stripped
@@ -10946,7 +10948,8 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11458864, guid: 38d115dcc8ae1624aa37492934493b22, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 38d115dcc8ae1624aa37492934493b22, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1928601566 stripped
