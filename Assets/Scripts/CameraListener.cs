@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿/*
+    Setup:
+        1) Listening For: [the message to listen for]
+        2) Star Cam: if this camera is active on level start.
+        2) Activator: the trigger(s) that this camera is activated with.
+*/
+
+
+using UnityEngine;
 using System.Collections;
 
 public class CameraListener : MonoBehaviour
