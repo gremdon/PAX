@@ -3,14 +3,23 @@ using System.Collections;
 
 public class AmbientAudio : MonoBehaviour
 {
-    public AudioSource backgroundAudioSource;
+    public AudioSource ambientAudioAS;
     public AudioClip backgroundSound;
+    //public AudioClip backgroundSound2;
 
     void Awake()
     {
-        backgroundAudioSource = GetComponent<AudioSource>();
-        Audio.audioManager = backgroundAudioSource;
-        Audio.AmbientSound(backgroundSound);
+        ambientAudioAS = GetComponent<AudioSource>();
+        ambientAudioAS.clip = backgroundSound;
+        ambientAudioAS.playOnAwake = true;
+        ambientAudioAS.loop = true;
+        ambientAudioAS.priority = 256;
+        ambientAudioAS.volume = 0.1f;
+        ambientAudioAS.Play();
     }
 
+    public void ChangeAmbientAudio()
+    {
+
+    }
 }

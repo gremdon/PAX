@@ -39,11 +39,14 @@ static public class Audio
     }
 
     /// <summary>
-    /// Subscribing to broadcast message that audio will listen to
+    /// Subscribing to broadcast message that audio will listen to and play 3D audio
     /// </summary>
     /// <param name="messageBroadcast">
     /// The message that is interested in.
-    ///</param>
+    /// </param>
+    /// <param name="threeD">
+    /// Set Audio 3D.
+    /// </param>
     static public void AudioListener(string messageBroadcast, bool threeD)
     {
         if(threeD)
@@ -80,17 +83,6 @@ static public class Audio
     static private void play2DAudio(string argument)
     {
         audioManager.clip = audioTable[argument];
-        audioManager.Play();
-    }
-
-    static public void AmbientSound(AudioClip sound)
-    {
-        //Ambient = surround sound (3D sound)
-        audioManager.clip = sound;
-        audioManager.playOnAwake = true;
-        audioManager.loop = true;
-        audioManager.priority = 256;
-        audioManager.volume = 0.1f;
         audioManager.Play();
     }
 }
