@@ -5,20 +5,6 @@ using System.Collections;
 
 public class PlayerCharacterController : MonoBehaviour
 {
-    DJG.FSM<E_CHARACTERSTATES> _fsm;
-
-    enum E_CHARACTERSTATES
-    {
-        e_Init,
-        e_Idle,
-        e_Walking,
-        e_Running,
-        e_Attacking,
-        e_Jumping,
-        e_Dead,
-        e_Count //Used to enumerate through the array
-    }
-
     [SerializeField]
     private float m_BaseMovementSpeed = 0;
     [SerializeField]
@@ -45,10 +31,6 @@ public class PlayerCharacterController : MonoBehaviour
 
     void Awake()
     {
-        _fsm = new DJG.FSM<E_CHARACTERSTATES>();
-        AddStates();
-        AddTransitions();
-        Instance = this;
         rb = GetComponent<Rigidbody>();
         AddListeners();
     }
@@ -68,51 +50,6 @@ public class PlayerCharacterController : MonoBehaviour
         Messenger.AddListener(gameObject.name + ":Special", SpecialAttack);
     }
 
-    void AddStates()
-    {
-        foreach(int i in Enum.GetValues(typeof(E_CHARACTERSTATES)))
-        {
-            if((E_CHARACTERSTATES)i != E_CHARACTERSTATES.e_Count)
-            {
-                _fsm.AddState((E_CHARACTERSTATES)i);
-            }
-        }
-    }
-
-    void AddTransitions()
-    {
-        //Transition from
-            //e_Init
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Idle, E_CHARACTERSTATES.e_Idle);
-            //e_Idle
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Idle, E_CHARACTERSTATES.e_Walking);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Idle, E_CHARACTERSTATES.e_Jumping);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Idle, E_CHARACTERSTATES.e_Attacking);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Idle, E_CHARACTERSTATES.e_Dead);
-            //e_Walking
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Walking, E_CHARACTERSTATES.e_Idle);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Walking, E_CHARACTERSTATES.e_Running);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Walking, E_CHARACTERSTATES.e_Jumping);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Walking, E_CHARACTERSTATES.e_Attacking);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Walking, E_CHARACTERSTATES.e_Dead);
-            //e_Running
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Running, E_CHARACTERSTATES.e_Walking);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Running, E_CHARACTERSTATES.e_Idle);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Running, E_CHARACTERSTATES.e_Attacking);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Running, E_CHARACTERSTATES.e_Jumping);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Running, E_CHARACTERSTATES.e_Dead);
-            //e_Attacking
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Attacking, E_CHARACTERSTATES.e_Running);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Attacking, E_CHARACTERSTATES.e_Walking);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Attacking, E_CHARACTERSTATES.e_Idle);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Attacking, E_CHARACTERSTATES.e_Dead);
-        //e_Jumping
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Jumping, E_CHARACTERSTATES.e_Idle);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Jumping, E_CHARACTERSTATES.e_Walking);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Jumping, E_CHARACTERSTATES.e_Running);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Jumping, E_CHARACTERSTATES.e_Attacking);
-        _fsm.AddTransition(E_CHARACTERSTATES.e_Jumping, E_CHARACTERSTATES.e_Dead);
-    }
 
     #region Event
 
@@ -175,15 +112,5 @@ public class PlayerCharacterController : MonoBehaviour
     void CheckGroundDistance()
     {
         RaycastHit HitInfo;
-    }
-
-    private PlayerCharacterController Instance;
-
-    protected PlayerCharacterController _Instance
-    {
-        get
-        {
-            return Instance;
-        }
     }
 }
