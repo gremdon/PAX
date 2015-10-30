@@ -66,8 +66,8 @@ static public class Audio
         // Setting spatialBlend 0 is 2D & 1 is 3D;
         audioManager.clip = audioTable[argument];
         audioManager.spatialBlend = 1;
-        audioManager.minDistance = 0.0f;
-        audioManager.maxDistance = 1.0f;
+        audioManager.minDistance = 1.0f;
+        audioManager.maxDistance = 5.0f;
         audioManager.Play();
     }
 

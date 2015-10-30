@@ -5,21 +5,64 @@ public class PAXCamera : MonoBehaviour
 {
     Transform pivot;
     Transform cam;
-    Transform followTarget;
-    Transform lookAtTarget;
+    public Transform followTarget;
+    public Transform lookAtTarget;
+
     public float yOffset = 0f;
-    public float playerDistanceToCamera = 2.2f;
+    public float followTargetDist = 3f;
+    public float pivotOffsetY;
+    //public float playerDistanceToCamera = 2.2f;
     public float minDistance = 3f;
     public float maxDistance = 10f;
     public float followSpeed = 1f;
     public float smoothing = 0.1f;
-    float lookAtDistance;
+    private float lookAtDistance;
+    private float followDistance;
+
+    //bool isOccluded = false;
     Vector3 offset;
     Vector3 cameraLookDirection;
     Vector3 playerMoveDirection;
+    Vector3 clipPos = new Vector3(0,0,0);
+    //Vector3 preOccludedPos;
 
     Vector3 aboveClipPlane = new Vector3(0, -1, 0);
     Vector3 bottomClipPlane = new Vector3(0, 1, 0);
+
+    //set lookAtTarget and followTarget in editor
+    [ContextMenu("Set Camera Targets")]
+    void SetTargets()
+    {
+        GameObject player1 = GameObject.Find("Player1");
+
+        //set lookAt target
+        if (GameObject.Find("lookAtTarget") != null)
+        {
+            return;
+        }
+        else
+        {            
+            GameObject g = new GameObject();
+            g.name = "lookAtTarget";
+            g.transform.parent = player1.transform;
+            g.transform.position = player1.transform.position;// + new Vector3(0, 0.5f, 0);
+            lookAtTarget = g.transform;
+        }
+
+        //set follow target
+        if (GameObject.Find("followTarget") != null)
+        {
+            return;
+        }
+        else
+        {
+            GameObject g = new GameObject();
+            g.name = "followTarget";
+            g.transform.parent = player1.transform;
+            g.transform.position = new Vector3(lookAtTarget.position.x, 0, lookAtTarget.position.z + followTargetDist);
+            followTarget = g.transform;
+        }
+    }
 
     void Awake()
     {
@@ -27,23 +70,9 @@ public class PAXCamera : MonoBehaviour
         pivot = cam.parent;
 
         offset = new Vector3(0, yOffset, 0);
-        //lookAtTarget = GameObject.FindGameObjectWithTag("Player").transform;
-        lookAtTarget = GameObject.Find("Player1").transform;
+        pivotOffsetY = pivot.position.y;
 
-        //set follow target
-        if (GameObject.Find("followTarget") != null)
-        {
-            //followTarget = GameObject.FindGameObjectWithTag("cameraFollow").transform;
-            GameObject.Find("followTarget");
-        }
-        else
-        {
-            GameObject g = new GameObject();
-            g.name = "followTarget";
-            g.transform.parent = lookAtTarget.transform;
-            g.transform.position = lookAtTarget.position + new Vector3(0, 0, 3);
-            followTarget = g.transform;
-        }        
+        SetTargets();
 
         ////set initial camera position and orientation
         //transform.position = followTarget.position + (-followTarget.forward * distance) + new Vector3(0, 3, 0);
@@ -51,45 +80,74 @@ public class PAXCamera : MonoBehaviour
         //cameraLookDirection = transform.forward;
 
         //Reset();
-        lookAtDistance = Vector3.Distance(lookAtTarget.position, pivot.transform.position);// transform.position - lookAtTarget.position;
+        lookAtDistance = Vector3.Distance(lookAtTarget.position, pivot.transform.position);
+        followDistance = Vector3.Distance(followTarget.position, pivot.transform.position);
 
     }
 
     void Update()
     {
-        Vector3 v = lookAtTarget.position - pivot.transform.position;
+        Vector3 v = followTarget.position - pivot.transform.position;
+
         if ((v.x * v.x + v.z * v.z) <= minDistance * minDistance ||
             (v.x * v.x + v.z * v.z) >= maxDistance * maxDistance)
         {
-            transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * followSpeed);
+            transform.position = Vector3.Lerp(transform.position, followTarget.position + 
+                                (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * followSpeed);
         }
         else if ((v.x * v.x + v.z * v.z) <= lookAtDistance * lookAtDistance ||
                  (v.x * v.x + v.z * v.z) >= lookAtDistance * lookAtDistance)
         {
-            transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * smoothing);
+            transform.position = Vector3.Lerp(transform.position, followTarget.position + 
+                                (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * smoothing);
         }
+
         HandleRotation();
-        transform.LookAt(lookAtTarget.position + offset);
+        transform.LookAt(lookAtTarget.position /*+ offset*/);
+        //if(isOccluded == false)
+        //{
+        //    preOccludedPos = pivot.position;
+        //}
+    }
+
+    void Clip()
+    {
+
     }
 
     void HandleRotation()
     {
         //shoot a ray from the followTarget to the camera pivot position
-        cameraLookDirection = followTarget.position - pivot.transform.position;
+        cameraLookDirection = (followTarget.position + offset) - pivot.transform.position;
         RaycastHit hit;
-        Ray r = new Ray(followTarget.position, -cameraLookDirection);
-        Physics.Raycast(r, out hit);
-        Debug.DrawRay(followTarget.position, -cameraLookDirection, Color.red);
+        Ray r = new Ray(followTarget.position + offset, -cameraLookDirection);
+        Physics.Raycast(r, out hit, followDistance);
+        Debug.DrawRay(followTarget.position + offset, -cameraLookDirection, Color.red);
         //if the ray hit an obstacle blocking the view of the lookAtTarget, the camera should pan behind the followTarget
-        if (hit.collider != null && hit.collider != lookAtTarget.gameObject && hit.collider != transform.gameObject)
+        if (hit.collider != null /*&& hit.distance <= followDistance*/)
         {
-            //if(hit.normal == aboveClipPlane)
-            transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * followSpeed);
+            if (hit.normal == aboveClipPlane)
+            {
+                Vector3 clipAmount = new Vector3(0, Time.deltaTime * followSpeed, 0);
+                clipPos -= clipAmount;
+                Debug.Log("clipPos: " + clipPos);
+                pivot.position -= clipAmount;
+            }
+
+            //transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * followSpeed);
         }
+        else
+        {
+            pivot.position -= clipPos;// + new Vector3(0, pivotOffsetY, 0);
+            Debug.Log("clipPos: " + clipPos);
+            clipPos = Vector3.zero;
+            Debug.Log("clipPos: " + clipPos);
+        }
+        transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * lookAtDistance), Time.deltaTime * followSpeed);
     }
 
     void Reset()
     {
-        transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * playerDistanceToCamera), Time.deltaTime * smoothing);
+        //transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * playerDistanceToCamera), Time.deltaTime * smoothing);
     }
 }
