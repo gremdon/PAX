@@ -5,7 +5,7 @@ public class BroadcastOnTrigger : MonoBehaviour {
     public string message;
     void OnTriggerEnter(Collider col)
     {
-        //col is the name of the gameobject this collider is attached for
+        //col is the name of the object that enters the trigger
         Messenger.Broadcast<string>(message, col.name);
     }
 }
