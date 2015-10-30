@@ -38,8 +38,6 @@ public class EnemyWander : MonoBehaviour
         {
             SetNextPosition();
         }
-
-        rb.velocity = new Vector3(0, 0, 0);
     }
 
     void SetNextPosition()
