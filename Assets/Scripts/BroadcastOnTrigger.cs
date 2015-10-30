@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BroadcastOnTrigger : MonoBehaviour
-{
+public class BroadcastOnTrigger : MonoBehaviour {
     public string message;
-    public string argument;
-    void OnTriggerEnter()
+    protected virtual void OnTriggerEnter(Collider col)
     {
         //col is the name of the object that enters the trigger
-        Messenger.Broadcast<string, string>(message, col.name,this.name);
+        Messenger.Broadcast<string>(message, col.name);
     }
 }

@@ -5,6 +5,7 @@ public class CameraListener : MonoBehaviour
 {
     public string listeningFor;
     public bool startCam;
+    public GameObject activator1, activator2;
 	// Use this for initialization
 	void Awake()
     {
@@ -15,18 +16,28 @@ public class CameraListener : MonoBehaviour
 
     void SetCam(string s, string broadcaster) // s is the name of the gameobject that broadcasts the message
     {
+        Debug.Log(broadcaster);
         if (s == "Player1")
         {
             if (gameObject.activeSelf == false)
             {
-                if(broadcaster == "HalfwayTrigger" && gameObject.name == "FreeFollowCam2")
-                    gameObject.SetActive(true);
-                if(broadcaster == "ArenaTrigger" && gameObject.name == "cctvCam")
-                    gameObject.SetActive(true);
-                if (broadcaster == "HalfwayTrigger" && gameObject.name == "FreeFollowCam")
-                    gameObject.SetActive(true);
-                if (broadcaster == "ArenaTrigger" && gameObject.name == "FreeFollowCam2")
-                    gameObject.SetActive(true);
+                if(activator2 == null)
+                {
+                    if (broadcaster == activator1.name)
+                        gameObject.SetActive(true);
+                }
+                else
+                {
+                    if(broadcaster == activator1.name || broadcaster == activator2.name)
+                        gameObject.SetActive(true);
+                }
+                
+                //if(broadcaster == "ArenaTrigger" && gameObject.name == "cctvCam")
+                //    gameObject.SetActive(true);
+                //if (broadcaster == "HalfwayTrigger" && gameObject.name == "FreeFollowCam")
+                //    gameObject.SetActive(true);
+                //if (broadcaster == "ArenaTrigger" && gameObject.name == "FreeFollowCam2")
+                //    gameObject.SetActive(true);
             }
             else
             {

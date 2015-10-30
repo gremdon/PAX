@@ -2697,6 +2697,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listeningFor: CameraEvent
   startCam: 0
+  activator1: {fileID: 1577402610}
+  activator2: {fileID: 1306380910}
 --- !u!1 &386842024
 GameObject:
   m_ObjectHideFlags: 0
@@ -7470,7 +7472,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1306380910}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbea4957266449147b795a352be287f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 952be7fa99c5f1943beba84c6a079e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   message: CameraEvent
@@ -8459,6 +8461,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listeningFor: CameraEvent
   startCam: 0
+  activator1: {fileID: 1306380910}
+  activator2: {fileID: 0}
 --- !u!1 &1512747552
 GameObject:
   m_ObjectHideFlags: 0
@@ -8635,7 +8639,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1577402610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbea4957266449147b795a352be287f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 952be7fa99c5f1943beba84c6a079e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   message: CameraEvent
@@ -10966,6 +10970,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listeningFor: CameraEvent
   startCam: 1
+  activator1: {fileID: 1577402610}
+  activator2: {fileID: 0}
 --- !u!1 &1961581507
 GameObject:
   m_ObjectHideFlags: 0
