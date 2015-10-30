@@ -51,13 +51,21 @@ public class RigidWander : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerCharacterController>() &&  target == null)
+        if (other.GetComponent<UnityChanControlScriptWithRgidBody>() &&  target == null)
             target = other.gameObject;
     }
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject == target)
             target = null;
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.GetComponent<UnityChanControlScriptWithRgidBody>())
+        {
+            Destroy(gameObject);
+        }
     }
 
     public float speed;
