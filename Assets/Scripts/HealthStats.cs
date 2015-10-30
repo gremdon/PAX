@@ -43,7 +43,7 @@ public class HealthStats : MonoBehaviour
 
      }
 
-
+    
 
     protected virtual void TakeDamage(string message)
     {
