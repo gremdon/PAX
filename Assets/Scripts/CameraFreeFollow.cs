@@ -62,7 +62,7 @@ public class CameraFreeFollow : MonoBehaviour
         }
     }
 
-    void Awake()
+    void Start()
     {
         cam = GetComponentInChildren<Camera>().transform;
         pivot = cam.parent;
