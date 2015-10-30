@@ -129,7 +129,7 @@ public class InputHandler : Singleton<InputHandler>
         IdleTime += Time.deltaTime;
         if (IdleTime > 20)
         {
-            Debug.Log("Thanks for playing");
+           // Debug.Log("Thanks for playing");
         }
 
         if (Input.anyKey || Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0 ||
