@@ -9,7 +9,7 @@ public class AmbientAudio : MonoBehaviour
     void Awake()
     {
         backgroundAudioSource = GetComponent<AudioSource>();
-        Audio.audioManager = backgroundAudioSource;
+        Audio.audioSource = backgroundAudioSource;
         Audio.AmbientSound(backgroundSound);
     }
 

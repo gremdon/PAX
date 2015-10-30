@@ -10,7 +10,7 @@ static public class Audio
     /// <summary>
     /// Audio Source to play audio
     /// </summary>
-    static public AudioSource audioManager;
+    static public AudioSource audioSource;
 
     /// <summary>
     /// Key : string arg
@@ -28,7 +28,7 @@ static public class Audio
     /// <param name ="audioclip">
     /// Audioclip that plays with the assign argument
     /// </param>
-    static public void AddAudio(string argument, AudioClip audioclip)
+    static public void AddAudioToDictionary(string argument, AudioClip audioclip)
     {
         if (audioTable.ContainsKey(argument))
         {
@@ -44,7 +44,7 @@ static public class Audio
     /// <param name="messageBroadcast">
     /// The message that is interested in.
     ///</param>
-    static public void AudioListener(string messageBroadcast, bool threeD)
+    static public void AddListener(string messageBroadcast, bool threeD)
     {
         if(threeD)
         {
@@ -64,11 +64,11 @@ static public class Audio
     static private void play3DAudio(string argument)
     {
         // Setting spatialBlend 0 is 2D & 1 is 3D;
-        audioManager.clip = audioTable[argument];
-        audioManager.spatialBlend = 1;
-        audioManager.minDistance = 1.0f;
-        audioManager.maxDistance = 5.0f;
-        audioManager.Play();
+        audioSource.clip = audioTable[argument];
+        audioSource.spatialBlend = 1;
+        audioSource.minDistance = 1.0f;
+        audioSource.maxDistance = 5.0f;
+        audioSource.Play();
     }
 
     /// <summary>
@@ -79,18 +79,18 @@ static public class Audio
     /// </param>
     static private void play2DAudio(string argument)
     {
-        audioManager.clip = audioTable[argument];
-        audioManager.Play();
+        audioSource.clip = audioTable[argument];
+        audioSource.Play();
     }
 
     static public void AmbientSound(AudioClip sound)
     {
         //Ambient = surround sound (3D sound)
-        audioManager.clip = sound;
-        audioManager.playOnAwake = true;
-        audioManager.loop = true;
-        audioManager.priority = 256;
-        audioManager.volume = 0.1f;
-        audioManager.Play();
+        audioSource.clip = sound;
+        audioSource.playOnAwake = true;
+        audioSource.loop = true;
+        audioSource.priority = 256;
+        audioSource.volume = 0.1f;
+        audioSource.Play();
     }
 }

@@ -30,8 +30,8 @@ public class test_audio : MonoBehaviour
 
         // For Triggers
         // For 3D audio, you must step in the trigger box for it to play 3D
-        Audio.audioManager = audioSource;
-        Audio.AddAudio(argument, sound);
-        Audio.AudioListener(audioEvent, sound3D);
+        Audio.audioSource = audioSource;
+        Audio.AddAudioToDictionary(argument, sound);
+        Audio.AddListener(audioEvent, sound3D);
     }
 }
