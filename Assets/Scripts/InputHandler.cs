@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿#define EDITORMODEON
+
+using UnityEngine;
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 using System.Collections.Generic;
 
+
+
+    
 /// <summary>
 /// Dylan Guidry
 /// InputHandler.cs
@@ -11,7 +16,7 @@ using System.Collections.Generic;
 /// Handles all inputs by the user and if they are a input that is assigned to an action
 /// it will publish it and what ever is listening for the event will perform the action 
 /// </summary>
-
+[ExecuteInEditMode]
 public class InputHandler : Singleton<InputHandler>
 {
     private enum E_JOYSTICK
@@ -124,12 +129,14 @@ public class InputHandler : Singleton<InputHandler>
         SetP2Controls();
     }
 
+
     void Update()
     {
+        
         IdleTime += Time.deltaTime;
         if (IdleTime > 20)
         {
-           // Debug.Log("Thanks for playing");
+            // Debug.Log("Thanks for playing");
         }
 
         if (Input.anyKey || Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0 ||
@@ -144,7 +151,7 @@ public class InputHandler : Singleton<InputHandler>
         {
             Messenger.Broadcast<float, float>(Players[0] + ":", Input.GetAxis("Vertical"),
                 Input.GetAxis("Horizontal"));
-            if(numPlayers == 2)
+            if (numPlayers == 2)
             {
                 Messenger.Broadcast<float, float>(Players[1] + ":", Input.GetAxis("p2Horizontal"),
                     Input.GetAxis("p2Vertical"));
@@ -154,7 +161,7 @@ public class InputHandler : Singleton<InputHandler>
         {
             Messenger.Broadcast<float, float>(Players[0] + ":", Input.GetAxis("KeyBoardVertical"),
                 Input.GetAxis("KeyBoardHorizontal"));
-            if(numPlayers == 2)
+            if (numPlayers == 2)
             {
                 Messenger.Broadcast<float, float>(Players[1] + ":", Input.GetAxis("Vertical"),
                      Input.GetAxis("Horizontal"));
@@ -389,22 +396,31 @@ public class InputHandler : Singleton<InputHandler>
     [ContextMenu("Check Controls")]
     void CheckControlType()
     {
-        string[] t = Input.GetJoystickNames();
-        Debug.Log(t[0]);
-        if (t[0] == "")
+
+        string s = Input.GetJoystickNames().ToString();
+
+
+        if (s != "System.String[]")
         {
-            keyboard = true;
+            string[] t = Input.GetJoystickNames();
+            keyboard = false;
+            Debug.Log(t[0]);
+
+
         }
         else
         {
-            keyboard = false;
+            keyboard = true;
         }
+
+
+
     }
 
     /// <summary>
     /// All variables of the InputHandler class
     /// </summary>
-    #region Varaibles
+#region Varaibles
     [Tooltip("Controls Configuration for the Controller")]
     [Header("Joystick Controls")]
     [SerializeField]
@@ -416,13 +432,16 @@ public class InputHandler : Singleton<InputHandler>
     [SerializeField]
     private E_JOYSTICK jSprint; //Control assigned to the Sprint Action if using a joystick
 
+#if EDITORMODEON
     [Header("Keyboard Controls")]
     [SerializeField]
+#endif
     private E_KEYBOARD kAttack; //Control assigned to the attack action if using the Keyboard
     [SerializeField]
     private E_KEYBOARD kJump; //Control assigned to the Jump Action if using the Keyboard
     [SerializeField]
     private E_KEYBOARD kSpecial; //Control assigned to the Specail Action if using the Keyboard
+
     [SerializeField]
     private E_KEYBOARD kSprint; //Control assigned to the Sprint Action if using the Keyboard
 
@@ -430,7 +449,8 @@ public class InputHandler : Singleton<InputHandler>
 
     public int numPlayers; //Keeps track of number of players active in the game
 
-    private List<string> Players;
+    [SerializeField]
+    private List<string> Players = new List<string>();
 
     private List<string> P1Controls = new List<string>(); //List that stores all controls for player 1
     private List<string> P2Controls = new List<string>(); //List that stores all controls for player 2
@@ -438,5 +458,5 @@ public class InputHandler : Singleton<InputHandler>
     private float IdleTime; //Will be used to turn return to main menu if no input for a certain time.
 
 
-    #endregion
+#endregion
 }
