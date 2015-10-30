@@ -11,7 +11,8 @@ public class CameraListener : MonoBehaviour {
     }
 
     void SetCam(string s)
-    {
-        gameObject.SetActive(true);
+    {        
+        if(s == "Player1")
+            gameObject.SetActive(true);
     }
 }

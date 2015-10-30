@@ -6,6 +6,7 @@ public class SliderChange : HudListener {
 
     protected override void DoSomething(string message)
     {
-        GetComponent<Slider>().value--;
+        if(message == "Player1")
+            GetComponent<Slider>().value--;
     }
 }
