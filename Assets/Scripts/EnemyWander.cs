@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
-public class RigidWander : MonoBehaviour
+public class EnemyWander : MonoBehaviour
 {
     void Start()
     {
@@ -23,13 +23,17 @@ public class RigidWander : MonoBehaviour
         else
         {
             rb.AddForce((nxtPos - transform.position).normalized * speedConst * speed);
-
             Debug.DrawLine(transform.position, nxtPos, Color.red);
         }
 
         if (Vector3.Distance(transform.position, nxtPos) < 1f)
         {
             SetNextPosition();
+        }
+
+        if(transform.position.y > speed)
+        {
+            
         }
     }
 
@@ -50,14 +54,6 @@ public class RigidWander : MonoBehaviour
         if (other.gameObject == target)
             target = null;
     }
-
-    //void OnCollisionEnter(Collision other)
-    //{
-    //    if (other.gameObject.GetComponent<UnityChanControlScriptWithRgidBody>())
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
 
     public float speed;
     public float range;

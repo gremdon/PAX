@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &1101294529
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +369,10 @@ Prefab:
     - target: {fileID: 419682, guid: 1efaa92ed643b494f990878a52578b90, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480514, guid: 1efaa92ed643b494f990878a52578b90, type: 2}
+      propertyPath: m_Mass
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1efaa92ed643b494f990878a52578b90, type: 2}
