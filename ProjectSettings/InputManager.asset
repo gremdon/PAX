@@ -33,9 +33,9 @@ InputManager:
     dead: .189999998
     sensitivity: 1
     snap: 1
-    invert: 0
+    invert: 1
     type: 2
-    axis: 3
+    axis: 1
     joyNum: 2
   - serializedVersion: 3
     m_Name: KeyBoardHorizontal
@@ -65,9 +65,9 @@ InputManager:
     dead: .189999998
     sensitivity: 1
     snap: 1
-    invert: 1
+    invert: 0
     type: 2
-    axis: 1
+    axis: 0
     joyNum: 2
   - serializedVersion: 3
     m_Name: Vertical

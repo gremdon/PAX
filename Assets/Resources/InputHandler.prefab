@@ -42,13 +42,15 @@ MonoBehaviour:
   jAttack: 2
   jJump: 1
   jSpecial: 3
-  jSprint: 6
+  jSprint: 5
   kAttack: 0
   kJump: 0
   kSpecial: 0
   kSprint: 0
   keyboard: 0
   numPlayers: 1
+  P1Controls: []
+  P2Controls: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
