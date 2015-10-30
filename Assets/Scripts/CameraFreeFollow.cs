@@ -11,14 +11,15 @@ public class CameraFreeFollow : MonoBehaviour
     public float yOffset = 0f;
     public float followTargetDist = 3f;
     public float pivotOffsetY;
-    public float minDistance = 3f;
-    public float maxDistance = 10f;
+    public float minDistance = 15f;
+    public float maxDistance = 20f;
     public float followSpeed = 1f;
     public float smoothing = 0.1f;
     private float lookAtDistance;
     private float followDistance;
     
     Vector3 offset;
+    Vector3 camOffset;
     Vector3 cameraLookDirection;
     Vector3 playerMoveDirection;
     Vector3 clipPos = new Vector3(0, 0, 0);
@@ -72,14 +73,19 @@ public class CameraFreeFollow : MonoBehaviour
         SetTargets();
 
         //Reset();
-        lookAtDistance = Vector3.Distance(lookAtTarget.position, pivot.transform.position);
-        followDistance = Vector3.Distance(followTarget.position, pivot.transform.position);
+        //lookAtDistance = Vector3.Distance(lookAtTarget.position, pivot.transform.position);
+        //followDistance = Vector3.Distance(followTarget.position, pivot.transform.position);
+        camOffset = followTarget.position - transform.position;
 
     }
 
     void Update()
     {
+        transform.position = Vector3.Lerp(transform.position, lookAtTarget.position -
+                             camOffset, Time.deltaTime * followSpeed);
 
+
+        cam.transform.LookAt(lookAtTarget.position + offset);
     }
 
 }
