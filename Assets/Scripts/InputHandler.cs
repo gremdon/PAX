@@ -1,5 +1,4 @@
-﻿#define EDITORMODEON
-
+﻿ 
 using UnityEngine;
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
@@ -431,11 +430,10 @@ public class InputHandler : Singleton<InputHandler>
     private E_JOYSTICK jSpecial; //Control assigned to the Specail Action if using a joystick
     [SerializeField]
     private E_JOYSTICK jSprint; //Control assigned to the Sprint Action if using a joystick
-
-#if EDITORMODEON
+     
     [Header("Keyboard Controls")]
     [SerializeField]
-#endif
+ 
     private E_KEYBOARD kAttack; //Control assigned to the attack action if using the Keyboard
     [SerializeField]
     private E_KEYBOARD kJump; //Control assigned to the Jump Action if using the Keyboard
