@@ -25,8 +25,9 @@ public class PlayerCharacterController : MonoBehaviour
     private float m_RotateSpeed = 0;
     [SerializeField]
     private float m_JumpPower = 0;
-
     private float m_MovementSpeed;
+
+    float GroundDistance = 0.1f;
 
     float h; //horizontal movement
     float v; //vertical movement
@@ -34,6 +35,13 @@ public class PlayerCharacterController : MonoBehaviour
     bool sprint;
 
     Rigidbody rb;
+
+    Vector3 HorizontalVelocity;
+    Vector3 VerticalVelocity;
+
+    public Vector3 Position;
+    public Vector3 Rotation;
+    public Vector3 Forward;
 
     void Awake()
     {
@@ -48,7 +56,7 @@ public class PlayerCharacterController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Messenger.Broadcast<string>("Player", gameObject.name);
 	}
 
     void AddListeners()
@@ -141,27 +149,32 @@ public class PlayerCharacterController : MonoBehaviour
     {
         if (sprint == true)
         {
-            m_MovementSpeed = 0.2f;
+            m_MovementSpeed = 5.0f;
         }
         else if(sprint == false)
         {
             m_MovementSpeed = m_BaseMovementSpeed;
         }
-
-        if (v > 0.1)
+        
+        if(HorizontalVelocity + VerticalVelocity != Vector3.zero)
         {
-            transform.forward = new Vector3(transform.forward.x, transform.forward.y, v);
-            transform.Translate(0, 0, v * m_MovementSpeed);
-            transform.Rotate(0, h * 10.0f, 0);
+            Forward = HorizontalVelocity + VerticalVelocity;
+            transform.forward = Forward;
+        }
 
-        }
-        else if (v < -0.1)
-        {
-            transform.forward = new Vector3(transform.forward.x, transform.forward.y, v);
-            transform.Translate(0, 0, -v * m_MovementSpeed);
-            transform.Rotate(0, -h * 10.0f, 0);
-        }
+        HorizontalVelocity.x = (h / m_MovementSpeed);
+        VerticalVelocity.z = (v / m_MovementSpeed);
+
+        Position = (HorizontalVelocity + VerticalVelocity);
+
+        transform.position += Position;
+
         sprint = false;
+    }
+
+    void CheckGroundDistance()
+    {
+        RaycastHit HitInfo;
     }
 
     private PlayerCharacterController Instance;
