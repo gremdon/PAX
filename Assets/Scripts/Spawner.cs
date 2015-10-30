@@ -35,8 +35,12 @@ public class Spawner : MonoBehaviour
 
                 if (spawningType == Spawning.DespawnAtLimit && limit <= units.Count && limit > 0)
                 {
-                    Destroy(units[0]);
-                    units.RemoveAt(0);
+                    while (limit <= units.Count)
+                    {
+                        Destroy(units[0]);
+                        units.RemoveAt(0);
+                    }
+
                 }
 
                 units.Add((GameObject)Instantiate(prefab, transform.position, transform.rotation));
