@@ -22,7 +22,12 @@ public class CameraListener : MonoBehaviour
             gameObject.SetActive(false);
     }
 
-    void SetCam(string s, string broadcaster) // s is the name of the gameobject that broadcasts the message
+    /// <summary>
+    /// Sets the active camera.
+    /// </summary>
+    /// <param name="s">Name of the gameobject that triggered the event.</param>
+    /// <param name="broadcaster">Name of the gameobject that broadcasts the message.</param>
+    void SetCam(string s, string broadcaster)
     {
         Debug.Log(broadcaster);
         if (s == "Player1")
@@ -39,13 +44,6 @@ public class CameraListener : MonoBehaviour
                     if(broadcaster == activator1.name || broadcaster == activator2.name)
                         gameObject.SetActive(true);
                 }
-                
-                //if(broadcaster == "ArenaTrigger" && gameObject.name == "cctvCam")
-                //    gameObject.SetActive(true);
-                //if (broadcaster == "HalfwayTrigger" && gameObject.name == "FreeFollowCam")
-                //    gameObject.SetActive(true);
-                //if (broadcaster == "ArenaTrigger" && gameObject.name == "FreeFollowCam2")
-                //    gameObject.SetActive(true);
             }
             else
             {

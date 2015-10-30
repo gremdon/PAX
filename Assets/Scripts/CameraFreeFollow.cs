@@ -36,6 +36,12 @@ public class CameraFreeFollow : MonoBehaviour
         //set lookAt target
         if (GameObject.Find("lookAtTarget") != null)
         {
+            //Debug.Log("previous lookAtTarget parent: " + GameObject.Find("lookAtTarget").transform.parent.name);
+            if (lookAtTarget == null)
+            {
+                lookAtTarget = GameObject.Find("lookAtTarget").transform;
+                //Debug.Log("new lookAtTarget parent: " + lookAtTarget.parent.name);
+            }
             return;
         }
         else
@@ -46,10 +52,16 @@ public class CameraFreeFollow : MonoBehaviour
             g.transform.position = player1.transform.position;
             lookAtTarget = g.transform;
         }
-
+        Debug.Log("right Before");
         //set follow target
         if (GameObject.Find("followTarget") != null)
         {
+            Debug.Log("followTarget found.");
+            if (followTarget == null)
+            {
+                followTarget = GameObject.Find("followTarget").transform;
+                Debug.Log("new followTarget parent: " + followTarget.parent.name);
+            }
             return;
         }
         else
@@ -60,6 +72,43 @@ public class CameraFreeFollow : MonoBehaviour
             g.transform.position = new Vector3(lookAtTarget.position.x, 0, lookAtTarget.position.z + followTargetDist);
             followTarget = g.transform;
         }
+
+        ////below doesn't work
+        //GameObject player1 = GameObject.Find("Player1");
+        //lookAtTarget = GameObject.Find("lookAtTarget").transform;
+        //followTarget = GameObject.Find("followTarget").transform;
+
+        ////set lookAt target
+        //if (lookAtTarget != null)
+        //{
+        //    Debug.Log(lookAtTarget.parent.name);
+        //    return;
+        //}
+        //else
+        //{
+        //    Debug.Log("lookAtTarget Didn't break.");
+        //    GameObject g = new GameObject();
+        //    g.name = "lookAtTarget";
+        //    g.transform.parent = player1.transform;
+        //    g.transform.position = player1.transform.position;
+        //    lookAtTarget = g.transform;
+        //}
+
+        ////set follow target
+        //if (followTarget != null)
+        //{
+        //    Debug.Log(lookAtTarget.parent.name);
+        //    return;
+        //}
+        //else
+        //{
+        //    Debug.Log("followTarget Didn't break.");
+        //    GameObject g = new GameObject();
+        //    g.name = "followTarget";
+        //    g.transform.parent = player1.transform;
+        //    g.transform.position = new Vector3(lookAtTarget.position.x, 0, lookAtTarget.position.z + followTargetDist);
+        //    followTarget = g.transform;
+        //}
     }
 
     void Start()
