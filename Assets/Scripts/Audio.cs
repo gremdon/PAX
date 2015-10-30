@@ -61,7 +61,7 @@ static public class Audio
     /// <param name="audioClip">
     /// The audio that is passed in, will turn into 3D audio
     /// </param>
-    static public void play3DAudio(string argument)
+    static private void play3DAudio(string argument)
     {
         // Setting spatialBlend 0 is 2D & 1 is 3D;
         audioManager.clip = audioTable[argument];
@@ -80,6 +80,17 @@ static public class Audio
     static private void play2DAudio(string argument)
     {
         audioManager.clip = audioTable[argument];
+        audioManager.Play();
+    }
+
+    static public void AmbientSound(AudioClip sound)
+    {
+        //Ambient = surround sound (3D sound)
+        audioManager.clip = sound;
+        audioManager.playOnAwake = true;
+        audioManager.loop = true;
+        audioManager.priority = 256;
+        audioManager.volume = 0.1f;
         audioManager.Play();
     }
 }
