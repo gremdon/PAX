@@ -5,10 +5,6 @@ public class Projectile : MonoBehaviour
 {
     
 
-    [SerializeField]
-    private int speed = 5;
-    [SerializeField]
-    private float Timer = 100;
 
     bool alive = true;
     void Start()
@@ -51,5 +47,9 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
+    [SerializeField]
+    private int speed = 5;
+    [SerializeField]
+    private float Timer = 100;
 
 }
