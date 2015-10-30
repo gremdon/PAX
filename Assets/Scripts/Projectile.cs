@@ -34,8 +34,11 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        KillProjectile();
-        Messenger.Broadcast("takedamage", other.name);
+        if (!other.isTrigger)
+        {
+            KillProjectile();
+            Messenger.Broadcast("takedamage", other.name);
+        }
        
     }
 
