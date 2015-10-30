@@ -430,6 +430,7 @@ public class InputHandler : Singleton<InputHandler>
 
     public int numPlayers; //Keeps track of number of players active in the game
 
+    [SerializeField]
     private List<string> Players;
 
     private List<string> P1Controls = new List<string>(); //List that stores all controls for player 1
