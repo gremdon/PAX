@@ -10,11 +10,13 @@ public class BroadcastOnTriggerStay : MonoBehaviour
 {
     protected virtual void OnTriggerEnter(Collider other)
     {
+        print("enter");
         StartCoroutine("Broadcast", other);
     }
 
     protected virtual void OnTriggerExit(Collider other)
     {
+        print("exit");
         StopCoroutine("Broadcast");
     }
 
@@ -22,13 +24,15 @@ public class BroadcastOnTriggerStay : MonoBehaviour
     {
         while (other)
         {
+            print("shit");
             Messenger.Broadcast(m_message, other.name);
             yield return new WaitForSeconds(m_timer);
         }
     }
 
-    [SerializeField] private float m_timer = 1;
+
     [SerializeField] private string m_message;
+    [SerializeField] private float m_timer = 1;
 }
 
-/// Eric Mouledoux
+/// Eric Mouledoux and Q-Dog

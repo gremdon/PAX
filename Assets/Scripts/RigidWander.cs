@@ -31,15 +31,6 @@ public class RigidWander : MonoBehaviour
         {
             SetNextPosition();
         }
-
-        if(transform.position.y > origin.y + 1)
-        {
-            rb.mass = 999;
-        }
-        else
-        {
-            rb.mass = 1;
-        }
     }
 
     void SetNextPosition()
@@ -49,7 +40,7 @@ public class RigidWander : MonoBehaviour
         nxtPos = new Vector3(t.x, 0, t.y) + origin;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.GetComponent<UnityChanControlScriptWithRgidBody>() &&  target == null)
             target = other.gameObject;
@@ -60,13 +51,13 @@ public class RigidWander : MonoBehaviour
             target = null;
     }
 
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.GetComponent<UnityChanControlScriptWithRgidBody>())
-        {
-            Destroy(gameObject);
-        }
-    }
+    //void OnCollisionEnter(Collision other)
+    //{
+    //    if (other.gameObject.GetComponent<UnityChanControlScriptWithRgidBody>())
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 
     public float speed;
     public float range;
