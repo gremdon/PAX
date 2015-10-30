@@ -57,7 +57,6 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     private bool m_enableSpawn;
 
-
     /// <summary>
     /// Getter and setter for toggling the enemy spawner
     /// </summary>

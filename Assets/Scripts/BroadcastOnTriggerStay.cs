@@ -25,7 +25,7 @@ public class BroadcastOnTriggerStay : MonoBehaviour
         while (other)
         {
             print("shit");
-            Messenger.Broadcast(m_message, other.name);
+            Messenger.Broadcast(m_message.ToLower(), other.name);
             yield return new WaitForSeconds(m_timer);
         }
     }

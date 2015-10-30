@@ -9,9 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 419682}
   - 54: {fileID: 5480514}
+  - 65: {fileID: 6571612}
   - 114: {fileID: 11456886}
   - 135: {fileID: 13509596}
-  - 65: {fileID: 6555316}
   m_Layer: 0
   m_Name: Roomba
   m_TagString: Untagged
@@ -164,7 +164,7 @@ Rigidbody:
   m_GameObject: {fileID: 112332}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 9
   m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -183,7 +183,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6555316
+--- !u!65 &6571612
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -193,7 +193,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .5, y: .200000003, z: .5}
+  m_Size: {x: .100000001, y: .200000003, z: .100000001}
   m_Center: {x: 0, y: .100000001, z: 0}
 --- !u!65 &6593674
 BoxCollider:
