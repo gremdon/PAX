@@ -56,7 +56,7 @@ public class PlayerCharacterController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Messenger.Broadcast<string>("Player", gameObject.name);
 	}
 
     void AddListeners()
