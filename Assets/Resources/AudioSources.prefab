@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 446728}
   - 114: {fileID: 11471178}
   m_Layer: 0
-  m_Name: TestAudio
+  m_Name: AudioSources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,11 +39,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b839ad7900c033347bda69abfcdc1ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  music: {fileID: 0}
-  broadcastMessge: 
+  audioSource: {fileID: 0}
+  sound: {fileID: 0}
+  audioEvent: 
   argument: 
-  ThreeDSound: 0
+  sound3D: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
