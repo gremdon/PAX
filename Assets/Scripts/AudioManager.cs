@@ -14,28 +14,17 @@ static public class AudioManager
 
     /// <summary>
     /// Key : string arg
-    /// Value : AudioClip
+    /// Value : GameObject
     /// play audio depend on the string arg
     /// </summary>
     static Dictionary<string, GameObject> audioTable = new Dictionary<string, GameObject>();
 
-    /// <summary>
     /// Add AudioClip with string argument to Dictionary
-    /// </summary>
-    /// <param name ="argument">
     /// Argument that audio need to play to
-    /// </param>
-    /// <param name ="audioclip">
-    /// Audioclip that plays with the assign argument
-    /// </param>
-    static public void AddAudioToDictionary(string argument, GameObject audioclip)
+    /// GameObject that plays with the assign argument
+    static public void AddAudioToDictionary(string argument, GameObject audioGameObject)
     {
-        if (audioTable.ContainsKey(argument))
-        {
-            Debug.Log(argument.ToString() + "This message already exist");
-        }
-        else
-            audioTable.Add(argument, audioclip);
+            audioTable.Add(argument, audioGameObject);
     }
 
     /// <summary>
@@ -43,10 +32,13 @@ static public class AudioManager
     /// </summary>
     /// <param name="messageBroadcast">
     /// The message that is interested in.
-    ///</param>
+    /// </param>
+    /// <param name="threeD">
+    /// boolean for 3D audio
+    /// </param>
     static public void AddListener(string messageBroadcast, bool threeD)
     {
-        if(threeD)
+        if (threeD)
         {
             Messenger.AddListener<string>(messageBroadcast, play3DAudio);
         }
@@ -58,7 +50,7 @@ static public class AudioManager
     /// So all audioClips start off 2D
     /// This function turns 2D Audio Clips into 3D
     /// </summary>
-    /// <param name="audioClip">
+    /// <param name="argument">
     /// The audio that is passed in, will turn into 3D audio
     /// </param>
     static private void play3DAudio(string argument)
