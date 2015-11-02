@@ -55,6 +55,8 @@ static public class AudioManager
     /// </param>
     static private void play3DAudio(string argument)
     {
+        // GameObject aud equals to the dictonary audioTable[string argument] To pull that Gameobject in Dict.
+        // AudioSource asrc = Gameobject aud AudioSource.  AudioSource Asrc = Aud(AudioSource) What?!
         GameObject aud = audioTable[argument];
         AudioSource asrc = aud.GetComponent<AudioSource>();
         // Setting spatialBlend 0 is 2D & 1 is 3D;
@@ -75,10 +77,15 @@ static public class AudioManager
     {
         GameObject aud = audioTable[argument];
         AudioSource asrc = aud.GetComponent<AudioSource>();
-       
         asrc.Play();
     }
 
+    /// <summary>
+    /// AmbientSound for background music
+    /// </summary>
+    /// <param name="sound">
+    /// Audioclip that is passed in for background
+    /// </param>
     static public void AmbientSound(AudioClip sound)
     {
         //Ambient = surround sound (3D sound)
