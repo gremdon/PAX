@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &107854
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -11,9 +11,9 @@ GameObject:
   - 65: {fileID: 6595634}
   - 23: {fileID: 2392008}
   - 33: {fileID: 3307842}
-  - 114: {fileID: 11489924}
+  - 114: {fileID: 11481790}
   m_Layer: 0
-  m_Name: AudioTrigger
+  m_Name: cena
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -21,7 +21,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &109616
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -30,9 +30,9 @@ GameObject:
   - 65: {fileID: 6506376}
   - 23: {fileID: 2338218}
   - 33: {fileID: 3321606}
-  - 114: {fileID: 11430442}
+  - 114: {fileID: 11451288}
   m_Layer: 0
-  m_Name: AudioTrigger
+  m_Name: hit
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -46,10 +46,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 478800}
-  - 114: {fileID: 11428178}
   - 82: {fileID: 8281116}
+  - 114: {fileID: 11459276}
   m_Layer: 0
-  m_Name: TestAudio (2)
+  m_Name: hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,10 +63,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 457130}
-  - 114: {fileID: 11478550}
   - 82: {fileID: 8227716}
+  - 114: {fileID: 11485204}
   m_Layer: 0
-  m_Name: TestAudio (3)
+  m_Name: cena
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,22 @@ GameObject:
   m_Component:
   - 4: {fileID: 442970}
   m_Layer: 0
-  m_Name: AudioSources
+  m_Name: Sources
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &174664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461204}
+  m_Layer: 0
+  m_Name: Triggers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +104,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &179502
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -98,9 +113,9 @@ GameObject:
   - 65: {fileID: 6598806}
   - 23: {fileID: 2315198}
   - 33: {fileID: 3315500}
-  - 114: {fileID: 11423392}
+  - 114: {fileID: 11407176}
   m_Layer: 0
-  m_Name: AudioTrigger
+  m_Name: death
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -114,10 +129,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 481192}
-  - 114: {fileID: 11491036}
   - 82: {fileID: 8275600}
+  - 114: {fileID: 11400828}
   m_Layer: 0
-  m_Name: TestAudio (1)
+  m_Name: death
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +140,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &181364
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -162,11 +177,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.301873505, y: .252966762, z: -3.84348583}
+  m_LocalPosition: {x: -4.22602606, y: -3.0082283, z: 4.26119518}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 478854}
-  m_RootOrder: 0
+  m_Father: {fileID: 442970}
+  m_RootOrder: 3
 --- !u!4 &442970
 Transform:
   m_ObjectHideFlags: 1
@@ -180,8 +195,9 @@ Transform:
   - {fileID: 481192}
   - {fileID: 478800}
   - {fileID: 457130}
+  - {fileID: 416512}
   m_Father: {fileID: 478854}
-  m_RootOrder: 4
+  m_RootOrder: 0
 --- !u!4 &445758
 Transform:
   m_ObjectHideFlags: 1
@@ -192,8 +208,8 @@ Transform:
   m_LocalPosition: {x: 3.13000011, y: 0, z: -3.68000031}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 478854}
-  m_RootOrder: 2
+  m_Father: {fileID: 461204}
+  m_RootOrder: 1
 --- !u!4 &455376
 Transform:
   m_ObjectHideFlags: 1
@@ -201,11 +217,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.519999981, y: 0, z: -.639999986}
+  m_LocalPosition: {x: -.519999981, y: 0, z: -.640000343}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 478854}
-  m_RootOrder: 3
+  m_Father: {fileID: 461204}
+  m_RootOrder: 2
 --- !u!4 &457130
 Transform:
   m_ObjectHideFlags: 1
@@ -218,6 +234,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 442970}
   m_RootOrder: 2
+--- !u!4 &461204
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174664}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 462574}
+  - {fileID: 445758}
+  - {fileID: 455376}
+  m_Father: {fileID: 478854}
+  m_RootOrder: 1
 --- !u!4 &462574
 Transform:
   m_ObjectHideFlags: 1
@@ -225,11 +256,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.42000008, y: 0, z: -3.68000007}
+  m_LocalPosition: {x: -3.42000008, y: 0, z: -3.68000031}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 478854}
-  m_RootOrder: 1
+  m_Father: {fileID: 461204}
+  m_RootOrder: 0
 --- !u!4 &478800
 Transform:
   m_ObjectHideFlags: 1
@@ -252,11 +283,8 @@ Transform:
   m_LocalPosition: {x: -.134794623, y: .230000004, z: -11.4119682}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 416512}
-  - {fileID: 462574}
-  - {fileID: 445758}
-  - {fileID: 455376}
   - {fileID: 442970}
+  - {fileID: 461204}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &481192
@@ -266,7 +294,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179576}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.42999983, y: -3.4911952, z: 10.6999998}
+  m_LocalPosition: {x: -.25999999, y: -3.4911952, z: 10.6999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 442970}
@@ -680,7 +708,23 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!114 &11423392
+--- !u!114 &11400828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b839ad7900c033347bda69abfcdc1ca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  sound: {fileID: 0}
+  audioEvent: playaudio
+  argument: 
+  sound3D: 1
+--- !u!114 &11407176
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -688,11 +732,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 179502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbea4957266449147b795a352be287f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f4526860b023da4f9b6d53a978c663d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   message: playaudio
---- !u!114 &11428178
+  argument: cena
+--- !u!114 &11451288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f4526860b023da4f9b6d53a978c663d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: playaudio
+  argument: cena
+--- !u!114 &11451918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd007c7c03b52a4799fb3beef75c7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundAudioSource: {fileID: 8299298}
+  backgroundSound: {fileID: 8300000, guid: 93222f30ab2efef4fb18e614f839b639, type: 3}
+--- !u!114 &11459276
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -708,48 +779,7 @@ MonoBehaviour:
   audioEvent: playaudio
   argument: 
   sound3D: 1
---- !u!114 &11430442
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 109616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbea4957266449147b795a352be287f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  message: playaudio
---- !u!114 &11451918
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bd007c7c03b52a4799fb3beef75c7ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  backgroundAudioSource: {fileID: 8299298}
-  backgroundSound: {fileID: 8300000, guid: 93222f30ab2efef4fb18e614f839b639, type: 3}
---- !u!114 &11478550
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 154120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b839ad7900c033347bda69abfcdc1ca8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  sound: {fileID: 0}
-  audioEvent: playaudio
-  argument: 
-  sound3D: 1
---- !u!114 &11489924
+--- !u!114 &11481790
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -757,16 +787,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 107854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbea4957266449147b795a352be287f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f4526860b023da4f9b6d53a978c663d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   message: playaudio
---- !u!114 &11491036
+  argument: cena
+--- !u!114 &11485204
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179576}
+  m_GameObject: {fileID: 154120}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b839ad7900c033347bda69abfcdc1ca8, type: 3}
