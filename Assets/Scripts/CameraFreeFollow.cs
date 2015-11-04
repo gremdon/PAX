@@ -5,8 +5,8 @@ public class CameraFreeFollow : MonoBehaviour
 {
     Transform pivot;
     Transform cam;
-    public Transform followTarget;
     public Transform lookAtTarget;
+    public Transform followTarget;
 
     public float yOffset = 0f;
     public float followTargetDist = 3f;
@@ -29,20 +29,15 @@ public class CameraFreeFollow : MonoBehaviour
 
     //set lookAtTarget and followTarget in editor
     [ContextMenu("Set Camera Targets")]
-    void SetTargets()
+    void SetTargets(string camTarget)
     {
-        GameObject player1 = GameObject.Find("Player1");
+        GameObject player1 = GameObject.Find(camTarget);
 
         //set lookAt target
         if (GameObject.Find("lookAtTarget") != null)
         {
-            //Debug.Log("previous lookAtTarget parent: " + GameObject.Find("lookAtTarget").transform.parent.name);
             if (lookAtTarget == null)
-            {
                 lookAtTarget = GameObject.Find("lookAtTarget").transform;
-                //Debug.Log("new lookAtTarget parent: " + lookAtTarget.parent.name);
-            }
-            return;
         }
         else
         {
@@ -52,63 +47,21 @@ public class CameraFreeFollow : MonoBehaviour
             g.transform.position = player1.transform.position;
             lookAtTarget = g.transform;
         }
-        Debug.Log("right Before");
         //set follow target
         if (GameObject.Find("followTarget") != null)
         {
-            Debug.Log("followTarget found.");
             if (followTarget == null)
-            {
                 followTarget = GameObject.Find("followTarget").transform;
-                Debug.Log("new followTarget parent: " + followTarget.parent.name);
-            }
-            return;
         }
         else
         {
             GameObject g = new GameObject();
             g.name = "followTarget";
             g.transform.parent = player1.transform;
-            g.transform.position = new Vector3(lookAtTarget.position.x, 0, lookAtTarget.position.z + followTargetDist);
+            g.transform.position = new Vector3(lookAtTarget.position.x, 0, 
+                                   lookAtTarget.position.z + followTargetDist);
             followTarget = g.transform;
         }
-
-        ////below doesn't work
-        //GameObject player1 = GameObject.Find("Player1");
-        //lookAtTarget = GameObject.Find("lookAtTarget").transform;
-        //followTarget = GameObject.Find("followTarget").transform;
-
-        ////set lookAt target
-        //if (lookAtTarget != null)
-        //{
-        //    Debug.Log(lookAtTarget.parent.name);
-        //    return;
-        //}
-        //else
-        //{
-        //    Debug.Log("lookAtTarget Didn't break.");
-        //    GameObject g = new GameObject();
-        //    g.name = "lookAtTarget";
-        //    g.transform.parent = player1.transform;
-        //    g.transform.position = player1.transform.position;
-        //    lookAtTarget = g.transform;
-        //}
-
-        ////set follow target
-        //if (followTarget != null)
-        //{
-        //    Debug.Log(lookAtTarget.parent.name);
-        //    return;
-        //}
-        //else
-        //{
-        //    Debug.Log("followTarget Didn't break.");
-        //    GameObject g = new GameObject();
-        //    g.name = "followTarget";
-        //    g.transform.parent = player1.transform;
-        //    g.transform.position = new Vector3(lookAtTarget.position.x, 0, lookAtTarget.position.z + followTargetDist);
-        //    followTarget = g.transform;
-        //}
     }
 
     void Start()
@@ -119,13 +72,12 @@ public class CameraFreeFollow : MonoBehaviour
         offset = new Vector3(0, yOffset, 0);
         pivotOffsetY = pivot.position.y;
 
-        SetTargets();
+        SetTargets("Player1");
 
         //Reset();
         //lookAtDistance = Vector3.Distance(lookAtTarget.position, pivot.transform.position);
         //followDistance = Vector3.Distance(followTarget.position, pivot.transform.position);
         camOffset = followTarget.position - transform.position;
-
     }
 
     void Update()

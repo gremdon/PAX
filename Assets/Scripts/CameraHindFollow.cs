@@ -5,8 +5,8 @@ public class CameraHindFollow : MonoBehaviour
 {
     Transform pivot;
     Transform cam;
-    public Transform followTarget;
     public Transform lookAtTarget;
+    public Transform followTarget;
 
     public float yOffset = 0f;
     public float followTargetDist = 3f;
@@ -31,28 +31,29 @@ public class CameraHindFollow : MonoBehaviour
 
     //set lookAtTarget and followTarget in editor
     [ContextMenu("Set Camera Targets")]
-    void SetTargets()
+    void SetTargets(string camTarget)
     {
-        GameObject player1 = GameObject.Find("Player1");
+        GameObject player1 = GameObject.Find(camTarget);
 
         //set lookAt target
         if (GameObject.Find("lookAtTarget") != null)
         {
-            return;
+            if (lookAtTarget == null)
+                lookAtTarget = GameObject.Find("lookAtTarget").transform;
         }
         else
         {
             GameObject g = new GameObject();
             g.name = "lookAtTarget";
             g.transform.parent = player1.transform;
-            g.transform.position = player1.transform.position;// + new Vector3(0, 0.5f, 0);
+            g.transform.position = player1.transform.position;
             lookAtTarget = g.transform;
         }
-
         //set follow target
         if (GameObject.Find("followTarget") != null)
         {
-            return;
+            if (followTarget == null)
+                followTarget = GameObject.Find("followTarget").transform;
         }
         else
         {
@@ -62,50 +63,6 @@ public class CameraHindFollow : MonoBehaviour
             g.transform.position = new Vector3(lookAtTarget.position.x, 0, lookAtTarget.position.z + followTargetDist);
             followTarget = g.transform;
         }
-
-        ////below doesn't work
-        //GameObject player1 = GameObject.Find("Player1");
-
-        ////set lookAt target
-        //if (GameObject.Find("lookAtTarget") != null)
-        //{
-        //    Debug.Log("previous lookAtTarget parent: " + GameObject.Find("lookAtTarget").transform.parent.name);
-        //    if (lookAtTarget == null)
-        //    {
-        //        lookAtTarget = GameObject.Find("lookAtTarget").transform;
-        //        Debug.Log("new lookAtTarget parent: " + lookAtTarget.parent.name);
-        //    }
-        //    return;
-        //}
-        //else
-        //{
-        //    GameObject g = new GameObject();
-        //    g.name = "lookAtTarget";
-        //    g.transform.parent = player1.transform;
-        //    g.transform.position = player1.transform.position;
-        //    lookAtTarget = g.transform;
-        //}
-
-        ////set follow target
-        //if (GameObject.Find("followTarget") != null)
-        //{
-        //    Debug.Log("previous followTarget parent: " + GameObject.Find("followTarget").transform.parent.name);
-        //    if (followTarget == null)
-        //    {
-        //        followTarget = GameObject.Find("followTarget").transform;
-        //        Debug.Log("new followTarget parent: " + followTarget.parent.name);
-        //    }
-        //    return;
-        //}
-        //else
-        //{
-        //    GameObject g = new GameObject();
-        //    g.name = "followTarget";
-        //    g.transform.parent = player1.transform;
-        //    g.transform.position = new Vector3(lookAtTarget.position.x, 0, lookAtTarget.position.z + followTargetDist);
-        //    followTarget = g.transform;
-        //}
-
     }
 
     void Start()
@@ -116,17 +73,17 @@ public class CameraHindFollow : MonoBehaviour
         offset = new Vector3(0, yOffset, 0);
         pivotOffsetY = pivot.position.y;
 
-        SetTargets();
+        SetTargets("Player1");
 
         ////set initial camera position and orientation
-        //transform.position = followTarget.position + (-followTarget.forward * distance) + new Vector3(0, 3, 0);
+        //transform.position = followTarget.position + (-followTarget.forward * distance) + 
+        //                     new Vector3(0, 3, 0);
         //transform.LookAt(followTarget);
         //cameraLookDirection = transform.forward;
 
         //Reset();
         lookAtDistance = Vector3.Distance(lookAtTarget.position, pivot.transform.position);
         followDistance = Vector3.Distance(followTarget.position, pivot.transform.position);
-
     }
 
     void Update()

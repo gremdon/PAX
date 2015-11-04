@@ -29,7 +29,6 @@ public class CameraListener : MonoBehaviour
     /// <param name="broadcaster">Name of the gameobject that broadcasts the message.</param>
     void SetCam(string s, string broadcaster)
     {
-        Debug.Log(broadcaster);
         if (s == "Player1")
         {
             if (gameObject.activeSelf == false)
@@ -46,9 +45,7 @@ public class CameraListener : MonoBehaviour
                 }
             }
             else
-            {
                 gameObject.SetActive(false);
-            }
         }
     }
 }
