@@ -2023,8 +2023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundAudioSource: {fileID: 688509693}
-  currentAC: {fileID: 0}
-  nextAC: {fileID: 0}
+  backgroundAudioClip: {fileID: 8300000, guid: 7abbde055825429459bd13d9e6b7a478, type: 3}
 --- !u!4 &688509695
 Transform:
   m_ObjectHideFlags: 0
@@ -5557,7 +5556,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .25999999
+      value: .0799999982
       objectReference: {fileID: 0}
     - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_LocalPosition.y
@@ -5565,7 +5564,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -16.0200005
+      value: -15.1199999
       objectReference: {fileID: 0}
     - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_LocalRotation.x

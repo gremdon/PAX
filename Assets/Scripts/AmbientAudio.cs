@@ -4,8 +4,7 @@ using System.Collections;
 public class AmbientAudio : MonoBehaviour
 {
     public AudioSource backgroundAudioSource;
-    public AudioClip currentAC;
-    public AudioClip nextAC;
+    public AudioClip backgroundAudioClip;
 
     void Awake()
     {
@@ -14,14 +13,6 @@ public class AmbientAudio : MonoBehaviour
         // AudioManager.AmbientSound(AudioClip) audio clip that is passed in
         backgroundAudioSource = GetComponent<AudioSource>();
         AudioManager.audioSource = backgroundAudioSource;
-        AudioManager.AmbientSound(currentAC);
+        AudioManager.AmbientSound(backgroundAudioClip);
     }
-
-    public void ChangeAC()
-    {
-        backgroundAudioSource.clip = currentAC;
-        backgroundAudioSource.clip = nextAC;
-
-    }
-
 }
