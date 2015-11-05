@@ -58,7 +58,7 @@ public class HealthStats : MonoBehaviour
 
     protected virtual void OnDead()
     {
-        Messenger.Broadcast("playerdied", name); //Broacasts "playerdied" with gameObject.name
+        Messenger.Broadcast("entitydied", name); //Broacasts "playerdied" with gameObject.name
     }
 
     public virtual void OnEnable()
