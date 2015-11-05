@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class test_audio : MonoBehaviour
+public class Audio3D : MonoBehaviour
 {
     /// <summary>
     /// Tran & Chui's test Audio script.
@@ -30,8 +30,8 @@ public class test_audio : MonoBehaviour
 
         // For Triggers
         // For 3D audio, you must step in the trigger box for it to play 3D
-        Audio.audioManager = audioSource;
-        Audio.AddAudio(argument, sound);
-        Audio.AudioListener(audioEvent, sound3D);
+        
+        AudioManager.AddAudioToDictionary(argument, gameObject);
+        AudioManager.AddListener(audioEvent, sound3D);
     }
 }
