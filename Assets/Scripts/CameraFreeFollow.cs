@@ -11,12 +11,12 @@ public class CameraFreeFollow : MonoBehaviour
     public float yOffset = 0f;
     public float followTargetDist = 3f;
     public float pivotOffsetY;
-    public float minDistance = 15f;
-    public float maxDistance = 20f;
+    //public float minDistance = 15f;
+    //public float maxDistance = 20f;
     public float followSpeed = 1f;
-    public float smoothing = 0.1f;
-    private float lookAtDistance;
-    private float followDistance;
+    //public float smoothing = 0.1f;
+    //private float lookAtDistance;
+    //private float followDistance;
     
     Vector3 offset;
     Vector3 camOffset;

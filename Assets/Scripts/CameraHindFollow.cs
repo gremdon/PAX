@@ -22,8 +22,8 @@ public class CameraHindFollow : MonoBehaviour
     //bool isOccluded = false;
     Vector3 offset;
     Vector3 cameraLookDirection;
-    Vector3 playerMoveDirection;
-    Vector3 clipPos = new Vector3(0, 0, 0);
+    //Vector3 playerMoveDirection;
+    //Vector3 clipPos = new Vector3(0, 0, 0);
     //Vector3 preOccludedPos;
 
     Vector3 aboveClipPlane = new Vector3(0, -1, 0);
@@ -60,7 +60,8 @@ public class CameraHindFollow : MonoBehaviour
             GameObject g = new GameObject();
             g.name = "followTarget";
             g.transform.parent = player1.transform;
-            g.transform.position = new Vector3(lookAtTarget.position.x, 0, lookAtTarget.position.z + followTargetDist);
+            g.transform.position = new Vector3(lookAtTarget.position.x, 0, 
+                                   lookAtTarget.position.z + followTargetDist);
             followTarget = g.transform;
         }
     }
@@ -138,7 +139,8 @@ public class CameraHindFollow : MonoBehaviour
             //    Debug.Log("clipPos: " + clipPos);
             //    pivot.position -= clipAmount;
             //}
-            //transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * followDistance), Time.deltaTime * followSpeed);
+            //transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + 
+            //                     (-lookAtTarget.forward * followDistance), Time.deltaTime * followSpeed);
         }
         //else
         //{
@@ -152,6 +154,7 @@ public class CameraHindFollow : MonoBehaviour
 
     void Reset()
     {
-        //transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + (-lookAtTarget.forward * playerDistanceToCamera), Time.deltaTime * smoothing);
+        //transform.position = Vector3.Lerp(transform.position, lookAtTarget.position + 
+        //                    (-lookAtTarget.forward * playerDistanceToCamera), Time.deltaTime * smoothing);
     }
 }
