@@ -101,10 +101,6 @@ public class Spawner : MonoBehaviour
     public int limit = 1;
     int index;
 
-    public bool randomSpawnLocation;
-
-    public float size;
-
     /// <summary>
     /// storage and queue for each unit spawned(if despawnedAtLimit is true)
     /// </summary>
@@ -136,9 +132,6 @@ public class SpawnerEditor : Editor
             }
         }
 
-        spawner.randomSpawnLocation = GUILayout.Toggle(spawner.randomSpawnLocation, "Random Spawn Location");
-        if (spawner.randomSpawnLocation)
-            spawner.size = EditorGUILayout.FloatField("Size",spawner.size);
 
     }
 
