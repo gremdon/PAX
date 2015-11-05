@@ -47,7 +47,7 @@ public class InputHandler : Singleton<InputHandler>
         e_F,
         e_G,
         e_Q, 
-        //e_R,
+        e_R,
         e_S,
         e_T,
         e_V,
@@ -64,7 +64,6 @@ public class InputHandler : Singleton<InputHandler>
     {
         base.Awake();
         Messenger.AddListener<string>("Player", NumberOfPlayers);
-
     }
 
     void Start()
@@ -375,7 +374,6 @@ public class InputHandler : Singleton<InputHandler>
     /// <summary>
     /// Sets defaults for the controls
     /// </summary>
-    [ContextMenu("Set Defualts")]
     public void SetDefualts()
     {
         jAttack = E_JOYSTICK.e_B;
@@ -387,6 +385,11 @@ public class InputHandler : Singleton<InputHandler>
         kJump = E_KEYBOARD.e_Space;
         kSpecial = E_KEYBOARD.e_E;
         kSprint = E_KEYBOARD.e_LeftShift;
+    }
+
+    void Reset(string a)
+    {
+        numPlayers = 0;
     }
 
     /// <summary>
@@ -416,7 +419,7 @@ public class InputHandler : Singleton<InputHandler>
 
     private bool keyboard; //A boolean to determine if the controls are configured for keyboard or Controler
 
-    private int numPlayers; //Keeps track of number of players active in the game
+    public int numPlayers; //Keeps track of number of players active in the game
 
     bool MaxPlayers; //If num players = 2 this is true
 
