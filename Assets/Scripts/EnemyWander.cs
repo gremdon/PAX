@@ -22,7 +22,7 @@ public class EnemyWander : MonoBehaviour
             Vector3 heading = Vector3.Normalize(targetPos - currentPos);
             rb.AddForce(heading * speedConst * speed * 2f);
             
-            //Debug.DrawLine(transform.position, target.transform.position, Color.red);
+            Debug.DrawLine(transform.position, target.transform.position, Color.red);
         }
         else
         {
@@ -31,7 +31,7 @@ public class EnemyWander : MonoBehaviour
             Vector3 heading = Vector3.Normalize(targetPos - currentPos);
             rb.AddForce(heading * speedConst * speed);
 
-            //Debug.DrawLine(transform.position, nxtPos, Color.red);
+            Debug.DrawLine(transform.position, nxtPos, Color.red);
         }
 
         if (Vector3.Distance(transform.position, nxtPos) < 1f)
@@ -42,12 +42,7 @@ public class EnemyWander : MonoBehaviour
 
     void SetNextPosition()
     {
-        do
-        {
-            lstPos = nxtPos;
-            Vector2 t = (Random.insideUnitCircle * range);
-            nxtPos = new Vector3(t.x, 0, t.y) + origin;
-        } while (Physics.Raycast(transform.position, nxtPos, Vector3.Distance(transform.position, nxtPos)));
+        StartCoroutine(NextPosition());
     }
 
     void OnTriggerStay(Collider other)
@@ -60,6 +55,16 @@ public class EnemyWander : MonoBehaviour
         if (other.gameObject == target)
             target = null;
     }
+    
+    IEnumerator NextPosition()
+    {
+        do
+        {
+            Vector2 t = (Random.insideUnitCircle * range);
+            nxtPos = new Vector3(t.x, 0, t.y) + origin;
+            yield return null;
+        } while (Physics.Raycast(transform.position, nxtPos, Vector3.Distance(transform.position, nxtPos))) ;
+    }
 
     public float speed;
     public float range;
@@ -71,7 +76,6 @@ public class EnemyWander : MonoBehaviour
     const float speedConst = 100;
 
     Vector3 nxtPos = new Vector3();
-    Vector3 lstPos = new Vector3();
     Vector3 origin = new Vector3();
     Vector3 forward = new Vector3();
 
