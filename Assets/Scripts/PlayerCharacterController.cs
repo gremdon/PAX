@@ -5,127 +5,110 @@ using System.Collections;
 
 public class PlayerCharacterController : MonoBehaviour
 {
-    [SerializeField]
-    private float m_BaseMovementSpeed = 0;
-    [SerializeField]
-    private float m_RotateSpeed = 0;
-    [SerializeField]
-    private float m_JumpPower = 0;
-    private float m_MovementSpeed;
+	[SerializeField]
+	private float
+		m_BaseMovementSpeed = 0;
+	[SerializeField]
+	private float
+		m_RotateSpeed = 0;
+	[SerializeField]
+	private float
+		m_JumpPower = 0;
+	private float m_MovementSpeed;
+	float GroundDistance = 0.1f;
+	float h; //horizontal movement
+	float v; //vertical movement
 
-    float GroundDistance = 0.1f;
+	bool sprint;
+	Rigidbody rb;
+	Vector3 HorizontalVelocity;
+	Vector3 VerticalVelocity;
+	public Vector3 Position;
+	public Vector3 Rotation;
+	public Vector3 Forward;
 
-    float h; //horizontal movement
-    float v; //vertical movement
-
-    bool sprint;
-
-    Rigidbody rb;
-
-    Vector3 HorizontalVelocity;
-    Vector3 VerticalVelocity;
-
-    public Vector3 Position;
-    public Vector3 Rotation;
-    public Vector3 Forward;
-
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        AddListeners();
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-        Messenger.Broadcast<string>("Player", gameObject.name);
+	void Awake ()
+	{
+		rb = GetComponent<Rigidbody> ();
+		AddListeners ();
 	}
 
-    void AddListeners()
-    {
-        Debug.Log("adding listeners");
-        Messenger.AddListener<float,float>(gameObject.name + ":", Movement);
-        Messenger.AddListener(gameObject.name + ":Jump", Jump);
-        Messenger.AddListener(gameObject.name + ":Attack", Attack);
-        Messenger.AddListener(gameObject.name + ":Sprint", Sprint);
-        Messenger.AddListener(gameObject.name + ":Special", SpecialAttack);
-        Messenger.MarkAsPermanent(gameObject.name + ":Jump");
-        Messenger.MarkAsPermanent(gameObject.name + ":Attack");
-        Messenger.MarkAsPermanent(gameObject.name + ":Sprint");
-        Messenger.MarkAsPermanent(gameObject.name + ":Special");
-        Messenger.MarkAsPermanent(gameObject.name + ":");
-    }
+	// Use this for initialization
+	void Start ()
+	{
+		Messenger.Broadcast<string> ("Player", gameObject.name);
+	}
 
-    void OnDisable()
-    {
-        Debug.Log("removing listeners");
-        Messenger.RemoveListener<float, float>(gameObject.name + ":", Movement);
-        Messenger.RemoveListener(gameObject.name + ":Jump", Jump);
-        Messenger.RemoveListener(gameObject.name + ":Attack", Attack);
-        Messenger.RemoveListener(gameObject.name + ":Sprint", Sprint);
-        Messenger.RemoveListener(gameObject.name + ":Special", SpecialAttack);
-    }
+	void AddListeners ()
+	{
+		Debug.Log ("adding listeners");
+		Messenger.AddListener<float,float> (gameObject.name + ":", Movement);
+		Messenger.AddListener (gameObject.name + ":Jump", Jump);
+		Messenger.AddListener (gameObject.name + ":Attack", Attack);
+		Messenger.AddListener (gameObject.name + ":Sprint", Sprint);
+		Messenger.AddListener (gameObject.name + ":Special", SpecialAttack);
+		Messenger.MarkAsPermanent (gameObject.name + ":Jump");
+		Messenger.MarkAsPermanent (gameObject.name + ":Attack");
+		Messenger.MarkAsPermanent (gameObject.name + ":Sprint");
+		Messenger.MarkAsPermanent (gameObject.name + ":Special");
+		Messenger.MarkAsPermanent (gameObject.name + ":");
+	}
+
+	void OnDisable ()
+	{
+		Debug.Log ("removing listeners");
+		Messenger.RemoveListener<float, float> (gameObject.name + ":", Movement);
+		Messenger.RemoveListener (gameObject.name + ":Jump", Jump);
+		Messenger.RemoveListener (gameObject.name + ":Attack", Attack);
+		Messenger.RemoveListener (gameObject.name + ":Sprint", Sprint);
+		Messenger.RemoveListener (gameObject.name + ":Special", SpecialAttack);
+	}
 
     #region Event
 
-    void Movement(float a, float b)
-    {
-        h = b;
-        v = a;
-    }
+	void Movement (float a, float b)
+	{
+		h = b;
+		v = a;
+	}
 
-    void Jump()
-    {
-        rb.AddForce(Vector3.up * m_JumpPower, ForceMode.VelocityChange);
-    }
+	void Jump ()
+	{
+		rb.AddForce (Vector3.up * m_JumpPower, ForceMode.VelocityChange);
+	}
 
-    void Attack()
-    {
-        Debug.Log("Attack");
-    }
+	void Attack ()
+	{
+		Debug.Log ("Attack");
+	}
 
-    void SpecialAttack()
-    {
-        Debug.Log("Special Attack");
-    }
+	void SpecialAttack ()
+	{
+		Debug.Log ("Special Attack");
+	}
 
-    void Sprint()
-    {
-        sprint = true;
-    }
+	void Sprint ()
+	{
+		sprint = true;
+	}
 
     #endregion
 
-    // Update is called once per frame
-    void FixedUpdate ()
-    {
-        if (sprint == true)
-        {
-            m_MovementSpeed = 5.0f;
-        }
-        else if(sprint == false)
-        {
-            m_MovementSpeed = m_BaseMovementSpeed;
-        }
-        
-        if(HorizontalVelocity + VerticalVelocity != Vector3.zero)
-        {
-            Forward = HorizontalVelocity + VerticalVelocity;
-            transform.forward = Forward;
-        }
+	void FixedUpdate ()
+	{
+		if (sprint == true) {
+			m_MovementSpeed = 5.0f;
+		} else if (sprint == false) {
+			m_MovementSpeed = m_BaseMovementSpeed;
+		}
 
-        HorizontalVelocity.x = (h / m_MovementSpeed);
-        VerticalVelocity.z = (v / m_MovementSpeed);
+		Forward.z = Camera.main.transform.forward.z + v;
+		Forward.y = 0;
+		transform.forward = Forward;
 
-        Position = (HorizontalVelocity + VerticalVelocity);
+		Position.z = v;
+		transform.position += Position;
 
-        transform.position += Position;
-
-        sprint = false;
-    }
-
-    void CheckGroundDistance()
-    {
-        RaycastHit HitInfo;
-    }
+		//sprint = false;
+	}
 }

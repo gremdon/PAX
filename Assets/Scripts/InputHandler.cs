@@ -69,13 +69,12 @@ public class InputHandler : Singleton<InputHandler>
 
     void Start()
     {
-        //Adds all the controls to the list
-        //They are modified in the SetControls Functions for each player
-        CheckControlType();
+
     }
 
     void CustomContols()
     {
+        CheckControlType();
         PlayerControls.Clear();
         if (keyboard)
         {
@@ -255,7 +254,6 @@ public class InputHandler : Singleton<InputHandler>
                 {
                     DefinedControls.Add(split[1].ToLower() + ":" + temp[1]);
                 }
-
             }
         }
     }
@@ -325,7 +323,7 @@ public class InputHandler : Singleton<InputHandler>
     [SerializeField]
     private E_KEYBOARD kSprint; //Control assigned to the Sprint Action if using the Keyboard
 
-    private bool keyboard; //A boolean to determine if the controls are configured for keyboard or Controler
+    public bool keyboard; //A boolean to determine if the controls are configured for keyboard or Controler
 
     public int numPlayers; //Keeps track of number of players active in the game
 

@@ -73,8 +73,8 @@ InputManager:
     m_Name: p2KeyBoardHorizontal
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: a
-    positiveButton: d
+    negativeButton: j
+    positiveButton: l
     altNegativeButton: left
     altPositiveButton: right
     gravity: 1
@@ -153,8 +153,8 @@ InputManager:
     m_Name: p2KeyBoardVertical
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: s
-    positiveButton: w
+    negativeButton: k
+    positiveButton: i
     altNegativeButton: down
     altPositiveButton: up
     gravity: 1
