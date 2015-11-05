@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
+        index = 0;
         StartCoroutine(Spawn());
     }
 
@@ -38,9 +39,10 @@ public class Spawner : MonoBehaviour
                     Destroy(units[0]);
                     units.RemoveAt(0);
                 }
-
-                units.Add((GameObject)Instantiate(prefab, transform.position, transform.rotation));
-
+                GameObject go = (GameObject)Instantiate(prefab, transform.position, transform.rotation);
+                go.name = name + go.name + index;
+                units.Add(go);
+                index++;
             }
 
             yield return new WaitForSeconds(timer);
@@ -72,10 +74,10 @@ public class Spawner : MonoBehaviour
     /// </summary>
     [SerializeField]
     private int limit = 1;
+    int index;
     /// <summary>
     /// storage and queue for each unit spawned(if despawnedAtLimit is true)
     /// </summary>
-
-
     private List<GameObject> units = new List<GameObject>();
+    
 }

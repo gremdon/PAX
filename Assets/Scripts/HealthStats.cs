@@ -73,6 +73,12 @@ public class HealthStats : MonoBehaviour
         Messenger.RemoveListener<string>("takedamage", TakeDamage); //Removes listener of "takedamage" with TakeDamage function
         Messenger.RemoveListener<string>("gethealed", GetHealed);
     }
+
+    //public virtual void OnDestroy()
+    //{
+    //    Messenger.RemoveListener<string>("takedamage", TakeDamage); //Removes listener of "takedamage" with TakeDamage function
+    //    Messenger.RemoveListener<string>("gethealed", GetHealed);
+    //}
    [SerializeField]
    protected int _health = 3;
     /// <summary>

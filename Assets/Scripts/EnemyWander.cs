@@ -24,21 +24,27 @@ public class EnemyWander : MonoBehaviour
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
 
-            float dist = Vector3.Distance(transform.position, target.transform.position);
+            Vector3 levelTarget = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
+            float dist = Vector3.Distance(transform.position, levelTarget);
 
-            Physics.Raycast(transform.position, target.transform.position, out hit, dist);
+            Vector3 direction = (levelTarget - transform.position).normalized;
+            bool hasHit = Physics.Raycast(transform.position, direction, out hit, dist);
 
-            print(hit.transform.gameObject);
+            //print(hit.transform.gameObject.name);
 
-            if (hit.transform.gameObject == target)
+            if (hasHit && hit.transform.gameObject == target)
             {
                 Vector3 targetPos = new Vector3(target.transform.position.x, 0, target.transform.position.z);
                 Vector3 currentPos = new Vector3(transform.position.x, 0, transform.position.z);
                 Vector3 heading = Vector3.Normalize(targetPos - currentPos);
                 rb.AddForce(heading * speedConst * speed);
             }
+            else
+            {
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            }
 
-            Debug.DrawLine(transform.position, target.transform.position, Color.red);
+            Debug.DrawLine(transform.position, levelTarget, Color.red);
             yield return null;
         }
         //else
@@ -81,10 +87,12 @@ public class EnemyWander : MonoBehaviour
 
     void Die(string a)
     {
+       
         if (a == name)
         {
+            Messenger.RemoveListener<string>("entitydied", Die);
             transform.position = Vector3.zero;
-            gameObject.SetActive(false);
+            Destroy(gameObject);//.SetActive(false);
         }
     }
 
