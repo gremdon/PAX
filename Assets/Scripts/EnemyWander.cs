@@ -3,67 +3,112 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyWander : MonoBehaviour
 {
+    void Awake()
+    {
+        Messenger.AddListener<string>("entitydied", Die);
+    }
+
     void Start()
     {
         target = null;
-        origin = transform.position;
+        origin = new Vector2(transform.position.x, transform.position.z);
         rb = GetComponent<Rigidbody>();
-        SetNextPosition();
+        //SetNextPosition();
     }
 
-    void Update()
+    IEnumerator Persue()
     {
-        rb.velocity = Vector3.zero;
+        RaycastHit hit;
 
-        if (target)
+        while (target)
         {
-            Vector3 targetPos = new Vector3(target.transform.position.x, 0, target.transform.position.z);
-            Vector3 currentPos = new Vector3(transform.position.x, 0, transform.position.z);
-            Vector3 heading = Vector3.Normalize(targetPos - currentPos);
-            rb.AddForce(heading * speedConst * speed * 2f);
-            
-            Debug.DrawLine(transform.position, target.transform.position, Color.red);
-        }
-        else
-        {
-            Vector3 targetPos = new Vector3(nxtPos.x, 0, nxtPos.z);
-            Vector3 currentPos = new Vector3(transform.position.x, 0, transform.position.z);
-            Vector3 heading = Vector3.Normalize(targetPos - currentPos);
-            rb.AddForce(heading * speedConst * speed);
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
 
-            Debug.DrawLine(transform.position, nxtPos, Color.red);
-        }
+            Vector3 levelTarget = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
+            float dist = Vector3.Distance(transform.position, levelTarget);
 
-        if (Vector3.Distance(transform.position, nxtPos) < 1f)
-        {
-            SetNextPosition();
-        }
-    }
+            Vector3 direction = (levelTarget - transform.position).normalized;
+            bool hasHit = Physics.Raycast(transform.position, direction, out hit, dist);
 
-    void SetNextPosition()
-    {
-        StartCoroutine(NextPosition());
+            //print(hit.transform.gameObject.name);
+
+            if (hasHit && hit.transform.gameObject == target)
+            {
+                Vector3 targetPos = new Vector3(target.transform.position.x, 0, target.transform.position.z);
+                Vector3 currentPos = new Vector3(transform.position.x, 0, transform.position.z);
+                Vector3 heading = Vector3.Normalize(targetPos - currentPos);
+                rb.AddForce(heading * speedConst * speed);
+            }
+            else
+            {
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            }
+
+            Debug.DrawLine(transform.position, levelTarget, Color.red);
+            yield return null;
+        }
+        //else
+        //{
+        //    Vector3 targetPos = new Vector3(nxtPos.x, 0, nxtPos.z);
+        //    Vector3 currentPos = new Vector3(transform.position.x, 0, transform.position.z);
+        //    Vector3 heading = Vector3.Normalize(targetPos - currentPos);
+        //    rb.AddForce(heading * speedConst * speed);
+
+        //    Debug.DrawLine(transform.position, nxtPos, Color.red);
+
+        //    if (Vector3.Distance(transform.position, nxtPos) < 1f)
+        //    {
+        //        SetNextPosition();
+        //    }
+        //}
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<UnityChanControlScriptWithRgidBody>() && target == null)
+        if (other.GetComponent<PlayerCharacterController>() && target == null)
+        {
             target = other.gameObject;
+            StartCoroutine(Persue());
+        }
     }
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject == target)
             target = null;
     }
-    
-    IEnumerator NextPosition()
+
+    void OnCollisionEnter(Collision other)
     {
-        do
+        if(other.gameObject.GetComponent<PlayerCharacterController>())
         {
-            Vector2 t = (Random.insideUnitCircle * range);
-            nxtPos = new Vector3(t.x, 0, t.y) + origin;
-            yield return null;
-        } while (Physics.Raycast(transform.position, nxtPos, Vector3.Distance(transform.position, nxtPos))) ;
+            Messenger.Broadcast("takedamage", name);
+        }
+    }
+
+    void Die(string a)
+    {
+       
+        if (a == name)
+        {
+            Messenger.RemoveListener<string>("entitydied", Die);
+            transform.position = Vector3.zero;
+            Destroy(gameObject);//.SetActive(false);
+        }
+    }
+
+    void SetNextPosition()
+    {
+        Vector2 t;
+        float dist;
+
+        t = (Random.insideUnitCircle * range) + origin;
+        nxtPos = new Vector3(t.x, transform.position.y, t.y);
+        dist = Vector3.Distance(transform.position, nxtPos);
+
+        if(Physics.Raycast(transform.position, nxtPos, dist))
+        {
+            SetNextPosition();
+        }
     }
 
     public float speed;
@@ -71,12 +116,10 @@ public class EnemyWander : MonoBehaviour
 
     public GameObject target;
 
-    bool canMove;
-
     const float speedConst = 100;
 
+    Vector2 origin = new Vector2();
     Vector3 nxtPos = new Vector3();
-    Vector3 origin = new Vector3();
     Vector3 forward = new Vector3();
 
     Rigidbody rb;
