@@ -47,6 +47,9 @@ MonoBehaviour:
   kJump: 15
   kSpecial: 3
   kSprint: 17
+  numPlayers: 0
+  PlayerControls: []
+  DefinedControls: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
