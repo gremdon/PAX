@@ -85,23 +85,6 @@ static public class AudioManager
             asrc.Play();
         }
     }
-
-    /// <summary>
-    /// AmbientSound for background music
-    /// </summary>
-    /// <param name="sound">
-    /// Audioclip that is passed in for background
-    /// </param>
-    static public void AmbientSound(AudioClip sound)
-    {
-        //Ambient = surround sound (3D sound)
-        audioSource.clip = sound;
-        audioSource.playOnAwake = true;
-        audioSource.loop = true;
-        audioSource.priority = 256;
-        audioSource.volume = 0.1f;
-        audioSource.Play();
-    }
 }
 
 /*
