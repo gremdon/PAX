@@ -87,14 +87,14 @@ public class Spawner : MonoBehaviour
     /// <summary>
     /// Seconds per spawn.
     /// </summary>
-    private float timer = 1;
+    public float timer = 1;
     public bool despawnTimerBool = false;
 
-    public float despawnTimer = 1;
+    public float despawnTimer = 1f;
     /// <summary>
     /// Prefab to be spawned
     /// </summary>
-    private GameObject prefab;
+    public GameObject prefab;
     /// <summary>
     /// Max number of spawned(If despawnAtLimit is true)
     /// </summary>
@@ -118,6 +118,8 @@ public class SpawnerEditor : Editor
     {
         var spawner = (Spawner)target;
 
+        spawner.prefab = (GameObject)EditorGUILayout.ObjectField("Prefab", spawner.prefab, typeof(GameObject),true);
+
         spawner.spawningType = (Spawner.Spawning)EditorGUILayout.EnumPopup("Limit Options", spawner.spawningType);
 
         if (spawner.spawningType != Spawner.Spawning.NoLimit)
@@ -131,7 +133,7 @@ public class SpawnerEditor : Editor
                 spawner.despawnTimer = EditorGUILayout.FloatField("Despawn Timer", spawner.despawnTimer);
             }
         }
-
+        spawner.timer = EditorGUILayout.FloatField("Spawn Timer", spawner.timer);
 
     }
 
