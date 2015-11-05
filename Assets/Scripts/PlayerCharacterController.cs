@@ -70,7 +70,6 @@ public class PlayerCharacterController : MonoBehaviour
 
     void Movement(float a, float b)
     {
-        Debug.Log("Hit");
         h = b;
         v = a;
     }
