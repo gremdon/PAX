@@ -2,6 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// 
+/// Develop by: Quinton "Kiro" Baudoin
+///         
+///     Purpose: To instantiat gameObjects with a set limit and timer.
+///     
+///    4 spawn types:
+///     -    Stop At Limit: If limit is reached this script will stop running.
+///     -    Wait At Limit: If limit is reached this script will wait till one of the gameObjects that this script spawned
+///                         is destroyed(set to null) before spawning another.
+///     -    Distroy At Limit: If limit is reached this script will destroy the earliest gameObject this script spawned, then spawn a new one.
+///     -    No Limit: Ignors Limit.
+/// 
+/// 
+/// </summary>
+
+
+
 public class Spawner : MonoBehaviour
 {
 
@@ -35,8 +53,12 @@ public class Spawner : MonoBehaviour
 
                 if (spawningType == Spawning.DespawnAtLimit && limit <= units.Count && limit > 0)
                 {
-                    Destroy(units[0]);
-                    units.RemoveAt(0);
+                    while (limit <= units.Count)
+                    {
+                        Destroy(units[0]);
+                        units.RemoveAt(0);
+                    }
+
                 }
 
                 units.Add((GameObject)Instantiate(prefab, transform.position, transform.rotation));

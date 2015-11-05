@@ -1,13 +1,14 @@
 ﻿/*
     Setup:
         1) Listening For: [the message to listen for]
-        2) Star Cam: if this camera is active on level start.
-        2) Activator: the trigger(s) that this camera is activated with.
+        2) Start Cam: If this camera is the active camera on level start.
+        2) Activator: The trigger(s) that this camera is activated with. 
+                      -Currently supports two activators. 
+                      1. Drag the activator in the first empty slot. If an 
+                         activator slot(s) is not used, leave it empty.
 */
 
-
 using UnityEngine;
-using System.Collections;
 
 public class CameraListener : MonoBehaviour
 {
@@ -29,7 +30,6 @@ public class CameraListener : MonoBehaviour
     /// <param name="broadcaster">Name of the gameobject that broadcasts the message.</param>
     void SetCam(string s, string broadcaster)
     {
-        Debug.Log(broadcaster);
         if (s == "Player1")
         {
             if (gameObject.activeSelf == false)
@@ -46,9 +46,7 @@ public class CameraListener : MonoBehaviour
                 }
             }
             else
-            {
                 gameObject.SetActive(false);
-            }
         }
     }
 }
