@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Collections;
@@ -21,8 +21,8 @@ public class PlayerCharacterController : MonoBehaviour
 
 	bool sprint;
 	Rigidbody rb;
-	Vector3 HorizontalVelocity;
-	Vector3 VerticalVelocity;
+	float HorizontalVelocity;
+	float VerticalVelocity;
 	public Vector3 Position;
 	public Vector3 Rotation;
 	public Vector3 Forward;
@@ -67,7 +67,6 @@ public class PlayerCharacterController : MonoBehaviour
 	}
 
     #region Event
-
 	void Movement (float a, float b)
 	{
 		h = b;
@@ -98,17 +97,23 @@ public class PlayerCharacterController : MonoBehaviour
 
 	void FixedUpdate ()
 	{
-		if (sprint == true) {
+		Vector3 dir = new Vector3(-1,0,0);
+		if (sprint == true)
+		{
 			m_MovementSpeed = 5.0f;
-		} else if (sprint == false) {
+		} else if (sprint == false) 
+		{
 			m_MovementSpeed = m_BaseMovementSpeed;
 		}
+		Forward = Camera.main.transform.forward - dir;
 
-		Forward.z = v;
-		Forward.x = h;
+		Forward.y = 0;
 		transform.forward = Forward;
 
-		Position.z = v/m_MovementSpeed;
+		VerticalVelocity = (v) / m_MovementSpeed;
+		HorizontalVelocity = (h) / m_MovementSpeed;
+
+		Position = new Vector3 (HorizontalVelocity, 0, VerticalVelocity);
 		transform.position += Position;
 		//sprint = false;
 	}
