@@ -93,8 +93,8 @@ public class UnityChanControlScriptWithRigidBody : MonoBehaviour
 			jump = "c2Jump";
 			break;
 		case InputState.KEYBOARD1:
-			h = Input.GetAxis("k1Horizontal");
-			v = Input.GetAxis("k1Vertical");
+			h = Input.GetAxis("p1KeyBoardHorizontal");
+			v = Input.GetAxis("p1KeyBoardVertical");
 			break;
 		default:
 			break;

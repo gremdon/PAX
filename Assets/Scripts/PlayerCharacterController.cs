@@ -5,6 +5,13 @@ using System.Collections;
 
 public class PlayerCharacterController : MonoBehaviour
 {
+	bool KeyBoard;
+
+	void ControlCheck(bool check)
+	{
+		KeyBoard = check;
+	}
+
 	void Awake ()
 	{
 		AddListeners ();
@@ -19,6 +26,7 @@ public class PlayerCharacterController : MonoBehaviour
 	void AddListeners ()
 	{
 		Debug.Log ("adding listeners");
+		Messenger.AddListener<bool>("Controller", ControlCheck);
 		Messenger.AddListener<int>(gameObject.name, PlayerNum);
 		Messenger.MarkAsPermanent(gameObject.name);
 	}
@@ -27,15 +35,25 @@ public class PlayerCharacterController : MonoBehaviour
 	{
 		Debug.Log ("removing listeners");
 		Messenger.RemoveListener<int>(gameObject.name, PlayerNum);
+		Messenger.RemoveListener<bool>("Control", ControlCheck);
 	}
 		
 	void PlayerNum(int num)
 	{
+		Debug.Log(KeyBoard);
 		switch(num)
 		{
 		case 0:
-			GetComponent<UnityChanControlScriptWithRigidBody>().inputType = 
-				UnityChanControlScriptWithRigidBody.InputState.PLAYER1;
+			if(KeyBoard == true)
+			{
+				GetComponent<UnityChanControlScriptWithRigidBody>().inputType = 
+					UnityChanControlScriptWithRigidBody.InputState.KEYBOARD1;
+			}
+			else
+			{
+				GetComponent<UnityChanControlScriptWithRigidBody>().inputType = 
+					UnityChanControlScriptWithRigidBody.InputState.PLAYER1;
+			}
 			break;
 		case 1:
 			GetComponent<UnityChanControlScriptWithRigidBody>().inputType = 
