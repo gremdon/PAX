@@ -31,7 +31,7 @@ public class CameraFreeFollow : MonoBehaviour
     [ContextMenu("Set Camera Targets")]
     void SetTargets(string camTarget)
     {
-        GameObject player1 = GameObject.Find(camTarget);
+        GameObject player1 = GameObject.FindGameObjectWithTag("Player");
 
         //set lookAt target
         if (GameObject.Find("lookAtTarget") != null)

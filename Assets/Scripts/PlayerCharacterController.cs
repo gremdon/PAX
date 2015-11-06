@@ -110,8 +110,8 @@ public class PlayerCharacterController : MonoBehaviour
         
         if(HorizontalVelocity + VerticalVelocity != Vector3.zero)
         {
-            Forward = HorizontalVelocity + VerticalVelocity;
-            transform.forward = Forward;
+            //Forward = 
+            transform.forward = HorizontalVelocity + VerticalVelocity;/*Forward;*/
         }
 
         HorizontalVelocity.x = (h / m_MovementSpeed);
