@@ -35,7 +35,7 @@ public class PlayerCharacterController : MonoBehaviour
 	{
 		Debug.Log ("removing listeners");
 		Messenger.RemoveListener<int>(gameObject.name, PlayerNum);
-		Messenger.RemoveListener<bool>("Control", ControlCheck);
+		Messenger.RemoveListener<bool>("Controller", ControlCheck);
 	}
 		
 	void PlayerNum(int num)

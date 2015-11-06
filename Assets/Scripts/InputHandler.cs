@@ -266,7 +266,7 @@ public class InputHandler : Singleton<InputHandler>
     /// </summary>
     void CheckControlType()
     {
-        if (Input.GetJoystickNames().Length == null)
+        if (Input.GetJoystickNames()[0] != "")
         {
             keyboard = false;
             p1Horizon = "p1Horizontal";
