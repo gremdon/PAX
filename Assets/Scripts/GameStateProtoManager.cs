@@ -22,14 +22,14 @@ public class GameStateProtoManager: MonoBehaviour
             Time.timeScale = 1;
 
         else if (msg == "play->gameover" || msg == "pause->start")
-            BroadcastMessage("maketransition", STATES.START);
+            Messenger.Broadcast("maketransition", STATES.START);
         else if (msg == "gameover->start")
             Application.LoadLevel(Application.loadedLevel);
 
     }
     void Winning(string msg)
     {
-        BroadcastMessage("maketransition", STATES.GAMEOVER);
+        Messenger.Broadcast("maketransition", STATES.GAMEOVER);
     }
 
     void OnDisable()
