@@ -20,7 +20,10 @@ public class GameStateProtoManager: MonoBehaviour
             Time.timeScale = 0;
         else if (msg == "pause->play")
             Time.timeScale = 1;
-
+        //Test**
+        else if (msg == "init->start")
+            Messenger.Broadcast("maketransition", STATES.PLAY);
+        //
         else if (msg == "play->gameover" || msg == "pause->start")
             Messenger.Broadcast("maketransition", STATES.START);
         else if (msg == "gameover->start")
