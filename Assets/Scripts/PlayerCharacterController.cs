@@ -27,6 +27,8 @@ public class PlayerCharacterController : MonoBehaviour
 	public Vector3 Rotation;
 	public Vector3 Forward;
 
+	public Vector3 camForward;
+
 	void Awake ()
 	{
 		rb = GetComponent<Rigidbody> ();
@@ -102,13 +104,12 @@ public class PlayerCharacterController : MonoBehaviour
 			m_MovementSpeed = m_BaseMovementSpeed;
 		}
 
-		Forward.z = Camera.main.transform.forward.z + v;
-		Forward.y = 0;
+		Forward.z = v;
+		Forward.x = h;
 		transform.forward = Forward;
 
-		Position.z = v;
+		Position.z = v/m_MovementSpeed;
 		transform.position += Position;
-
 		//sprint = false;
 	}
 }

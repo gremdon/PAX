@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &29776002
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,8 +519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &73862673
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -832,6 +833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &132332837
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1079,8 +1081,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &146064355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,6 +1321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &212415385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,6 +1861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &248488455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,8 +1905,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &248488458
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2069,6 +2073,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &284215895
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2517,6 +2522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &369468567
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2649,6 +2655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &385683895 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 104750, guid: 38d115dcc8ae1624aa37492934493b22, type: 2}
@@ -3081,6 +3088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &532532088
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3616,6 +3624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &627547081
 GameObject:
   m_ObjectHideFlags: 0
@@ -4013,6 +4022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &723225311
 GameObject:
   m_ObjectHideFlags: 0
@@ -4282,6 +4292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &768973419
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4534,6 +4545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &860799876
 GameObject:
   m_ObjectHideFlags: 0
@@ -4577,8 +4589,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &860799879
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4668,8 +4680,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: .00999999978
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &863873016
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4759,8 +4771,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &868503014
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5279,8 +5291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &939250861
 GameObject:
   m_ObjectHideFlags: 0
@@ -5397,8 +5409,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &941051539
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5530,8 +5542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &982438445
 GameObject:
   m_ObjectHideFlags: 0
@@ -6210,8 +6222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &1112206095
 GameObject:
   m_ObjectHideFlags: 0
@@ -6996,8 +7008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: .00999999978
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &1238792870
 GameObject:
   m_ObjectHideFlags: 0
@@ -7225,8 +7237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &1259379357
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7521,8 +7533,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &1324032375
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7829,8 +7841,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &1415140043
 GameObject:
   m_ObjectHideFlags: 0
@@ -8286,8 +8298,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &1508017406
 GameObject:
   m_ObjectHideFlags: 0
@@ -8371,8 +8383,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &1508609392
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8860,6 +8872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &1597953449
 GameObject:
   m_ObjectHideFlags: 0
@@ -9165,6 +9178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &1652731611
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10289,7 +10303,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -15.8900003
+      value: -9.01000023
       objectReference: {fileID: 0}
     - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_LocalRotation.x
@@ -10314,6 +10328,10 @@ Prefab:
     - target: {fileID: 191558, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_Name
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11442796, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_BaseMovementSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
@@ -10736,6 +10754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &1894549412
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11743,8 +11762,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &2089085130
 GameObject:
   m_ObjectHideFlags: 0
@@ -11830,8 +11849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &2098509958
 GameObject:
   m_ObjectHideFlags: 0
@@ -11949,6 +11968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &2108280565
 MeshRenderer:
   m_ObjectHideFlags: 0
