@@ -18,16 +18,13 @@ public class PlayerCharacterController : MonoBehaviour
 	float GroundDistance = 0.1f;
 	float h; //horizontal movement
 	float v; //vertical movement
-
-	bool sprint;
+	
 	Rigidbody rb;
 	float HorizontalVelocity;
 	float VerticalVelocity;
 	public Vector3 Position;
 	public Vector3 Rotation;
 	public Vector3 Forward;
-
-	public Vector3 camForward;
 
 	void Awake ()
 	{
@@ -75,7 +72,7 @@ public class PlayerCharacterController : MonoBehaviour
 
 	void Jump ()
 	{
-		rb.AddForce (Vector3.up * m_JumpPower, ForceMode.VelocityChange);
+		Debug.Log ("Jumpin");
 	}
 
 	void Attack ()
@@ -90,31 +87,13 @@ public class PlayerCharacterController : MonoBehaviour
 
 	void Sprint ()
 	{
-		sprint = true;
+		Debug.Log ("Sprinting");
 	}
 
     #endregion
 
 	void FixedUpdate ()
 	{
-		Vector3 dir = new Vector3(-1,0,0);
-		if (sprint == true)
-		{
-			m_MovementSpeed = 5.0f;
-		} else if (sprint == false) 
-		{
-			m_MovementSpeed = m_BaseMovementSpeed;
-		}
-		Forward = Camera.main.transform.forward - dir;
-
-		Forward.y = 0;
-		transform.forward = Forward;
-
-		VerticalVelocity = (v) / m_MovementSpeed;
-		HorizontalVelocity = (h) / m_MovementSpeed;
-
-		Position = new Vector3 (HorizontalVelocity, 0, VerticalVelocity);
-		transform.position += Position;
-		//sprint = false;
+			//if(gameObject.GetComponent<UnityChanControlScriptWithRigidBody)().
 	}
 }
