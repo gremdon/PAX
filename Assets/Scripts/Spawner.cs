@@ -87,23 +87,19 @@ public class Spawner : MonoBehaviour
     /// <summary>
     /// Seconds per spawn.
     /// </summary>
-    private float timer = 1;
+    public float timer = 1;
     public bool despawnTimerBool = false;
 
-    public float despawnTimer = 1;
+    public float despawnTimer = 1f;
     /// <summary>
     /// Prefab to be spawned
     /// </summary>
-    private GameObject prefab;
+    public GameObject prefab;
     /// <summary>
     /// Max number of spawned(If despawnAtLimit is true)
     /// </summary>
     public int limit = 1;
     int index;
-
-    public bool randomSpawnLocation;
-
-    public float size;
 
     /// <summary>
     /// storage and queue for each unit spawned(if despawnedAtLimit is true)
@@ -116,11 +112,11 @@ public class Spawner : MonoBehaviour
 [CustomEditor(typeof(Spawner))]
 public class SpawnerEditor : Editor
 {
-    
-
     public override void OnInspectorGUI()
     {
         var spawner = (Spawner)target;
+
+        spawner.prefab = (GameObject)EditorGUILayout.ObjectField("Prefab", spawner.prefab, typeof(GameObject),true);
 
         spawner.spawningType = (Spawner.Spawning)EditorGUILayout.EnumPopup("Limit Options", spawner.spawningType);
 
@@ -135,10 +131,7 @@ public class SpawnerEditor : Editor
                 spawner.despawnTimer = EditorGUILayout.FloatField("Despawn Timer", spawner.despawnTimer);
             }
         }
-
-        spawner.randomSpawnLocation = GUILayout.Toggle(spawner.randomSpawnLocation, "Random Spawn Location");
-        if (spawner.randomSpawnLocation)
-            spawner.size = EditorGUILayout.FloatField("Size",spawner.size);
+        spawner.timer = EditorGUILayout.FloatField("Spawn Timer", spawner.timer);
 
     }
 
