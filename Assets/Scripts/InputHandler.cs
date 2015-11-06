@@ -118,10 +118,10 @@ public class InputHandler : Singleton<InputHandler>
             //Enable once we have an exit game
         }
 
-        if (Input.anyKey || Input.GetAxis(p1Vert) != 0 || Input.GetAxis(p1Horizon) != 0 ||
-            Input.GetAxis(p2Vert) != 0 || Input.GetAxis(p2Horizon) != 0)
+        //if (Input.anyKey || Input.GetAxis(p1Vert) != 0 || Input.GetAxis(p1Horizon) != 0 ||
+          //  Input.GetAxis(p2Vert) != 0 || Input.GetAxis(p2Horizon) != 0)
         {
-            IdleTime = 0;
+            //IdleTime = 0;
         }
     }
 
@@ -131,12 +131,12 @@ public class InputHandler : Singleton<InputHandler>
     /// </summary>
     private void PlayerEvents()
     {
-        Messenger.Broadcast<float, float>(Players[0] + ":", Input.GetAxis(p1Vert),
-            Input.GetAxis(p1Horizon));
-        if (numPlayers == 2)
+     //   Messenger.Broadcast<float, float>(Players[0] + ":", Input.GetAxis(p1Vert),
+        //    Input.GetAxis(p1Horizon));
+       // if (numPlayers == 2)
         {
-            Messenger.Broadcast<float, float>(Players[1] + ":", Input.GetAxis(p2Vert),
-             Input.GetAxis(p2Horizon));
+       //     Messenger.Broadcast<float, float>(Players[1] + ":", Input.GetAxis(p2Vert),
+        //     Input.GetAxis(p2Horizon));
         }
         //Checks for inputs that are in the List of controls for player1
         foreach (string s in DefinedControls)
@@ -171,8 +171,9 @@ public class InputHandler : Singleton<InputHandler>
                 MaxPlayers = true;
             }
         }
+		CustomContols();
 		Messenger.Broadcast<int>(pName, Players.IndexOf(pName));
-        CustomContols();
+
     }
 
     /// <summary>
@@ -265,13 +266,14 @@ public class InputHandler : Singleton<InputHandler>
     /// </summary>
     void CheckControlType()
     {
-        if (Input.GetJoystickNames()[0] != "")
+        if (Input.GetJoystickNames().Length == null)
         {
             keyboard = false;
             p1Horizon = "p1Horizontal";
             p1Vert = "p1Vertical";
             p2Horizon = "p2Horizontal";
             p2Vert = "p2Vertical";
+				Messenger.Broadcast<bool>("Controller", keyboard);
         }
         else
         {
@@ -280,6 +282,7 @@ public class InputHandler : Singleton<InputHandler>
             p1Horizon = "p1KeyBoardHorizontal";
             p2Vert = "p2KeyBoardVertical";
             p2Horizon = "p2KeyBoardHorizontal";
+				Messenger.Broadcast<bool>("Controller", keyboard);
         }
     }
 
