@@ -26,7 +26,9 @@ public class CameraListener : MonoBehaviour
 
         Messenger.AddListener<string,string>(listeningForSetCam, SetCam);
         Messenger.AddListener<string>(listeningForReTarget, SetTarget);
-        if(!startCam)
+        Messenger.MarkAsPermanent(listeningForSetCam);
+        Messenger.MarkAsPermanent(listeningForReTarget);
+        if (!startCam)
             gameObject.SetActive(false);
     }
 
@@ -61,5 +63,11 @@ public class CameraListener : MonoBehaviour
     {
         if(s == "Player")
             cm.SetTargets();
+    }
+
+    void OnDestroy()
+    {
+        Messenger.RemoveListener<string, string>(listeningForSetCam, SetCam);
+        Messenger.RemoveListener<string>(listeningForReTarget, SetTarget);
     }
 }
