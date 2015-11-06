@@ -23,5 +23,4 @@ public class GUI_Audio : MonoBehaviour
 		guiAudio.clip = sound;
 		guiAudio.Play();
 	}
-
 }

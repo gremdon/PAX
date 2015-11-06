@@ -3,9 +3,11 @@ using System.Collections;
 
 public class AudioTrigger : BroadcastOnTrigger
 {
-    public string argument;
+    [SerializeField]
+	private AudioClip soundClip;
+
     protected override void OnTriggerEnter(Collider col)
     {
-        Messenger.Broadcast("playaudio", argument);
+        Messenger.Broadcast("playaudio", soundClip.name);
     }
 }
