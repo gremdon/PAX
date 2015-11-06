@@ -12,7 +12,7 @@ GameObject:
   - 65: {fileID: 6510820}
   - 135: {fileID: 13564118}
   - 114: {fileID: 11411786}
-  - 114: {fileID: 11442270}
+  - 114: {fileID: 11456716}
   m_Layer: 0
   m_Name: Roomba(Guard)
   m_TagString: Untagged
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_message: takedamage
   m_timer: 1
---- !u!114 &11442270
+--- !u!114 &11456716
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -242,10 +242,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 137642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09caf0b7d377b0a448f641b3de2adaba, type: 3}
+  m_Script: {fileID: 11500000, guid: 7595e967b2a44e146aa7ea9c08db67d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 1
   target: {fileID: 0}
 --- !u!135 &13564118
 SphereCollider:
