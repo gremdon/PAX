@@ -5,27 +5,6 @@ using System.Collections;
 
 public class PlayerCharacterController : MonoBehaviour
 {
-	[SerializeField]
-	private float
-		m_BaseMovementSpeed = 0;
-	[SerializeField]
-	private float
-		m_RotateSpeed = 0;
-	[SerializeField]
-	private float
-		m_JumpPower = 0;
-	private float m_MovementSpeed;
-	float GroundDistance = 0.1f;
-	float h; //horizontal movement
-	float v; //vertical movement
-	
-	Rigidbody rb;
-	float HorizontalVelocity;
-	float VerticalVelocity;
-	public Vector3 Position;
-	public Vector3 Rotation;
-	public Vector3 Forward;
-
 	void Awake ()
 	{
 		rb = GetComponent<Rigidbody> ();
