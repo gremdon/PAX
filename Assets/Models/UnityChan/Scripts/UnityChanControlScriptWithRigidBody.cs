@@ -11,7 +11,7 @@ using System.Collections;
 [RequireComponent(typeof (CapsuleCollider))]
 [RequireComponent(typeof (Rigidbody))]
 
-public class UnityChanControlScriptWithRgidBody : MonoBehaviour
+public class UnityChanControlScriptWithRigidBody : MonoBehaviour
 {
 	
 	public float animSpeed = 1.5f;				// アニメーション再生速度設定
@@ -63,13 +63,41 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		orgColHight = col.height;
 		orgVectColCenter = col.center;
 	}
-	
-	
+
+	public enum InputState
+	{
+		DEFAULT,
+		PLAYER1,
+		PLAYER2,
+		KEYBOARD1,
+		KEYBOARD2,
+
+
+	}
+
+	public InputState inputType = InputState.DEFAULT;
 	// 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
 	void FixedUpdate ()
 	{
 		float h = Input.GetAxis("Horizontal");				// 入力デバイスの水平軸をhで定義
 		float v = Input.GetAxis("Vertical");				// 入力デバイスの垂直軸をvで定義
+		switch(inputType)
+		{
+		case InputState.PLAYER1:
+			h = Input.GetAxis("p1Horizontal");
+			v = Input.GetAxis("p1Vertical");
+			break;
+		case InputState.PLAYER2:
+			h = Input.GetAxis("p2Horizontal");
+			v = Input.GetAxis("p2Vertical");
+			break;
+		case InputState.KEYBOARD1:
+			h = Input.GetAxis("k1Horizontal");
+			v = Input.GetAxis("k1Vertical");
+			break;
+		default:
+			break;
+		}
 		anim.SetFloat("Speed", v);							// Animator側で設定している"Speed"パラメタにvを渡す
 		anim.SetFloat("Direction", h); 						// Animator側で設定している"Direction"パラメタにhを渡す
 		anim.speed = animSpeed;								// Animatorのモーション再生速度に animSpeedを設定する
@@ -89,7 +117,8 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 			velocity *= backwardSpeed;	// 移動速度を掛ける
 		}
 		
-		if (Input.GetButtonDown("Jump")) {	// スペースキーを入力したら
+		if (Input.GetButtonDown("Jump")) 
+		{	// スペースキーを入力したら
 			
 			//アニメーションのステートがLocomotionの最中のみジャンプできる
 			if (currentBaseState.fullPathHash == locoState){
@@ -186,16 +215,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		}
 	}
 	
-	void OnGUI()
-	{
-		GUI.Box(new Rect(Screen.width -260, 10 ,250 ,150), "Interaction");
-		GUI.Label(new Rect(Screen.width -245,30,250,30),"Up/Down Arrow : Go Forwald/Go Back");
-		GUI.Label(new Rect(Screen.width -245,50,250,30),"Left/Right Arrow : Turn Left/Turn Right");
-		GUI.Label(new Rect(Screen.width -245,70,250,30),"Hit Space key while Running : Jump");
-		GUI.Label(new Rect(Screen.width -245,90,250,30),"Hit Spase key while Stopping : Rest");
-		GUI.Label(new Rect(Screen.width -245,110,250,30),"Left Control : Front Camera");
-		GUI.Label(new Rect(Screen.width -245,130,250,30),"Alt : LookAt Camera");
-	}
+
 	
 	
 	// キャラクターのコライダーサイズのリセット関数
