@@ -171,6 +171,7 @@ public class InputHandler : Singleton<InputHandler>
                 MaxPlayers = true;
             }
         }
+		Messenger.Broadcast<int>(pName, Players.IndexOf(pName));
         CustomContols();
     }
 
@@ -312,8 +313,8 @@ public class InputHandler : Singleton<InputHandler>
     [SerializeField]
     private E_JOYSTICK jSprint; //Control assigned to the Sprint Action if using a joystick
 
+	[Space(25)]
     [Header("Keyboard Controls")]
-    [Space(25)]
     [SerializeField]
     private E_KEYBOARD kAttack; //Control assigned to the attack action if using the Keyboard
     [SerializeField]
