@@ -12,6 +12,7 @@ GameObject:
   - 65: {fileID: 6572086}
   - 114: {fileID: 11456886}
   - 135: {fileID: 13509596}
+  - 114: {fileID: 11498602}
   m_Layer: 0
   m_Name: Roomba
   m_TagString: Untagged
@@ -193,8 +194,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: .899999976, y: .200000003, z: .899999976}
+  m_Center: {x: 0, y: .0989999995, z: 0}
 --- !u!65 &6593674
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -234,6 +235,19 @@ MonoBehaviour:
   speed: 1
   range: 5
   target: {fileID: 0}
+--- !u!114 &11498602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60dd3a2a21ee2134687e9986136b5278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 1
+  maxHealth: 1
 --- !u!135 &13509596
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -256,6 +270,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Constraints
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _health
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
