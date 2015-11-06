@@ -12,14 +12,23 @@ using UnityEngine;
 
 public class CameraListener : MonoBehaviour
 {
-    public string listeningFor;
+    public string listeningForSetCam;
+    public string listeningForReTarget;
     public bool startCam;
     public GameObject activator1, activator2;
+
+    private CameraManager cm;
+
 	// Use this for initialization
 	void Awake()
     {
-        Messenger.AddListener<string,string>(listeningFor, SetCam);
-        if(!startCam)
+        cm = GetComponentInParent<CameraManager>();
+
+        Messenger.AddListener<string,string>(listeningForSetCam, SetCam);
+        Messenger.AddListener<string>(listeningForReTarget, SetTarget);
+        Messenger.MarkAsPermanent(listeningForSetCam);
+        Messenger.MarkAsPermanent(listeningForReTarget);
+        if (!startCam)
             gameObject.SetActive(false);
     }
 
@@ -30,7 +39,7 @@ public class CameraListener : MonoBehaviour
     /// <param name="broadcaster">Name of the gameobject that broadcasts the message.</param>
     void SetCam(string s, string broadcaster)
     {
-        if (s == "Player1")
+        if (s == "Player")
         {
             if (gameObject.activeSelf == false)
             {
@@ -48,5 +57,17 @@ public class CameraListener : MonoBehaviour
             else
                 gameObject.SetActive(false);
         }
+    }
+
+    void SetTarget(string s)
+    {
+        if(s == "Player")
+            cm.SetTargets();
+    }
+
+    void OnDestroy()
+    {
+        Messenger.RemoveListener<string, string>(listeningForSetCam, SetCam);
+        Messenger.RemoveListener<string>(listeningForReTarget, SetTarget);
     }
 }
