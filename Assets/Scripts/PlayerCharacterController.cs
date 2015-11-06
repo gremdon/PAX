@@ -7,7 +7,6 @@ public class PlayerCharacterController : MonoBehaviour
 {
 	void Awake ()
 	{
-		rb = GetComponent<Rigidbody> ();
 		AddListeners ();
 	}
 
