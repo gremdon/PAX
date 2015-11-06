@@ -21,7 +21,6 @@ InputManager:
     type: 2
     axis: 3
     joyNum: 1       
-#player 1 vertical input
   - serializedVersion: 3  
     m_Name: p1Vertical
     descriptiveName: 

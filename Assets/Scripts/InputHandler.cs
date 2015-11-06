@@ -171,6 +171,7 @@ public class InputHandler : Singleton<InputHandler>
                 MaxPlayers = true;
             }
         }
+		Messenger.Broadcast<int>(pName, Players.IndexOf(pName));
         CustomContols();
     }
 
