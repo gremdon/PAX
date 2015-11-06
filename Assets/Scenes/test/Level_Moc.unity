@@ -143,6 +143,79 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb7bfdd44feb3af49812b63873dc2183, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &76223428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 76223429}
+  - 33: {fileID: 76223432}
+  - 23: {fileID: 76223431}
+  - 65: {fileID: 76223430}
+  m_Layer: 0
+  m_Name: Plane (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &76223429
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 76223428}
+  m_LocalRotation: {x: -1.15202326e-07, y: .707106709, z: -.707106829, w: -1.15202312e-07}
+  m_LocalPosition: {x: 0, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 297328617}
+  m_RootOrder: 4
+--- !u!65 &76223430
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 76223428}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 1.19209324e-06, z: 10.000001}
+  m_Center: {x: 0, y: 9.53674316e-07, z: 0}
+--- !u!23 &76223431
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 76223428}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &76223432
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 76223428}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &147056482
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,6 +363,10 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 189398338}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &224769735 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 415508, guid: 92f5d2105c66d4b46ad8cda5507bc682, type: 2}
+  m_PrefabInternal: {fileID: 1453539824}
 --- !u!4 &228884335 stripped
 Transform:
   m_PrefabParentObject: {fileID: 410344, guid: fb7bfdd44feb3af49812b63873dc2183, type: 2}
@@ -446,6 +523,7 @@ Transform:
   - {fileID: 959682725}
   - {fileID: 421063272}
   - {fileID: 147056483}
+  - {fileID: 76223429}
   m_Father: {fileID: 1540129302}
   m_RootOrder: 11
 --- !u!65 &297328618
@@ -506,7 +584,7 @@ GameObject:
   m_Layer: 0
   m_Name: HallTrigger1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
@@ -1212,6 +1290,21 @@ Prefab:
       propertyPath: activator2
       value: 
       objectReference: {fileID: 1011666301}
+    - target: {fileID: 120770, guid: 8c908610fe96c2342aa7406362cabe74, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 112064, guid: 8c908610fe96c2342aa7406362cabe74, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 106856, guid: 8c908610fe96c2342aa7406362cabe74, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000,
+        type: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c908610fe96c2342aa7406362cabe74, type: 2}
   m_IsPrefabParent: 0
@@ -1543,7 +1636,7 @@ GameObject:
   m_Layer: 0
   m_Name: HallTrigger1 (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
@@ -2128,7 +2221,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1540129302}
     m_Modifications:
     - target: {fileID: 415508, guid: 92f5d2105c66d4b46ad8cda5507bc682, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2136,7 +2229,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 415508, guid: 92f5d2105c66d4b46ad8cda5507bc682, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 415508, guid: 92f5d2105c66d4b46ad8cda5507bc682, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2160,8 +2253,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 415508, guid: 92f5d2105c66d4b46ad8cda5507bc682, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 163726, guid: 92f5d2105c66d4b46ad8cda5507bc682, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000,
+        type: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92f5d2105c66d4b46ad8cda5507bc682, type: 2}
   m_IsPrefabParent: 0
@@ -2401,8 +2499,9 @@ Transform:
   - {fileID: 247700766}
   - {fileID: 297328617}
   - {fileID: 2030941499}
+  - {fileID: 224769735}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1001 &1622202106
 Prefab:
   m_ObjectHideFlags: 0
@@ -2600,7 +2699,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!4 &1707774073 stripped
 Transform:
   m_PrefabParentObject: {fileID: 410344, guid: fb7bfdd44feb3af49812b63873dc2183, type: 2}
