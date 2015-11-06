@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &29776002
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +476,59 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 66913043}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &70561132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 70561133}
+  - 65: {fileID: 70561135}
+  - 114: {fileID: 70561136}
+  m_Layer: 0
+  m_Name: DeathTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &70561133
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 70561132}
+  m_LocalRotation: {x: 0, y: .00546689983, z: 0, w: .999985099}
+  m_LocalPosition: {x: 3.99000001, y: 1, z: -10.6499996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1516947814}
+  m_RootOrder: 12
+--- !u!65 &70561135
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 70561132}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &70561136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 70561132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81152ff2b64220448b13f34e5b71944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: EntityDied
 --- !u!1 &73862670
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,8 +572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &73862673
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -832,6 +886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &132332837
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1079,8 +1134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &146064355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,6 +1374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &212415385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,6 +1914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &248488455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,8 +1958,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &248488458
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2069,6 +2126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &284215895
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2517,6 +2575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &369468567
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2563,6 +2622,56 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 369468564}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &372639915
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.82999992
+      objectReference: {fileID: 0}
+    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.06799996
+      objectReference: {fileID: 0}
+    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -15.8900003
+      objectReference: {fileID: 0}
+    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 191558, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_Name
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 191558, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &383033106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2649,6 +2758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &385683895 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 104750, guid: 38d115dcc8ae1624aa37492934493b22, type: 2}
@@ -2668,7 +2778,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8dda6b4b5d18048989a2473eda6b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listeningFor: 
+  listeningForSetCam: CameraEvent
+  listeningForReTarget: EntityDied
   startCam: 0
   activator1: {fileID: 1577402610}
   activator2: {fileID: 1306380910}
@@ -3077,6 +3188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &532532088
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3612,6 +3724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &627547081
 GameObject:
   m_ObjectHideFlags: 0
@@ -4009,6 +4122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &723225311
 GameObject:
   m_ObjectHideFlags: 0
@@ -4278,6 +4392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &768973419
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4530,6 +4645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &860799876
 GameObject:
   m_ObjectHideFlags: 0
@@ -4573,8 +4689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &860799879
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4664,8 +4780,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: .00999999978
-  canAttack: 1
+  m_message: takedamage
+  m_timer: 1
 --- !u!23 &863873016
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4755,8 +4871,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &868503014
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4909,6 +5025,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 876948967}
+  - 114: {fileID: 876948968}
   m_Layer: 0
   m_Name: Cameras
   m_TagString: Untagged
@@ -4932,6 +5049,19 @@ Transform:
   - {fileID: 1633587797}
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!114 &876948968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 876948966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defa54d3644f8f84094c1e87bb663c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookAtTarget: {fileID: 0}
+  followTarget: {fileID: 0}
 --- !u!1 &881629472
 GameObject:
   m_ObjectHideFlags: 0
@@ -5279,8 +5409,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &939250861
 GameObject:
   m_ObjectHideFlags: 0
@@ -5397,8 +5527,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &941051539
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5530,8 +5660,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &982438445
 GameObject:
   m_ObjectHideFlags: 0
@@ -6210,8 +6340,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &1121256867
 GameObject:
   m_ObjectHideFlags: 0
@@ -6969,8 +7099,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: .00999999978
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &1238792870
 GameObject:
   m_ObjectHideFlags: 0
@@ -7078,7 +7208,7 @@ Transform:
   - {fileID: 995352444}
   - {fileID: 2077086498}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1 &1255900306
 GameObject:
   m_ObjectHideFlags: 0
@@ -7198,8 +7328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &1259379357
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7494,8 +7624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &1324032375
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7802,8 +7932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &1415140043
 GameObject:
   m_ObjectHideFlags: 0
@@ -8259,8 +8389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &1508017406
 GameObject:
   m_ObjectHideFlags: 0
@@ -8344,8 +8474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!23 &1508609392
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8407,7 +8537,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8dda6b4b5d18048989a2473eda6b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listeningFor: CameraEvent
+  listeningForSetCam: CameraEvent
+  listeningForReTarget: EntityDied
   startCam: 0
   activator1: {fileID: 1306380910}
   activator2: {fileID: 0}
@@ -8509,6 +8640,7 @@ Transform:
   - {fileID: 1182850112}
   - {fileID: 1306380911}
   - {fileID: 1577402611}
+  - {fileID: 70561133}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!1 &1517296774
@@ -8549,7 +8681,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1 &1577402610
 GameObject:
   m_ObjectHideFlags: 0
@@ -8561,7 +8693,7 @@ GameObject:
   - 65: {fileID: 1577402613}
   - 114: {fileID: 1577402612}
   m_Layer: 0
-  m_Name: HalfwayTrigger
+  m_Name: HallwayTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8837,6 +8969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!1 &1597953449
 GameObject:
   m_ObjectHideFlags: 0
@@ -9142,6 +9275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &1652731611
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9491,6 +9625,14 @@ Prefab:
       propertyPath: activator2
       value: 
       objectReference: {fileID: 1306380910}
+    - target: {fileID: 11442030, guid: b4e2b8de355946c49b150ef2418b9335, type: 2}
+      propertyPath: listeningForSetCam
+      value: CameraEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 11442030, guid: b4e2b8de355946c49b150ef2418b9335, type: 2}
+      propertyPath: listeningForReTarget
+      value: EntityDied
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4e2b8de355946c49b150ef2418b9335, type: 2}
   m_IsPrefabParent: 0
@@ -10237,52 +10379,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!1001 &1866369500
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -2.68000007
-      objectReference: {fileID: 0}
-    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.06799996
-      objectReference: {fileID: 0}
-    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -15.8900003
-      objectReference: {fileID: 0}
-    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 454032, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 191558, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
-      propertyPath: m_Name
-      value: Player2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &1874512437
 Prefab:
   m_ObjectHideFlags: 0
@@ -10325,6 +10421,14 @@ Prefab:
     - target: {fileID: 191558, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
       propertyPath: m_Name
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 191558, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 191558, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
@@ -10747,6 +10851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &1894549412
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11030,7 +11135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8dda6b4b5d18048989a2473eda6b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listeningFor: CameraEvent
+  listeningForSetCam: CameraEvent
+  listeningForReTarget: EntityDied
   startCam: 1
   activator1: {fileID: 1577402610}
   activator2: {fileID: 0}
@@ -11735,8 +11841,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &2089085130
 GameObject:
   m_ObjectHideFlags: 0
@@ -11822,8 +11928,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f7eedc9f396c49959f5a66b942807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  canAttack: 1
+  m_message: 
+  m_timer: 1
 --- !u!1 &2098509958
 GameObject:
   m_ObjectHideFlags: 0
@@ -11941,6 +12047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  maxHealth: 3
 --- !u!23 &2108280565
 MeshRenderer:
   m_ObjectHideFlags: 0
