@@ -112,8 +112,6 @@ public class Spawner : MonoBehaviour
 [CustomEditor(typeof(Spawner))]
 public class SpawnerEditor : Editor
 {
-    
-
     public override void OnInspectorGUI()
     {
         var spawner = (Spawner)target;
