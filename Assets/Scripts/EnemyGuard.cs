@@ -5,7 +5,8 @@ public class EnemyGuard : MonoBehaviour
 {
     void Awake()
     {
-        Messenger.AddListener<string>("entitydied", Die);   // Listens for the instance of its own death
+        Messenger.AddListener<string>("entitydied", Die);// Listens for the instance of its own death
+        Messenger.MarkAsPermanent("entitydied");
     }
 
     void Start()
@@ -79,9 +80,13 @@ public class EnemyGuard : MonoBehaviour
 
         if (a == name)
         {
-            Messenger.RemoveListener<string>("entitydied", Die);
-            transform.position = Vector3.zero;
+          //  Messenger.RemoveListener<string>("entitydied", Die);
+            Destroy(gameObject);
         }
+    }
+    void OnDestroy()
+    {
+        Messenger.RemoveListener<string>("entitydied", Die);
     }
 
     public float speed;
