@@ -1393,7 +1393,16 @@ Prefab:
       propertyPath: m_Name
       value: TempPlayer (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6536854, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570896, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5417450, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5b63b5bce5e8d34438ff30c03fbcee38, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &449334022 stripped
@@ -1413,7 +1422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overlord: {fileID: 1953351764}
   overlordOffSet: {x: -1.5, y: 1, z: -1}
-  maxSpeed: 1
+  maxSpeed: .0500000007
 --- !u!1 &457628589
 GameObject:
   m_ObjectHideFlags: 0
