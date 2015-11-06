@@ -22,13 +22,16 @@ public class CameraManager : MonoBehaviour
 
     public void SetTargets()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        //set lookAt target        
-        lookAtTarget.parent = player.transform;
-        lookAtTarget.position = player.transform.position;
-        //set follow target
-        followTarget.parent = player.transform;
-        followTarget.position = lookAtTarget.position;
+            //set lookAt target        
+            lookAtTarget.parent = player.transform;
+            lookAtTarget.position = player.transform.position;
+            //set follow target
+            followTarget.parent = player.transform;
+            followTarget.position = lookAtTarget.position;
+        }
     }
 }
