@@ -71,14 +71,13 @@ public class UnityChanControlScriptWithRigidBody : MonoBehaviour
 		PLAYER2,
 		KEYBOARD1,
 		KEYBOARD2,
-
-
 	}
 
 	public InputState inputType = InputState.DEFAULT;
 	// 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
 	void FixedUpdate ()
 	{
+		string jump = "Jump";
 		float h = Input.GetAxis("Horizontal");				// 入力デバイスの水平軸をhで定義
 		float v = Input.GetAxis("Vertical");				// 入力デバイスの垂直軸をvで定義
 		switch(inputType)
@@ -86,14 +85,16 @@ public class UnityChanControlScriptWithRigidBody : MonoBehaviour
 		case InputState.PLAYER1:
 			h = Input.GetAxis("p1Horizontal");
 			v = Input.GetAxis("p1Vertical");
+			jump = "c1Jump";
 			break;
 		case InputState.PLAYER2:
 			h = Input.GetAxis("p2Horizontal");
 			v = Input.GetAxis("p2Vertical");
+			jump = "c2Jump";
 			break;
 		case InputState.KEYBOARD1:
-			h = Input.GetAxis("k1Horizontal");
-			v = Input.GetAxis("k1Vertical");
+			h = Input.GetAxis("p1KeyBoardHorizontal");
+			v = Input.GetAxis("p1KeyBoardVertical");
 			break;
 		default:
 			break;
@@ -117,7 +118,7 @@ public class UnityChanControlScriptWithRigidBody : MonoBehaviour
 			velocity *= backwardSpeed;	// 移動速度を掛ける
 		}
 		
-		if (Input.GetButtonDown("Jump")) 
+		if (Input.GetButtonDown(jump)) 
 		{	// スペースキーを入力したら
 			
 			//アニメーションのステートがLocomotionの最中のみジャンプできる
@@ -198,7 +199,7 @@ public class UnityChanControlScriptWithRigidBody : MonoBehaviour
 				resetCollider();
 			}
 			// スペースキーを入力したらRest状態になる
-			if (Input.GetButtonDown("Jump")) {
+			if (Input.GetButtonDown(jump)) {
 				anim.SetBool("Rest", true);
 			}
 		}
