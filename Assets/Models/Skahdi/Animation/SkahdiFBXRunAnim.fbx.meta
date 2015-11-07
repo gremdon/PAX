@@ -323,47 +323,17 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    optimizeGameObjects: 0
+    optimizeGameObjects: 1
     motionNodeName: 
-    animationImportErrors: 
-    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'SkahdiRig_Spine_01SHJnt' has translation animation
-      that will be discarded.\n\t'SkahdiRig_Spine_02SHJnt' has translation animation
-      that will be discarded.\n\t'SkahdiRig_Spine_02SHJnt' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\t'SkahdiRig_Spine_03SHJnt'
-      has translation animation that will be discarded.\n\t'SkahdiRig_Spine_04SHJnt'
-      has translation animation that will be discarded.\n\t'SkahdiRig_Spine_04SHJnt'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'SkahdiRig_Spine_TopSHJnt'
-      has translation animation that will be discarded.\n\t'SkahdiRig_Spine_TopSHJnt'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'SkahdiRig_Neck_02SHJnt'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'SkahdiRig_l_Leg_KneeSHJnt'
-      has translation animation that will be discarded.\n\t'SkahdiRig_l_Leg_AnkleSHJnt'
-      has translation animation that will be discarded.\n\t'SkahdiRig_l_Leg_BallSHJnt'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'SkahdiRig_r_Leg_KneeSHJnt'
-      has translation animation that will be discarded.\n\t'SkahdiRig_r_Leg_AnkleSHJnt'
-      has translation animation that will be discarded.\n\t'SkahdiRig_r_Leg_BallSHJnt'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
-    animationRetargetingWarnings: "\nRetargeting quality report for clip 'Take 001':\n\tLeftLowerLeg
-      average position error 5.7 mm and maximum position error 50.9 mm at time 0:
-      7 (26.1%) Frame 7\n\tLeftFoot average position error 8.3 mm and maximum position
-      error 85.0 mm at time 0: 7 (26.1%) Frame 7\n\tRightLowerLeg average position
-      error 17.4 mm and maximum position error 87.2 mm at time 0:20 (82.6%) Frame
-      20\n\tRightFoot average position error 15.3 mm and maximum position error 107.7
-      mm at time 0:20 (82.6%) Frame 20\n\tLeftUpperArm average position error 77.4
-      mm and maximum position error 146.9 mm at time 0:11 (43.5%) Frame 11\n\tLeftLowerArm
-      average position error 67.8 mm and maximum position error 124.4 mm at time 0:13
-      (52.2%) Frame 13\n\tLeftHand average position error 56.9 mm and maximum position
-      error 108.9 mm at time 0:10 (39.1%) Frame 10\n\tRightUpperArm average position
-      error 76.1 mm and maximum position error 143.3 mm at time 0:11 (43.5%) Frame
-      11\n\tRightLowerArm average position error 67.8 mm and maximum position error
-      126.5 mm at time 0:11 (43.5%) Frame 11\n\tRightHand average position error 60.1
-      mm and maximum position error 109.7 mm at time 0:11 (43.5%) Frame 11\n\tHead
-      average position error 76.0 mm and maximum position error 144.2 mm at time 0:10
-      (39.1%) Frame 10\n\tLeftFoot average orientation error 3.4 deg and maximum orientation
-      error 17.6 deg at time 0:10 (39.1%) Frame 10\n\tRightFoot average orientation
-      error 43.2 deg and maximum orientation error 104.1 deg at time 0:16 (65.2%)
-      Frame 16\n"
+    animationImportErrors: '
+
+      Imported file ''SkahdiFBXRunAnim'' conversion failed: Required human bone ''Hips''
+      not found
+
+
+'
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 1
     animationCompression: 0
     animationRotationError: .5
