@@ -12,7 +12,7 @@ public class PlayerStates : HealthStats
     }
 
     private _FSM<STATES> _fsm = new _FSM<STATES>();
-
+    Callback handleDead;
     protected void Awake()
     {
         //   healthStats = GetComponent<HealthStats>();
@@ -31,10 +31,11 @@ public class PlayerStates : HealthStats
 
         _fsm.m_currentState = STATES.ALIVE;
 
-        Callback handleDead = HandleDead;
-        _fsm.AddTransition(STATES.ALIVE, STATES.DEAD, handleDead);
+        handleDead = HandleDead;
+        _fsm.AddTransition(STATES.ALIVE, STATES.DEAD, handleDead); 
     }
-
+    
+ 
     // Callback EnterDeadState;
 
     //void DoSomething(string transition)
@@ -69,8 +70,9 @@ public class PlayerStates : HealthStats
         //do death animations
         //do sounds
         //do everything associated with this object being "dead"
+        Debug.Log("FUUUUUUUUCK");
         gameObject.SetActive(false);
-        Messenger.Broadcast<string>("playerdied", tag);
+        Messenger.Broadcast<string>("playerdied", gameObject.tag);
 
     }
     protected override void OnDead()
