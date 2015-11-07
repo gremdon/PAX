@@ -9,6 +9,8 @@ public class AmbientAudio : MonoBehaviour
     void Awake()
     {
         ambientAudioAS = GetComponent<AudioSource>();
+		if (ambientAudioAS == null)
+			Debug.Log ("Need to add AudioSource");
         ambientAudioAS.clip = backgroundSound;
         ambientAudioAS.loop = true;
         ambientAudioAS.priority = 256;
