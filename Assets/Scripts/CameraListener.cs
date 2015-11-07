@@ -13,9 +13,9 @@ using UnityEngine;
 public class CameraListener : MonoBehaviour
 {
     public string listeningForSetCam;
-    public string listeningForReTarget;
+    string listeningForReTarget = "playerdied";
     public bool startCam;
-    public GameObject activator1, activator2;
+    public GameObject activator1, activator2;    
 
     private CameraManager cm;
 
