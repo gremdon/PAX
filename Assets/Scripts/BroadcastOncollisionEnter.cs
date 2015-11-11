@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BroadcastOncollisionEnter : MonoBehaviour {
+public class BroadcastOncollisionEnter : MonoBehaviour
+{
+	[SerializeField] string message;
 
-	// Use this for initialization
-	void Start () {
-	
+	void OnCollisionEnter(Collision c)
+	{
+		Messenger.Broadcast<string>(message,c.gameObject.GetInstanceID().ToString());
+
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
