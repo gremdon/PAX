@@ -11,25 +11,21 @@ public class PlayerCharacterController : MonoBehaviour
 		KeyBoard = check;
 	}
 
-	void Awake ()
-	{
-		AddListeners ();
-	}
+    void Awake()
+    {
+        Debug.Log("adding listeners");
+        Messenger.AddListener<bool>("Controller", ControlCheck);
+        Messenger.AddListener<int>(gameObject.name, PlayerNum);
+        Messenger.MarkAsPermanent(gameObject.name);
 
+    }
 	// Use this for initialization
 	void Start ()
 	{
 		Messenger.Broadcast<string> ("Player", gameObject.name);
 	}
 
-	void AddListeners ()
-	{
-		Debug.Log ("adding listeners");
-		Messenger.AddListener<bool>("Controller", ControlCheck);
-		Messenger.AddListener<int>(gameObject.name, PlayerNum);
-		Messenger.MarkAsPermanent(gameObject.name);
-	}
-
+ 
 	void OnDisable ()
 	{
 		Debug.Log ("removing listeners");
@@ -44,18 +40,15 @@ public class PlayerCharacterController : MonoBehaviour
 		case 0:
 			if(KeyBoard == true)
 			{
-				GetComponent<UnityChanControlScriptWithRigidBody>().inputType = 
-					UnityChanControlScriptWithRigidBody.InputState.KEYBOARD1;
+				GetComponent<UnityChanControlScriptWithRigidBody>().inputType = UnityChanControlScriptWithRigidBody.InputState.KEYBOARD1;
 			}
 			else
 			{
-				GetComponent<UnityChanControlScriptWithRigidBody>().inputType = 
-					UnityChanControlScriptWithRigidBody.InputState.PLAYER1;
+				GetComponent<UnityChanControlScriptWithRigidBody>().inputType = UnityChanControlScriptWithRigidBody.InputState.PLAYER1;
 			}
 			break;
 		case 1:
-			GetComponent<UnityChanControlScriptWithRigidBody>().inputType = 
-				UnityChanControlScriptWithRigidBody.InputState.PLAYER2;
+			GetComponent<UnityChanControlScriptWithRigidBody>().inputType = UnityChanControlScriptWithRigidBody.InputState.PLAYER2;
 			break;
 		default:
 			break;
