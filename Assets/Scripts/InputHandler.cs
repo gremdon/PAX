@@ -68,9 +68,13 @@ public class InputHandler : Singleton<InputHandler>
     }
 
     void Start()
-    {
-
+	{
     }
+
+	void ClearList()
+	{
+		this.DefinedControls.Clear();
+	}
 
     void CustomContols()
     {
@@ -90,11 +94,11 @@ public class InputHandler : Singleton<InputHandler>
             PlayerControls.Add(jSpecial + ":Special");
             PlayerControls.Add(jSprint + ":Sprint");
         }
-        SetControls(numPlayers, keyboard);
+        //SetControls(numPlayers, keyboard);
     }
 
     void OnDisable()
-    {
+	{
         Messenger.RemoveListener<string>("Player", NumberOfPlayers);
     }
 
@@ -173,7 +177,6 @@ public class InputHandler : Singleton<InputHandler>
         }
 		CustomContols();
 		Messenger.Broadcast<int>(pName, Players.IndexOf(pName));
-
     }
 
     /// <summary>
@@ -185,7 +188,6 @@ public class InputHandler : Singleton<InputHandler>
     {
         for (int i = 0; i < PlayerControls.Capacity; i++)
         {
-
             string[] temp = PlayerControls[i].Split(':');
             string[] split = temp[0].Split('_');
             if (keyboard == false)
@@ -267,7 +269,6 @@ public class InputHandler : Singleton<InputHandler>
     void CheckControlType()
     {
         List<string> joy = new List<string>(Input.GetJoystickNames());
-        Debug.Log(joy.Count); 
         if(joy.Count > 0)
             {
             if (Input.GetJoystickNames()[0] != "")
@@ -334,7 +335,8 @@ public class InputHandler : Singleton<InputHandler>
 
     public bool keyboard; //A boolean to determine if the controls are configured for keyboard or Controler
 
-    public int numPlayers; //Keeps track of number of players active in the game
+	[SerializeField]
+    int numPlayers = 0; //Keeps track of number of players active in the game
 
     bool MaxPlayers; //If num players = 2 this is true
 

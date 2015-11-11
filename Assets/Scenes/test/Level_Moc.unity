@@ -2203,7 +2203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: asdf
-  argument: 
+  soundClip: {fileID: 0}
 --- !u!1001 &1342900379
 Prefab:
   m_ObjectHideFlags: 0
@@ -2635,7 +2635,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 486008, guid: 3f06eb30bddb36b428bdce59aa6e1b02, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 196284, guid: 3f06eb30bddb36b428bdce59aa6e1b02, type: 2}
       propertyPath: m_Name
@@ -2856,7 +2856,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 487438, guid: fb1b3c6027e29c041b8b73e6c943e3ea, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb1b3c6027e29c041b8b73e6c943e3ea, type: 2}
