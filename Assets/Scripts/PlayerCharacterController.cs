@@ -6,7 +6,6 @@ using System.Collections;
 public class PlayerCharacterController : MonoBehaviour
 {
 	bool KeyBoard;
-
 	void ControlCheck(bool check)
 	{
 		KeyBoard = check;
@@ -40,7 +39,6 @@ public class PlayerCharacterController : MonoBehaviour
 		
 	void PlayerNum(int num)
 	{
-		Debug.Log(KeyBoard);
 		switch(num)
 		{
 		case 0:
