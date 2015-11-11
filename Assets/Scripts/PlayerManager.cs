@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerManager : Singleton<PlayerManager> {
+public class PlayerManager : Singleton<PlayerManager>
+{
 
     public GameObject Player1
     {
@@ -13,20 +14,36 @@ public class PlayerManager : Singleton<PlayerManager> {
         get;
         private set;
     }
+
+    public int PlayerCount
+    {
+        get { return players.Count; }
+
+        set { PlayerCount = value; }
+    }
     [SerializeField]
     List<GameObject> players = new List<GameObject>();
     protected override void Awake()
     {
-        
-        List<PlayerCharacterController> pcc = new List<PlayerCharacterController>(GameObject.FindObjectsOfType<PlayerCharacterController>());
-        
-        foreach(PlayerCharacterController p in pcc)
+        //players are initially 0
+       // PlayerCount = 0;
+
+        List<PlayerCharacterController> pcc = new List<PlayerCharacterController>(FindObjectsOfType<PlayerCharacterController>());
+
+        foreach (PlayerCharacterController p in pcc)
         {
-            players.Add(p.gameObject);           
+            players.Add(p.gameObject);
         }
-        if(players[0] != null)
+        if (players[0] != null)
+        {
             Player1 = players[0];
-        if(players[1] != null)
+           // PlayerCount++;
+        }
+
+        if (players[1] != null)
+        {
             Player2 = players[1];
+            //PlayerCount++;
+        }
     }
 }
