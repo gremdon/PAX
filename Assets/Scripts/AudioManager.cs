@@ -107,5 +107,5 @@ static public class AudioManager
     When switching, destroy Init Audio and switch to Game Background Audio and etc
 
     Problem: Keep playing AudioClips without cutting them off/resetting everytime they enter the trigger
-    Solution: 3:22pm, we got nothing for now. BUT SPOON!
+    Solution: We used an if statement to check if it was playing or not.
 */
