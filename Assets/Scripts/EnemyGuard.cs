@@ -71,22 +71,19 @@ public class EnemyGuard : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Messenger.Broadcast("takedamage", name);
+            Messenger.Broadcast("modstat", other.gameObject.GetInstanceID(), "health", -1f);
         }
     }
 
-    void Die(string a)
+    void Die(string a_instance)
     {
-
-        if (a == name)
-        {
-          //  Messenger.RemoveListener<string>("entitydied", Die);
-            Destroy(gameObject);
-        }
+		if(a_instance == GetInstanceID().ToString())
+			Destroy(gameObject);
     }
+
     void OnDestroy()
     {
-        Messenger.RemoveListener<string>("entitydied", Die);
+        Messenger.RemoveListener("entitydied", Die);
     }
 
     public float speed;
