@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BroadcastOnCollisionEnter : MonoBehaviour
+public class BroadcastOncollisionEnter : MonoBehaviour
 {
 	[SerializeField] string message;
 
-	void OnCollisionEnter(Collider c)
+	void OnCollisionEnter(Collision c)
 	{
-		Messenger.Broadcast(message,c.GetInstanceID().ToString());
+		Messenger.Broadcast<string>(message,c.gameObject.GetInstanceID().ToString());
 
 	}
 
