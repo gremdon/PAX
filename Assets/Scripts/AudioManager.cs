@@ -108,4 +108,20 @@ static public class AudioManager
 
     Problem: Keep playing AudioClips without cutting them off/resetting everytime they enter the trigger
     Solution: We used an if statement to check if it was playing or not.
+
+
+	AudioSource audioSource;
+	public AudioClip audioClip;
+	public string message;
+
+	void Awake()
+	{
+		AudioManager.AddAudioToDictionary (message, gameObject);
+		AudioManager.AddListener (message, true);
+	}
+
+	public void audioBroadCasting()
+	{
+		Messenger.Broadcast<string>(message, audioClip);
+	}
 */
