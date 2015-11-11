@@ -266,28 +266,23 @@ public class InputHandler : Singleton<InputHandler>
     /// </summary>
     void CheckControlType()
     {
-        List<string> joy = new List<string>(Input.GetJoystickNames());
-        Debug.Log(joy.Count); 
-        if(joy.Count > 0)
-            {
-            if (Input.GetJoystickNames()[0] != "")
-            {
-                keyboard = false;
-                p1Horizon = "p1Horizontal";
-                p1Vert = "p1Vertical";
-                p2Horizon = "p2Horizontal";
-                p2Vert = "p2Vertical";
-                Messenger.Broadcast<bool>("Controller", keyboard);
-            }
-            else
-            {
-                keyboard = true;
-                p1Vert = "p1KeyBoardVertical";
-                p1Horizon = "p1KeyBoardHorizontal";
-                p2Vert = "p2KeyBoardVertical";
-                p2Horizon = "p2KeyBoardHorizontal";
-                Messenger.Broadcast<bool>("Controller", keyboard);
-            }
+        if (Input.GetJoystickNames()[0] != "")
+        {
+            keyboard = false;
+            p1Horizon = "p1Horizontal";
+            p1Vert = "p1Vertical";
+            p2Horizon = "p2Horizontal";
+            p2Vert = "p2Vertical";
+				Messenger.Broadcast<bool>("Controller", keyboard);
+        }
+        else
+        {
+            keyboard = true;
+            p1Vert = "p1KeyBoardVertical";
+            p1Horizon = "p1KeyBoardHorizontal";
+            p2Vert = "p2KeyBoardVertical";
+            p2Horizon = "p2KeyBoardHorizontal";
+				Messenger.Broadcast<bool>("Controller", keyboard);
         }
     }
 
