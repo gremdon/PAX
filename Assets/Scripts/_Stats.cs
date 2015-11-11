@@ -6,7 +6,7 @@ public class _Stats : MonoBehaviour
 	// DEBUGGING // DEBUGGING // DEBUGGING // DEBUGGING // DEBUGGING 
 	void Start()
 	{
-		Messenger.Broadcast("modstat", GetInstanceID().ToString(), "health", -7f);
+		Messenger.Broadcast("modstat", gameObject.GetInstanceID().ToString(), "health", -7f);
 	}
 	// DEBUGGING // DEBUGGING // DEBUGGING // DEBUGGING // DEBUGGING 
 
@@ -15,8 +15,6 @@ public class _Stats : MonoBehaviour
 	/// </summary>
 	void Awake()
 	{
-		print(GetInstanceID());
-
 		m_maxHealth = m_health;		// Sets the health limit to the value assigned at start
 		m_maxMana = m_mana;			// Sets the mana limit to the value assigned at start
 
@@ -31,7 +29,7 @@ public class _Stats : MonoBehaviour
 	/// <param name="a_value">A_value.</param>
 	void ModStat(string a_instance, string a_stat, float a_value)
 	{
-		if(a_instance == GetInstanceID().ToString())
+		if(a_instance == gameObject.GetInstanceID().ToString())
 		{
 			if(a_stat.ToLower().Contains("health"))
 			{
